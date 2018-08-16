@@ -1,0 +1,1 @@
+// This is the file that pass request to db Photo model

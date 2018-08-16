@@ -1,0 +1,60 @@
+{
+  "name": "cruisin66v1",
+  "version": "0.0.1",
+  "description": "Studio-M4 Hack Reactor Thesis project",
+  "author": "Studio-M4",
+  "private": true,
+  "scripts": {
+    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "test": "jest",
+    "lint": "eslint ./",
+    "database": "nodemon ./db/models/index.js",
+    "start-dev": "nodemon ./server/app.js"
+  },
+  "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
+    "bluebird": "^3.5.1",
+    "body-parser": "^1.18.3",
+    "eslint-config-airbnb": "^17.1.0",
+    "expo": "^27.0.1",
+    "express": "^4.16.3",
+    "express-session": "^1.15.6",
+    "morgan": "^1.9.0",
+    "mysql": "^2.16.0",
+    "mysql2": "^1.6.1",
+    "native-base": "^2.7.2",
+    "react": "16.4.1",
+    "react-native": "0.56.0",
+    "react-native-app-link": "^0.4.1",
+    "react-native-elements": "^0.19.1",
+    "react-native-google-places-autocomplete": "^1.3.9",
+    "react-native-ionicons": "^0.2.2",
+    "react-native-map-link": "^2.1.0",
+    "react-native-segmented-control-tab": "^3.3.1",
+    "react-native-vector-icons": "^5.0.0",
+    "react-navigation": "^2.11.2",
+    "request": "^2.69.0",
+    "router": "^1.3.3",
+    "sequelize": "^4.38.0",
+    "tcomb-form-native": "^0.6.15"
+  },
+  "devDependencies": {
+    "babel-jest": "23.4.2",
+    "babel-preset-react-native": "^5",
+    "jest": "23.5.0",
+    "react-test-renderer": "16.3.1",
+    "enzyme": "3.3.0",
+    "enzyme-adapter-react-16": "1.1.1",
+    "eslint": "^5.3.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "jest-expo": "~27.0.0",
+    "nodemon": "^1.18.3",
+    "react": "16.4.1",
+    "react-native-scripts": "1.14.0",
+    "sequelize": "^4.38.0"
+  },
+  "jest": {
+    "preset": "react-native"
+  }
+}
