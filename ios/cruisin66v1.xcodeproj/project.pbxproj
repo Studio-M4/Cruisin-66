@@ -5,6 +5,7 @@
 	};
 	objectVersion = 46;
 	objects = {
+
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
@@ -12,6 +13,8 @@
 		00C302E91ABCBA2D00DB3ED1 /* libRCTNetwork.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302DC1ABCB9D200DB3ED1 /* libRCTNetwork.a */; };
 		00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302E41ABCB9EE00DB3ED1 /* libRCTVibration.a */; };
 		00E356F31AD99517003FC87E /* cruisin66v1Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* cruisin66v1Tests.m */; };
+		0610C239037841FC89D7C79D /* rubicon-icon-font.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 470321D631BC4853B02CE0A5 /* rubicon-icon-font.ttf */; };
+		1136B6FDBBAE4E55A8E03987 /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 951B445BA825451C99BEB1B5 /* MaterialIcons.ttf */; };
 		133E29F31AD74F7200F7D852 /* libRCTLinking.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 78C398B91ACF4ADC00677621 /* libRCTLinking.a */; };
 		139105C61AF99C1200B5F7CC /* libRCTSettings.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 139105C11AF99BAD00B5F7CC /* libRCTSettings.a */; };
 		139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 139FDEF41B06529B00C62182 /* libRCTWebSocket.a */; };
@@ -20,7 +23,9 @@
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		140ED2AC1D01E1AD002B40FF /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
+		145475435D174D988EDDE3C4 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BE9F971F7CDB4250ABE2F07C /* Zocial.ttf */; };
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
+		17EE7AA3A0A95F1B54950257 /* Pods_cruisin66v1.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4EBF80B6EFCAF1B800003A3 /* Pods_cruisin66v1.framework */; };
 		2D02E4BC1E0B4A80006451C7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
@@ -34,23 +39,44 @@
 		2D16E6881FA4F8E400B85C8A /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D16E6891FA4F8E400B85C8A /* libReact.a */; };
 		2DCD954D1E0B4F2C00145EB5 /* cruisin66v1Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* cruisin66v1Tests.m */; };
 		2DF0FFEE2056DD460020B375 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAD3EA31DF850E9000B6D8A /* libReact.a */; };
+		4317ADC221273467002173A0 /* AIRMapCalloutManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4317AD6E21273467002173A0 /* AIRMapCalloutManager.m */; };
+		4317ADC321273467002173A0 /* AIRMapLocalTile.m in Sources */ = {isa = PBXBuildFile; fileRef = 4317AD7521273467002173A0 /* AIRMapLocalTile.m */; };
+		4317ADC421273467002173A0 /* AIRMapMarkerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4317AD7721273467002173A0 /* AIRMapMarkerManager.m */; };
+		4317ADC521273467002173A0 /* AIRMapUrlTile.m in Sources */ = {isa = PBXBuildFile; fileRef = 4317AD7821273467002173A0 /* AIRMapUrlTile.m */; };
+		4317ADC621273467002173A0 /* AIRMapPolylineRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 4317AD7921273467002173A0 /* AIRMapPolylineRenderer.m */; };
+		4317ADC721273467002173A0 /* AIRMapOverlayManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4317AD7A21273467002173A0 /* AIRMapOverlayManager.m */; };
+		4317ADC821273467002173A0 /* AIRMapCoordinate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4317AD7C21273467002173A0 /* AIRMapCoordinate.m */; };
+		4317ADC921273467002173A0 /* AIRMapPolylineManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4317AD8121273467002173A0 /* AIRMapPolylineManager.m */; };
+		4317ADCA21273467002173A0 /* SMCalloutView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4317AD8421273467002173A0 /* SMCalloutView.m */; };
+		4317ADCB21273467002173A0 /* AIRMapLocalTileOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = 4317AD8621273467002173A0 /* AIRMapLocalTileOverlay.m */; };
+		4317ADCC21273467002173A0 /* AIRMapCallout.m in Sources */ = {isa = PBXBuildFile; fileRef = 4317AD8721273467002173A0 /* AIRMapCallout.m */; };
+		4317ADCD21273467002173A0 /* AIRMapLocalTileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4317AD8821273467002173A0 /* AIRMapLocalTileManager.m */; };
+		4317ADCE21273467002173A0 /* AIRMapPolyline.m in Sources */ = {isa = PBXBuildFile; fileRef = 4317AD8921273467002173A0 /* AIRMapPolyline.m */; };
+		4317ADCF21273467002173A0 /* AIRMapCircleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4317AD8B21273467002173A0 /* AIRMapCircleManager.m */; };
+		4317ADD021273467002173A0 /* AIRMapMarker.m in Sources */ = {isa = PBXBuildFile; fileRef = 4317AD8C21273467002173A0 /* AIRMapMarker.m */; };
+		4317ADD121273467002173A0 /* AIRMapPolygonManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4317AD8D21273467002173A0 /* AIRMapPolygonManager.m */; };
+		4317ADD221273467002173A0 /* AIRMapPolygon.m in Sources */ = {isa = PBXBuildFile; fileRef = 4317AD8E21273467002173A0 /* AIRMapPolygon.m */; };
+		4317ADD321273467002173A0 /* AIRMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 4317AD8F21273467002173A0 /* AIRMap.m */; };
+		4317ADD421273467002173A0 /* AIRMapCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = 4317AD9121273467002173A0 /* AIRMapCircle.m */; };
+		4317ADD521273467002173A0 /* AIRMapUrlTileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4317AD9521273467002173A0 /* AIRMapUrlTileManager.m */; };
+		4317ADD621273467002173A0 /* AIRMapManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4317AD9921273467002173A0 /* AIRMapManager.m */; };
+		4317ADD721273467002173A0 /* AIRMapOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = 4317AD9A21273467002173A0 /* AIRMapOverlay.m */; };
+		4317ADD821273467002173A0 /* AIRMapOverlayRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 4317AD9B21273467002173A0 /* AIRMapOverlayRenderer.m */; };
+		4317ADD921273467002173A0 /* RCTConvert+AirMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 4317AD9C21273467002173A0 /* RCTConvert+AirMap.m */; };
 		5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
-		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
-		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
-		60F0348B0BBA42D78ACAA6C1 /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D6B3AF08FBDF4BB2BC6811F9 /* Entypo.ttf */; };
-		69D956E6812F4BBAA45E8F19 /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 17B7B3AFC8B14194BC0F7074 /* EvilIcons.ttf */; };
-		F230F4727E56447C9290DC9B /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1AFB1B9D688946979B63EC22 /* Feather.ttf */; };
-		82F21CF33E10464299BCE955 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4936D928D7304B22B1E9F767 /* FontAwesome.ttf */; };
-		7E13532C35354A53BA23F01C /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4FFD16BC3E1E48358C90A918 /* Foundation.ttf */; };
 		609CD2F52232454DBC920A79 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7C969D89266349C5947ED7E3 /* Ionicons.ttf */; };
-		D19C70D93A194214BD68B674 /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AC8F0647A2624B53BD29C8AF /* MaterialCommunityIcons.ttf */; };
-		1136B6FDBBAE4E55A8E03987 /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 951B445BA825451C99BEB1B5 /* MaterialIcons.ttf */; };
-		A79859E2AB4240919953DD58 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5365E603520D4A8CADAA3FE8 /* Octicons.ttf */; };
-		909B171D504C40C193960E6D /* Roboto_medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3DC435599B8944CB8E8BE92C /* Roboto_medium.ttf */; };
+		60F0348B0BBA42D78ACAA6C1 /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D6B3AF08FBDF4BB2BC6811F9 /* Entypo.ttf */; };
 		694DDA9130214181B579B4CD /* Roboto.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 171F3EE95F984011B334F471 /* Roboto.ttf */; };
-		0610C239037841FC89D7C79D /* rubicon-icon-font.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 470321D631BC4853B02CE0A5 /* rubicon-icon-font.ttf */; };
+		69D956E6812F4BBAA45E8F19 /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 17B7B3AFC8B14194BC0F7074 /* EvilIcons.ttf */; };
+		7E13532C35354A53BA23F01C /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4FFD16BC3E1E48358C90A918 /* Foundation.ttf */; };
+		82F21CF33E10464299BCE955 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4936D928D7304B22B1E9F767 /* FontAwesome.ttf */; };
+		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
+		909B171D504C40C193960E6D /* Roboto_medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3DC435599B8944CB8E8BE92C /* Roboto_medium.ttf */; };
+		A79859E2AB4240919953DD58 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5365E603520D4A8CADAA3FE8 /* Octicons.ttf */; };
+		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
 		AE41BC506B3E4C7A91729114 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5E9FB435B3E34001A26F261B /* SimpleLineIcons.ttf */; };
-		145475435D174D988EDDE3C4 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BE9F971F7CDB4250ABE2F07C /* Zocial.ttf */; };
+		D19C70D93A194214BD68B674 /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AC8F0647A2624B53BD29C8AF /* MaterialCommunityIcons.ttf */; };
+		F230F4727E56447C9290DC9B /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1AFB1B9D688946979B63EC22 /* Feather.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -349,27 +375,82 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = cruisin66v1/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = cruisin66v1/main.m; sourceTree = "<group>"; };
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
+		171F3EE95F984011B334F471 /* Roboto.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Roboto.ttf; path = "../node_modules/native-base/Fonts/Roboto.ttf"; sourceTree = "<group>"; };
+		17B7B3AFC8B14194BC0F7074 /* EvilIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = EvilIcons.ttf; path = "../node_modules/native-base/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
+		1AFB1B9D688946979B63EC22 /* Feather.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Feather.ttf; path = "../node_modules/native-base/Fonts/Feather.ttf"; sourceTree = "<group>"; };
+		21D9E740B097CB4D6D11D69E /* Pods-cruisin66v1.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cruisin66v1.debug.xcconfig"; path = "Pods/Target Support Files/Pods-cruisin66v1/Pods-cruisin66v1.debug.xcconfig"; sourceTree = "<group>"; };
+		2A851B7F0CA561EDF0D1B41B /* Pods-cruisin66v1.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cruisin66v1.release.xcconfig"; path = "Pods/Target Support Files/Pods-cruisin66v1/Pods-cruisin66v1.release.xcconfig"; sourceTree = "<group>"; };
 		2D02E47B1E0B4A5D006451C7 /* cruisin66v1-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "cruisin66v1-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* cruisin66v1-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "cruisin66v1-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D16E6891FA4F8E400B85C8A /* libReact.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libReact.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		3DC435599B8944CB8E8BE92C /* Roboto_medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Roboto_medium.ttf; path = "../node_modules/native-base/Fonts/Roboto_medium.ttf"; sourceTree = "<group>"; };
+		4317AD6B21273467002173A0 /* AIRMapLocalTileManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIRMapLocalTileManager.h; sourceTree = "<group>"; };
+		4317AD6C21273467002173A0 /* AIRMapCallout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIRMapCallout.h; sourceTree = "<group>"; };
+		4317AD6D21273467002173A0 /* AIRMapLocalTileOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIRMapLocalTileOverlay.h; sourceTree = "<group>"; };
+		4317AD6E21273467002173A0 /* AIRMapCalloutManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AIRMapCalloutManager.m; sourceTree = "<group>"; };
+		4317AD6F21273467002173A0 /* AIRMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIRMap.h; sourceTree = "<group>"; };
+		4317AD7021273467002173A0 /* AIRMapPolygon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIRMapPolygon.h; sourceTree = "<group>"; };
+		4317AD7121273467002173A0 /* AIRMapPolygonManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIRMapPolygonManager.h; sourceTree = "<group>"; };
+		4317AD7221273467002173A0 /* AIRMapMarker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIRMapMarker.h; sourceTree = "<group>"; };
+		4317AD7321273467002173A0 /* AIRMapCircleManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIRMapCircleManager.h; sourceTree = "<group>"; };
+		4317AD7421273467002173A0 /* AIRMapPolyline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIRMapPolyline.h; sourceTree = "<group>"; };
+		4317AD7521273467002173A0 /* AIRMapLocalTile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AIRMapLocalTile.m; sourceTree = "<group>"; };
+		4317AD7621273467002173A0 /* AIRMapUrlTileManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIRMapUrlTileManager.h; sourceTree = "<group>"; };
+		4317AD7721273467002173A0 /* AIRMapMarkerManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AIRMapMarkerManager.m; sourceTree = "<group>"; };
+		4317AD7821273467002173A0 /* AIRMapUrlTile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AIRMapUrlTile.m; sourceTree = "<group>"; };
+		4317AD7921273467002173A0 /* AIRMapPolylineRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AIRMapPolylineRenderer.m; sourceTree = "<group>"; };
+		4317AD7A21273467002173A0 /* AIRMapOverlayManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AIRMapOverlayManager.m; sourceTree = "<group>"; };
+		4317AD7B21273467002173A0 /* AIRMapCircle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIRMapCircle.h; sourceTree = "<group>"; };
+		4317AD7C21273467002173A0 /* AIRMapCoordinate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AIRMapCoordinate.m; sourceTree = "<group>"; };
+		4317AD7D21273467002173A0 /* RCTConvert+AirMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RCTConvert+AirMap.h"; sourceTree = "<group>"; };
+		4317AD7E21273467002173A0 /* AIRMapOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIRMapOverlay.h; sourceTree = "<group>"; };
+		4317AD7F21273467002173A0 /* AIRMapOverlayRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIRMapOverlayRenderer.h; sourceTree = "<group>"; };
+		4317AD8021273467002173A0 /* AIRMapManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIRMapManager.h; sourceTree = "<group>"; };
+		4317AD8121273467002173A0 /* AIRMapPolylineManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AIRMapPolylineManager.m; sourceTree = "<group>"; };
+		4317AD8221273467002173A0 /* AIRMapCalloutManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIRMapCalloutManager.h; sourceTree = "<group>"; };
+		4317AD8421273467002173A0 /* SMCalloutView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMCalloutView.m; sourceTree = "<group>"; };
+		4317AD8521273467002173A0 /* SMCalloutView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMCalloutView.h; sourceTree = "<group>"; };
+		4317AD8621273467002173A0 /* AIRMapLocalTileOverlay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AIRMapLocalTileOverlay.m; sourceTree = "<group>"; };
+		4317AD8721273467002173A0 /* AIRMapCallout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AIRMapCallout.m; sourceTree = "<group>"; };
+		4317AD8821273467002173A0 /* AIRMapLocalTileManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AIRMapLocalTileManager.m; sourceTree = "<group>"; };
+		4317AD8921273467002173A0 /* AIRMapPolyline.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AIRMapPolyline.m; sourceTree = "<group>"; };
+		4317AD8A21273467002173A0 /* AIRMapSnapshot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIRMapSnapshot.h; sourceTree = "<group>"; };
+		4317AD8B21273467002173A0 /* AIRMapCircleManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AIRMapCircleManager.m; sourceTree = "<group>"; };
+		4317AD8C21273467002173A0 /* AIRMapMarker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AIRMapMarker.m; sourceTree = "<group>"; };
+		4317AD8D21273467002173A0 /* AIRMapPolygonManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AIRMapPolygonManager.m; sourceTree = "<group>"; };
+		4317AD8E21273467002173A0 /* AIRMapPolygon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AIRMapPolygon.m; sourceTree = "<group>"; };
+		4317AD8F21273467002173A0 /* AIRMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AIRMap.m; sourceTree = "<group>"; };
+		4317AD9021273467002173A0 /* AIRMapCoordinate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIRMapCoordinate.h; sourceTree = "<group>"; };
+		4317AD9121273467002173A0 /* AIRMapCircle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AIRMapCircle.m; sourceTree = "<group>"; };
+		4317AD9221273467002173A0 /* AIRMapOverlayManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIRMapOverlayManager.h; sourceTree = "<group>"; };
+		4317AD9321273467002173A0 /* AIRMapPolylineRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIRMapPolylineRenderer.h; sourceTree = "<group>"; };
+		4317AD9421273467002173A0 /* AIRMapUrlTile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIRMapUrlTile.h; sourceTree = "<group>"; };
+		4317AD9521273467002173A0 /* AIRMapUrlTileManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AIRMapUrlTileManager.m; sourceTree = "<group>"; };
+		4317AD9621273467002173A0 /* AIRMapMarkerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIRMapMarkerManager.h; sourceTree = "<group>"; };
+		4317AD9721273467002173A0 /* AIRMapLocalTile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIRMapLocalTile.h; sourceTree = "<group>"; };
+		4317AD9821273467002173A0 /* AIRMapPolylineManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIRMapPolylineManager.h; sourceTree = "<group>"; };
+		4317AD9921273467002173A0 /* AIRMapManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AIRMapManager.m; sourceTree = "<group>"; };
+		4317AD9A21273467002173A0 /* AIRMapOverlay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AIRMapOverlay.m; sourceTree = "<group>"; };
+		4317AD9B21273467002173A0 /* AIRMapOverlayRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AIRMapOverlayRenderer.m; sourceTree = "<group>"; };
+		4317AD9C21273467002173A0 /* RCTConvert+AirMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RCTConvert+AirMap.m"; sourceTree = "<group>"; };
+		470321D631BC4853B02CE0A5 /* rubicon-icon-font.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "rubicon-icon-font.ttf"; path = "../node_modules/native-base/Fonts/rubicon-icon-font.ttf"; sourceTree = "<group>"; };
+		4936D928D7304B22B1E9F767 /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/native-base/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
+		4FFD16BC3E1E48358C90A918 /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = "../node_modules/native-base/Fonts/Foundation.ttf"; sourceTree = "<group>"; };
+		52130B69B4A5D128356B81E5 /* libPods-cruisin66v1Tests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-cruisin66v1Tests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5365E603520D4A8CADAA3FE8 /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/native-base/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
+		5E9FB435B3E34001A26F261B /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = "../node_modules/native-base/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; };
+		6B560EC381910861847BBFB3 /* libPods-cruisin66v1-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-cruisin66v1-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
+		7C969D89266349C5947ED7E3 /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/native-base/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
+		951B445BA825451C99BEB1B5 /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/native-base/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
+		AC8F0647A2624B53BD29C8AF /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialCommunityIcons.ttf; path = "../node_modules/native-base/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
 		ADBDB91F1DFEBF0600ED6528 /* RCTBlob.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTBlob.xcodeproj; path = "../node_modules/react-native/Libraries/Blob/RCTBlob.xcodeproj"; sourceTree = "<group>"; };
-		D6B3AF08FBDF4BB2BC6811F9 /* Entypo.ttf */ = {isa = PBXFileReference; name = "Entypo.ttf"; path = "../node_modules/native-base/Fonts/Entypo.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		17B7B3AFC8B14194BC0F7074 /* EvilIcons.ttf */ = {isa = PBXFileReference; name = "EvilIcons.ttf"; path = "../node_modules/native-base/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		1AFB1B9D688946979B63EC22 /* Feather.ttf */ = {isa = PBXFileReference; name = "Feather.ttf"; path = "../node_modules/native-base/Fonts/Feather.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		4936D928D7304B22B1E9F767 /* FontAwesome.ttf */ = {isa = PBXFileReference; name = "FontAwesome.ttf"; path = "../node_modules/native-base/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		4FFD16BC3E1E48358C90A918 /* Foundation.ttf */ = {isa = PBXFileReference; name = "Foundation.ttf"; path = "../node_modules/native-base/Fonts/Foundation.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		7C969D89266349C5947ED7E3 /* Ionicons.ttf */ = {isa = PBXFileReference; name = "Ionicons.ttf"; path = "../node_modules/native-base/Fonts/Ionicons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		AC8F0647A2624B53BD29C8AF /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; name = "MaterialCommunityIcons.ttf"; path = "../node_modules/native-base/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		951B445BA825451C99BEB1B5 /* MaterialIcons.ttf */ = {isa = PBXFileReference; name = "MaterialIcons.ttf"; path = "../node_modules/native-base/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		5365E603520D4A8CADAA3FE8 /* Octicons.ttf */ = {isa = PBXFileReference; name = "Octicons.ttf"; path = "../node_modules/native-base/Fonts/Octicons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		3DC435599B8944CB8E8BE92C /* Roboto_medium.ttf */ = {isa = PBXFileReference; name = "Roboto_medium.ttf"; path = "../node_modules/native-base/Fonts/Roboto_medium.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		171F3EE95F984011B334F471 /* Roboto.ttf */ = {isa = PBXFileReference; name = "Roboto.ttf"; path = "../node_modules/native-base/Fonts/Roboto.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		470321D631BC4853B02CE0A5 /* rubicon-icon-font.ttf */ = {isa = PBXFileReference; name = "rubicon-icon-font.ttf"; path = "../node_modules/native-base/Fonts/rubicon-icon-font.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		5E9FB435B3E34001A26F261B /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; name = "SimpleLineIcons.ttf"; path = "../node_modules/native-base/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		BE9F971F7CDB4250ABE2F07C /* Zocial.ttf */ = {isa = PBXFileReference; name = "Zocial.ttf"; path = "../node_modules/native-base/Fonts/Zocial.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		BE9F971F7CDB4250ABE2F07C /* Zocial.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Zocial.ttf; path = "../node_modules/native-base/Fonts/Zocial.ttf"; sourceTree = "<group>"; };
+		D6B3AF08FBDF4BB2BC6811F9 /* Entypo.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Entypo.ttf; path = "../node_modules/native-base/Fonts/Entypo.ttf"; sourceTree = "<group>"; };
+		DBFC15BB81E0DB467F80B3A1 /* libPods-cruisin66v1-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-cruisin66v1-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E4EBF80B6EFCAF1B800003A3 /* Pods_cruisin66v1.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_cruisin66v1.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -398,6 +479,7 @@
 				832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */,
 				00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */,
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
+				17EE7AA3A0A95F1B54950257 /* Pods_cruisin66v1.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -547,8 +629,93 @@
 			isa = PBXGroup;
 			children = (
 				2D16E6891FA4F8E400B85C8A /* libReact.a */,
+				DBFC15BB81E0DB467F80B3A1 /* libPods-cruisin66v1-tvOS.a */,
+				6B560EC381910861847BBFB3 /* libPods-cruisin66v1-tvOSTests.a */,
+				52130B69B4A5D128356B81E5 /* libPods-cruisin66v1Tests.a */,
+				E4EBF80B6EFCAF1B800003A3 /* Pods_cruisin66v1.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		41BF1623A5CC23DBF13E4F4A /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				21D9E740B097CB4D6D11D69E /* Pods-cruisin66v1.debug.xcconfig */,
+				2A851B7F0CA561EDF0D1B41B /* Pods-cruisin66v1.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		4317AD6A21273467002173A0 /* AirMaps */ = {
+			isa = PBXGroup;
+			children = (
+				4317AD6B21273467002173A0 /* AIRMapLocalTileManager.h */,
+				4317AD6C21273467002173A0 /* AIRMapCallout.h */,
+				4317AD6D21273467002173A0 /* AIRMapLocalTileOverlay.h */,
+				4317AD6E21273467002173A0 /* AIRMapCalloutManager.m */,
+				4317AD6F21273467002173A0 /* AIRMap.h */,
+				4317AD7021273467002173A0 /* AIRMapPolygon.h */,
+				4317AD7121273467002173A0 /* AIRMapPolygonManager.h */,
+				4317AD7221273467002173A0 /* AIRMapMarker.h */,
+				4317AD7321273467002173A0 /* AIRMapCircleManager.h */,
+				4317AD7421273467002173A0 /* AIRMapPolyline.h */,
+				4317AD7521273467002173A0 /* AIRMapLocalTile.m */,
+				4317AD7621273467002173A0 /* AIRMapUrlTileManager.h */,
+				4317AD7721273467002173A0 /* AIRMapMarkerManager.m */,
+				4317AD7821273467002173A0 /* AIRMapUrlTile.m */,
+				4317AD7921273467002173A0 /* AIRMapPolylineRenderer.m */,
+				4317AD7A21273467002173A0 /* AIRMapOverlayManager.m */,
+				4317AD7B21273467002173A0 /* AIRMapCircle.h */,
+				4317AD7C21273467002173A0 /* AIRMapCoordinate.m */,
+				4317AD7D21273467002173A0 /* RCTConvert+AirMap.h */,
+				4317AD7E21273467002173A0 /* AIRMapOverlay.h */,
+				4317AD7F21273467002173A0 /* AIRMapOverlayRenderer.h */,
+				4317AD8021273467002173A0 /* AIRMapManager.h */,
+				4317AD8121273467002173A0 /* AIRMapPolylineManager.m */,
+				4317AD8221273467002173A0 /* AIRMapCalloutManager.h */,
+				4317AD8321273467002173A0 /* Callout */,
+				4317AD8621273467002173A0 /* AIRMapLocalTileOverlay.m */,
+				4317AD8721273467002173A0 /* AIRMapCallout.m */,
+				4317AD8821273467002173A0 /* AIRMapLocalTileManager.m */,
+				4317AD8921273467002173A0 /* AIRMapPolyline.m */,
+				4317AD8A21273467002173A0 /* AIRMapSnapshot.h */,
+				4317AD8B21273467002173A0 /* AIRMapCircleManager.m */,
+				4317AD8C21273467002173A0 /* AIRMapMarker.m */,
+				4317AD8D21273467002173A0 /* AIRMapPolygonManager.m */,
+				4317AD8E21273467002173A0 /* AIRMapPolygon.m */,
+				4317AD8F21273467002173A0 /* AIRMap.m */,
+				4317AD9021273467002173A0 /* AIRMapCoordinate.h */,
+				4317AD9121273467002173A0 /* AIRMapCircle.m */,
+				4317AD9221273467002173A0 /* AIRMapOverlayManager.h */,
+				4317AD9321273467002173A0 /* AIRMapPolylineRenderer.h */,
+				4317AD9421273467002173A0 /* AIRMapUrlTile.h */,
+				4317AD9521273467002173A0 /* AIRMapUrlTileManager.m */,
+				4317AD9621273467002173A0 /* AIRMapMarkerManager.h */,
+				4317AD9721273467002173A0 /* AIRMapLocalTile.h */,
+				4317AD9821273467002173A0 /* AIRMapPolylineManager.h */,
+				4317AD9921273467002173A0 /* AIRMapManager.m */,
+				4317AD9A21273467002173A0 /* AIRMapOverlay.m */,
+				4317AD9B21273467002173A0 /* AIRMapOverlayRenderer.m */,
+				4317AD9C21273467002173A0 /* RCTConvert+AirMap.m */,
+			);
+			name = AirMaps;
+			path = "../node_modules/react-native-maps/lib/ios/AirMaps";
+			sourceTree = "<group>";
+		};
+		4317AD8321273467002173A0 /* Callout */ = {
+			isa = PBXGroup;
+			children = (
+				4317AD8421273467002173A0 /* SMCalloutView.m */,
+				4317AD8521273467002173A0 /* SMCalloutView.h */,
+			);
+			path = Callout;
+			sourceTree = "<group>";
+		};
+		4397ACB6212692FE008CE2BF /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "Recovered References";
 			sourceTree = "<group>";
 		};
 		5E91572E1DD0AC6500FF2AA8 /* Products */ = {
@@ -600,12 +767,15 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				4317AD6A21273467002173A0 /* AirMaps */,
 				13B07FAE1A68108700A75B9A /* cruisin66v1 */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* cruisin66v1Tests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				9A6BEBD954E94B029D1B3A7B /* Resources */,
+				41BF1623A5CC23DBF13E4F4A /* Pods */,
+				4397ACB6212692FE008CE2BF /* Recovered References */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -623,17 +793,8 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		ADBDB9201DFEBF0600ED6528 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */,
-				2D16E6721FA4F8DC00B85C8A /* libRCTBlob-tvOS.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		9A6BEBD954E94B029D1B3A7B /* Resources */ = {
-			isa = "PBXGroup";
+			isa = PBXGroup;
 			children = (
 				D6B3AF08FBDF4BB2BC6811F9 /* Entypo.ttf */,
 				17B7B3AFC8B14194BC0F7074 /* EvilIcons.ttf */,
@@ -652,7 +813,15 @@
 			);
 			name = Resources;
 			sourceTree = "<group>";
-			path = "";
+		};
+		ADBDB9201DFEBF0600ED6528 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */,
+				2D16E6721FA4F8DC00B85C8A /* libRCTBlob-tvOS.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
@@ -679,10 +848,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "cruisin66v1" */;
 			buildPhases = (
+				D8F597F679267F7BF37B8FB0 /* [CP] Check Pods Manifest.lock */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
+				5B4BAEA7E90B97A4A4C51C07 /* [CP] Copy Pods Resources */,
+				B58580DD55B4BA73184AE17A /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -741,6 +913,10 @@
 					00E356ED1AD99517003FC87E = {
 						CreatedOnToolsVersion = 6.2;
 						TestTargetID = 13B07F861A680F5B00A75B9A;
+					};
+					13B07F861A680F5B00A75B9A = {
+						DevelopmentTeam = YLRTX7D6A9;
+						ProvisioningStyle = Automatic;
 					};
 					2D02E47A1E0B4A5D006451C7 = {
 						CreatedOnToolsVersion = 8.2.1;
@@ -1163,6 +1339,60 @@
 			shellPath = /bin/sh;
 			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
 		};
+		5B4BAEA7E90B97A4A4C51C07 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-cruisin66v1/Pods-cruisin66v1-resources.sh",
+				"${PODS_ROOT}/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleMaps.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-cruisin66v1/Pods-cruisin66v1-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B58580DD55B4BA73184AE17A /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-cruisin66v1/Pods-cruisin66v1-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/yoga/yoga.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/yoga.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-cruisin66v1/Pods-cruisin66v1-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D8F597F679267F7BF37B8FB0 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-cruisin66v1-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -1178,8 +1408,32 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4317ADC721273467002173A0 /* AIRMapOverlayManager.m in Sources */,
+				4317ADC621273467002173A0 /* AIRMapPolylineRenderer.m in Sources */,
+				4317ADCE21273467002173A0 /* AIRMapPolyline.m in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
+				4317ADC821273467002173A0 /* AIRMapCoordinate.m in Sources */,
+				4317ADD521273467002173A0 /* AIRMapUrlTileManager.m in Sources */,
+				4317ADCB21273467002173A0 /* AIRMapLocalTileOverlay.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
+				4317ADCF21273467002173A0 /* AIRMapCircleManager.m in Sources */,
+				4317ADD021273467002173A0 /* AIRMapMarker.m in Sources */,
+				4317ADD321273467002173A0 /* AIRMap.m in Sources */,
+				4317ADD921273467002173A0 /* RCTConvert+AirMap.m in Sources */,
+				4317ADD821273467002173A0 /* AIRMapOverlayRenderer.m in Sources */,
+				4317ADC221273467002173A0 /* AIRMapCalloutManager.m in Sources */,
+				4317ADD121273467002173A0 /* AIRMapPolygonManager.m in Sources */,
+				4317ADD621273467002173A0 /* AIRMapManager.m in Sources */,
+				4317ADCA21273467002173A0 /* SMCalloutView.m in Sources */,
+				4317ADC321273467002173A0 /* AIRMapLocalTile.m in Sources */,
+				4317ADCC21273467002173A0 /* AIRMapCallout.m in Sources */,
+				4317ADD221273467002173A0 /* AIRMapPolygon.m in Sources */,
+				4317ADD421273467002173A0 /* AIRMapCircle.m in Sources */,
+				4317ADC421273467002173A0 /* AIRMapMarkerManager.m in Sources */,
+				4317ADCD21273467002173A0 /* AIRMapLocalTileManager.m in Sources */,
+				4317ADC521273467002173A0 /* AIRMapUrlTile.m in Sources */,
+				4317ADD721273467002173A0 /* AIRMapOverlay.m in Sources */,
+				4317ADC921273467002173A0 /* AIRMapPolylineManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1236,9 +1490,11 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = cruisin66v1Tests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lc++",
@@ -1253,9 +1509,11 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
+				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = cruisin66v1Tests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lc++",
@@ -1267,11 +1525,20 @@
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 21D9E740B097CB4D6D11D69E /* Pods-cruisin66v1.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
+				DEVELOPMENT_TEAM = YLRTX7D6A9;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/../node_modules/react-native-maps/lib/ios/**",
+				);
 				INFOPLIST_FILE = cruisin66v1/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -1279,16 +1546,26 @@
 					"-lc++",
 				);
 				PRODUCT_NAME = cruisin66v1;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2A851B7F0CA561EDF0D1B41B /* Pods-cruisin66v1.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = YLRTX7D6A9;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/../node_modules/react-native-maps/lib/ios/**",
+				);
 				INFOPLIST_FILE = cruisin66v1/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -1296,6 +1573,7 @@
 					"-lc++",
 				);
 				PRODUCT_NAME = cruisin66v1;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
@@ -1312,8 +1590,10 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_TESTABILITY = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
+				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = "cruisin66v1-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lc++",
@@ -1338,8 +1618,10 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_NO_COMMON_BLOCKS = YES;
+				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = "cruisin66v1-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lc++",
@@ -1363,8 +1645,10 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_TESTABILITY = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
+				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = "cruisin66v1-tvOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lc++",
@@ -1388,8 +1672,10 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_NO_COMMON_BLOCKS = YES;
+				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = "cruisin66v1-tvOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lc++",

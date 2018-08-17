@@ -1,128 +1,121 @@
-import React from 'react';
+import React from "react";
 
-import { 
-  StyleSheet, 
-  Text, 
-  View, 
-  Image, 
-  TextInput, 
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  TextInput,
   TouchableHighlight,
   ScrollView,
+  AsyncStorage,
   ActivityIndicator
-} from 'react-native';
-import {
-  InputGroup,
-  Input,
-  Icon,
-  Button
-} from 'native-base';
-import FormMessage from './FormMessage'
+} from "react-native";
+import { InputGroup, Input, Container, Content, Icon } from "native-base";
 
+const axios = require("axios");
 class Signup extends React.Component {
-
   static navigationOptions = {
-      title: 'Cruisin\'66'
+    title: "Cruisin'66"
   };
 
   constructor(props) {
     super(props);
     this.state = {
-      firstName: '',
-      lastName: '',
-      userName: '',
-      email: '',
-      password: '',      
-      showProgress: false,
+      firstName: "",
+      lastName: "",
+      userName: "",
+      email: "",
+      password: "",
+      showProgress: false
     };
   }
 
-//todo: error handling (Ex: account already exists)
-  handleSubmit() {
-    return fetch('http://localhost:3000/signup', {
-      method: 'POST', 
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
+  //todo: error handling (Ex: account already exists)
+  handleSubmitSignUp() {
+    const { navigate } = this.props.navigation; // define here for the context
+
+    axios
+      .post("http://localhost:3000/signup", {
         firstName: this.state.firstName,
         lastName: this.state.lastName,
         userName: this.state.userName,
         email: this.state.email,
         password: this.state.password
       })
-    })
-    .then((response) => {
-      console.log(response);
-      if (response.error) {
-        console.log("Error with sign up information")
-      } else {
-        console.log('Login success');
-        return response.json();
-      }
-    })
-    .then(data => {
-      // AsyncStorage.setItem('token', data.token)
-      // .then(() => {
-        console.log(data);
-        this.props.navigation.navigate('Home', data.token);
-      // });
-    })
-    .catch((err) => {
-      console.log(err)
-    });
+      .then(function(response) {
+        if (response.err) {
+          alert("Error login");
+        } else {
+          var dataUser = AsyncStorage.setItem(
+            "userInfo",
+            JSON.stringify(response)
+          );
+          if (dataUser) {
+            navigate("Home");
+          }
+        }
+      })
+      .catch(function(error) {
+        console.log(error);
+        alert(error);
+      });
   }
 
   render() {
     return (
-      <View style={styles.container}>
-        <View style={styles.formStyle}>
-            <TextInput
-              style={styles.inputStyle}
-              placeholder="First name"
-              onChangeText={(firstName) => this.setState({ firstName })}
-              value={this.state.firstName}
-            />
-            <TextInput
-              style={styles.inputStyle}
-              placeholder="Last name"
-              onChangeText={(lastName) => this.setState({ lastName })}
-              value={this.state.lastName}
-            />
-            <TextInput
-              style={styles.inputStyle}
-              placeholder="Email"
-              onChangeText={(email) => this.setState({ email })}
-              value={this.state.email}
-            />
-            <TextInput
-              style={styles.inputStyle}
-              placeholder="Password"
-              onChangeText={password => this.setState({ password })}
-              value={this.state.password}
-              secureTextEntry
-            />
-            <TextInput
-              style={styles.inputStyle}
-              placeholder="Re-enter password"
-              onChangeText={password2 => this.setState({ password2 })}
-              value={this.state.password2}
-              secureTextEntry
-            />
+      <Container>
+        <Content>
+          <View style={styles.container}>
+            <View style={styles.formStyle}>
+              <TextInput
+                style={styles.inputStyle}
+                placeholder="First name"
+                onChangeText={firstName => this.setState({ firstName })}
+                value={this.state.firstName}
+              />
+              <TextInput
+                style={styles.inputStyle}
+                placeholder="Last name"
+                onChangeText={lastName => this.setState({ lastName })}
+                value={this.state.lastName}
+              />
+              <TextInput
+                style={styles.inputStyle}
+                placeholder="Email"
+                onChangeText={email => this.setState({ email })}
+                value={this.state.email}
+              />
+              <TextInput
+                style={styles.inputStyle}
+                placeholder="Password"
+                onChangeText={password => this.setState({ password })}
+                value={this.state.password}
+                secureTextEntry
+              />
+              <TextInput
+                style={styles.inputStyle}
+                placeholder="Re-enter password"
+                onChangeText={password2 => this.setState({ password2 })}
+                value={this.state.password2}
+                secureTextEntry
+              />
+              <ActivityIndicator
+                animating={this.state.showProgress}
+                size="large"
+                style={styles.loader}
+              />
 
-            <TouchableHighlight
-              style={styles.button}
-              onPress = {this.handleSubmit.bind(this)}
+              <TouchableHighlight
+                style={styles.button}
+                onPress={this.handleSubmitSignUp.bind(this)}
               >
-              <Text style={styles.buttonTextColor}> Sign up </Text>
-            </TouchableHighlight>
+                <Text style={styles.buttonTextColor}> Sign up </Text>
+              </TouchableHighlight>
+            </View>
           </View>
-          <ActivityIndicator
-            animating={this.state.showProgress}
-            size="large"
-            style={styles.loader}
-          />
-      </View>
+        </Content>
+      </Container>
     );
   }
 }

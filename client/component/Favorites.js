@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, View,FlatList, Image, TextInput,
-   TouchableHighlight,ScrollView,Modal } from 'react-native';
+   TouchableHighlight,ScrollView,Modal,RefreshControl } from 'react-native';
 
 import {
   Container,
@@ -20,6 +20,7 @@ import {
 } from "native-base";
 
 export default class Favorites extends React.Component {
+  
     static navigationOptions = {
         title: 'Favorites',
     };
@@ -27,8 +28,12 @@ export default class Favorites extends React.Component {
     super(props);
     this.state = {
         modalVisible: false,
+        refreshing: false,
     };
- 
+    _onRefresh = () => {
+      this.setState({refreshing: true});
+    }
+
   }
 
 
@@ -41,6 +46,7 @@ export default class Favorites extends React.Component {
       <Container>
       <Content>
         <FlatList
+       
           data={[
             {
               albumId: 1,
@@ -111,7 +117,16 @@ export default class Favorites extends React.Component {
             </TouchableHighlight>
           )}
           keyExtractor={(item, index) => index.toString()}
+          ref={ref => this.listRef = ref}
+          // Trying a pill refresh
+           refreshControl={
+          <RefreshControl
+            refreshing={this.state.refreshing}
+            onRefresh={this._onRefresh}
+          />
+        }
         />
+        
       </Content>
     </Container>
     );

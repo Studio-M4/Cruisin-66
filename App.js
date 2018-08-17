@@ -46,7 +46,7 @@ const instructions = Platform.select({
 
 const TabsIcons = (isFocused) => (
   {
-    Profile: `ios-contact${isFocused ? "" : "-outline"}`,
+    Profile: `ios-person${isFocused ? "" : "-outline"}`,
     Favorites: `ios-folder${isFocused ? "" : "-outline"}`,
     CreateItinerary: `ios-add-circle${isFocused ? "" : "-outline"}`,
     CreateStop: `ios-add-circle${isFocused ? "" : "-outline"}`,
