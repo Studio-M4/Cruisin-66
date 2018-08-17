@@ -42,76 +42,32 @@ export default class CommentStop extends React.Component {
   }
 
   render() {
+    const { region } = this.props;
+                
     return (
-      <MapView
-      initialRegion={{
-        latitude: 37.78825,
-        longitude: -122.4324,
-        latitudeDelta: 0.0922,
-        longitudeDelta: 0.0421,
-      }}
-      />
+      <View style ={styles.container}>
+        <MapView
+          style={styles.map}
+          region={{
+            latitude: 37.78825,
+            longitude: -122.4324,
+            latitudeDelta: 0.015,
+            longitudeDelta: 0.0121,
+          }}
+        ></MapView>
+      </View>
     );
   }
 }
 const styles = StyleSheet.create({
   container: {
-    display: "flex",
-    flex: 1,
-    flexDirection: "row",
-    backgroundColor: "#fff",
-    margin: 4,
-    borderRadius: 5
-  },
-  container2: {
-    display: "flex",
-    flex: 1,
-    flexDirection: "row",
-    backgroundColor: "#fff",
-    margin: 4,
-    borderRadius: 5
-  },
-  title: {
-    fontSize: 14,
-    color: "#777",
-    marginTop: 7,
-    padding: 9,
-    borderRadius: 25,
-    marginLeft: 4,
-    width: "80%",
-    height: 30
-  },
-  imagesStyle: {
-    width: 50,
-    height: 50,
-    borderRadius: 25,
-    marginBottom: 3
-  },
-  imagesStyleModal: {
-    width: 80,
-    height: 80,
-    borderRadius: 40,
-    marginBottom: 20
-  },
-  textDesign: {
-    width: "80%",
-    color: "#333",
-    marginBottom: 20
-  },
-  closeIt: {
-    padding: 10,
-    marginLeft: "80%",
-    marginTop: 5
-  },
-  inputStyle: {
-    height: 40,
-    width: "80%",
-    borderColor: "#ccc",
-    borderWidth: 0.4,
-    paddingLeft: 10,
-    marginTop: 10,
-    marginLeft: 4,
-    bottom: 5,
-    borderRadius: 20
+    ...StyleSheet.absoluteFillObject,
+    height: '100%',
+    width: "100%",
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+},
+  map: {
+    ...StyleSheet.absoluteFillObject,
   }
 });
