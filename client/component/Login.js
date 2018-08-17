@@ -1,4 +1,6 @@
 import React from "react";
+import { NavigationEvents } from "react-navigation";
+
 import {
   StyleSheet,
   Text,
@@ -9,135 +11,142 @@ import {
   ScrollView,
   ActivityIndicator,
   AsyncStorage
-} from 'react-native';
-import {
-  InputGroup,
-  Input,
-  Icon
-} from 'native-base';
-// import FormMessage from './FormMessage'
+} from "react-native";
+
+import { InputGroup, Input, Container, Content, Icon } from "native-base";
+
+const axios = require("axios");
+
 class Login extends React.Component {
   static navigationOptions = {
-      title: 'Cruisin\'66'
+    title: "Cruisin'66"
   };
 
   constructor(props) {
-      super(props);
-      this.state = {
-        username: '',
-        password: '',
-        validUsername: false, 
-        validPassword: false,
-        showProgress: false,
-        error: null
-      };
+    super(props);
+    this.state = {
+      username: "",
+      password: "",
+      validUsername: false,
+      validPassword: false,
+      showProgress: true,
+      error: null
+    };
   }
 
-  // onLoginPressed() {
-  //   this.setState({showProgress: true});
-  // }
+  onLoginPressed() {
+    this.setState({ showProgress: true });
+  }
 
-  // renderError() {
-  //   if (this.state.error) {
-  //     return (
-  //       <Text style={styles.error}>
-  //         {this.state.error}
-  //       </Text>
-  //     )
-  //   }
-  // }
-
-  //todo: handler utility for response messages 
+  //todo: handler utility for response messages
   //https://medium.com/@yoniweisbrod/interacting-with-apis-using-react-native-fetch-9733f28566bb
 
-  submitLogin() {
-    console.log('inside submitLogin')
-    console.log('email', this.state.email)
-    console.log('password', this.state.password)
+  //submitLogin using axios
 
-    return fetch('http://localhost:3000/login', {
-      method: 'POST', 
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
+  submintLoginAxios() {
+    const { navigate } = this.props.navigation; // define here for the context
+
+    axios
+      .post("http://localhost:3000/login", {
         email: this.state.email,
         password: this.state.password
       })
-    })
-    .then((response) => {
-      // console.log(response);
-      if (response.error) {
-        console.log("Error with login information")
-      } else {
-        console.log('Login success');
-        return response.json();
-      }
-    })
-    .then(data => {
-      // AsyncStorage.setItem('token', data.token)
-      // .then(() => {
-        console.log(data);
-        this.props.navigation.navigate('Home', data.token);
-      // });
-    })
-    .catch((err) => {
-      console.log(err)
-    })
+      .then(function(response) {
+        console.log("check if not an err", response.data);
+        if (response.data.messageCode === 103) {
+          alert(response.data.message);
+        } else {
+          var dataUser = AsyncStorage.setItem(
+            "userInfo",
+            JSON.stringify(response)
+          );
+          if (dataUser) {
+            navigate("Home");
+          }
+        }
+      })
+      .catch(function(error) {
+        console.log(error);
+        alert(error);
+      });
   }
+  _testIftheUserAlreadyLogin = async () => {
+    const { navigate } = this.props.navigation; // define here for the context
+
+    try {
+      const value = await AsyncStorage.getItem("userInfo");
+      if (value !== null) {
+        // user already login -- go to home page
+        navigate("Home");
+      }
+    } catch (error) {
+      // Error retrieving data
+      alert(error);
+    }
+  };
 
   render() {
-    return (
-      <ScrollView>
-        <View style={styles.container}>
-          <Text style={styles.title}>
-            {/* Cruisin'66 */}
-          </Text>
-          <View>
-            {/* <Image
-              style={styles.imagesStyle}
-              source={require("./imgs/icon.png")}
-            /> */}
-          </View>
-          <View style={styles.formStyle}>
-            <TextInput
-              style={styles.inputStyle}
-              placeholder="Email"
-              onChangeText={(email) => this.setState({ email })}
-              value={this.state.email}
-            />
-            <TextInput
-              style={styles.inputStyle}
-              placeholder="Password"
-              onChangeText={password => this.setState({ password })}
-              value={this.state.password}
-              secureTextEntry
-            />
-            <TouchableHighlight
-              style={styles.button}
-              // onPress={this.onLoginPressed.bind(this)}
-              onPress={this.submitLogin.bind(this)}
-              >
-              <Text style={styles.buttonTextColor}> LOGIN </Text>
-            </TouchableHighlight>
+    setTimeout(() => {
+      this.setState({
+        showProgress: false
+      });
+    }, 3000);
 
-            <TouchableHighlight
-              style={styles.button}
-              onPress={() => this.props.navigation.navigate('Signup')}
-              >
-              <Text style={styles.buttonTextColor}> SIGN UP </Text>
-            </TouchableHighlight>
-          </View>
-          <ActivityIndicator
-            animating={this.state.showProgress}
-            size="large"
-            style={styles.loader}
-          />
-        </View>
-      </ScrollView>
+    return (
+      <Container>
+        <Content>
+          <ScrollView>
+            <NavigationEvents
+              onDidFocus={payload => this._testIftheUserAlreadyLogin()}
+            />
+            <View style={styles.container}>
+              <Text style={styles.title}>{/* Cruisin'66 */}</Text>
+              <ActivityIndicator
+                animating={this.state.showProgress}
+                size="large"
+                style={styles.loader}
+              />
+              <View>
+                <Image
+                  style={styles.imagesStyle}
+                  source={require("./imgs/icon.png")}
+                />
+              </View>
+              <View style={styles.formStyle}>
+                <TextInput
+                  style={styles.inputStyle}
+                  placeholder="Email"
+                  onChangeText={email => this.setState({ email })}
+                  value={this.state.email}
+                />
+                <TextInput
+                  style={styles.inputStyle}
+                  placeholder="Password"
+                  onChangeText={password => this.setState({ password })}
+                  value={this.state.password}
+                  secureTextEntry
+                />
+                <TouchableHighlight
+                  style={styles.button}
+                  onPress={this.onLoginPressed.bind(this)}
+                  onPress={this.submintLoginAxios.bind(this)}
+                >
+                  <Text style={styles.buttonTextColor}> LOGIN </Text>
+                </TouchableHighlight>
+
+                <TouchableHighlight
+                  style={styles.button}
+                  onPress={() => this.props.navigation.navigate("Signup")}
+                >
+                  <Text style={styles.buttonTextColor}> SIGN UP </Text>
+                </TouchableHighlight>
+              </View>
+            </View>
+          </ScrollView>
+        </Content>
+      </Container>
     );
-  };
+  }
 }
 
 const styles = StyleSheet.create({

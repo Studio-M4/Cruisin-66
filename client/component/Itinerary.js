@@ -132,7 +132,7 @@ export default class Itinerary extends React.Component {
                      <Text style={styles.tourname}>{item.itinerary}</Text>
                     </ImageBackground>
                   </CardItem>
-                  {/* <CardItem>
+                  <CardItem>
                     <Left>
                       <Button transparent>
                         <Icon active name="thumbs-up" />
@@ -144,7 +144,7 @@ export default class Itinerary extends React.Component {
                         <Icon active name="chatbubbles" />
                         <Text
                           onPress={() => {
-                             1. Navigate to the Details route with params 
+                            //  1. Navigate to the Details route with params 
                             this.props.navigation.navigate("CommentStop", {
                               itinerary: item
                             });
@@ -154,7 +154,7 @@ export default class Itinerary extends React.Component {
                     <Right>
                       <Text>11h ago</Text>
                     </Right>
-                  </CardItem> */}
+                  </CardItem>
                 </Card>
               </TouchableHighlight>
             )}

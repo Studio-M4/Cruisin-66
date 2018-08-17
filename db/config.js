@@ -3,7 +3,7 @@ const fs = require('fs');
 module.exports = {
     development: {
       username: 'root',
-      password: 'test',
+      password: 'password',
       database: 'cruisin66_dev',
       host: '127.0.0.1',
       dialect: 'mysql',
