@@ -68,19 +68,7 @@ class Stops extends React.Component {
 
   getStopsById = () => {
     let itineraryId = this.state.itineraryId;
-    // const params = {
-    //   itineraryId: this.state.itineraryId
-    // };
     
-    // var esc = encodeURIComponent;
-    // var query = Object.keys(params)
-    //     .map(k => esc(k) + '=' + esc(params[k]))
-    //     .join('&');
-
-    // let url = `http://localhost:3000/stop?${query}`;
-    // console.log(url);
-
-    // return fetch(url, {
     return fetch(`http://localhost:3000/stops?itineraryId=${itineraryId}`, {
       method: 'GET', 
       headers: {
