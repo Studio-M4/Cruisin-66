@@ -3,9 +3,9 @@ const app = require('../app.js');
 const getStops = require('express').Router();
 
 getStops.get('/stops', (req, res) => {
-  let query = req.params;
+  let query = req.query;
   console.log(query);
-  db.getAllStops((err, data) => {
+  db.getAllStops(query, (err, data) => {
     if (err) {
       res.sendStatus(500);
       res.send('Server side error happened');

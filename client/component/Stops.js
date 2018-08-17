@@ -67,6 +67,7 @@ class Stops extends React.Component {
   }
 
   getStopsById = () => {
+    let itineraryId = this.state.itineraryId;
     // const params = {
     //   itineraryId: this.state.itineraryId
     // };
@@ -80,7 +81,7 @@ class Stops extends React.Component {
     // console.log(url);
 
     // return fetch(url, {
-    return fetch('http://localhost:3000/stops', {
+    return fetch(`http://localhost:3000/stops?itineraryId=${itineraryId}`, {
       method: 'GET', 
       headers: {
         'Accept': 'application/json',
