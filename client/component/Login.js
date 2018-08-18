@@ -38,11 +38,7 @@ class Login extends React.Component {
     this.setState({ showProgress: true });
   }
 
-  //todo: handler utility for response messages
-  //https://medium.com/@yoniweisbrod/interacting-with-apis-using-react-native-fetch-9733f28566bb
-
   //submitLogin using axios
-
   submintLoginAxios() {
     const { navigate } = this.props.navigation; // define here for the context
 
@@ -52,7 +48,6 @@ class Login extends React.Component {
         password: this.state.password
       })
       .then(function(response) {
-        console.log("check if not an err", response.data);
         if (response.data.messageCode === 103) {
           alert(response.data.message);
         } else {

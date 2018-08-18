@@ -34,7 +34,6 @@ class Signup extends React.Component {
   //todo: error handling (Ex: account already exists)
   handleSubmitSignUp() {
     const { navigate } = this.props.navigation; // define here for the context
-
     axios
       .post("http://localhost:3000/signup", {
         firstName: this.state.firstName,
