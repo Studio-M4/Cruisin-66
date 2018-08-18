@@ -56,6 +56,7 @@ class Login extends React.Component {
             JSON.stringify(response)
           );
           if (dataUser) {
+            console.log(dataUser);
             navigate("Home");
           }
         }

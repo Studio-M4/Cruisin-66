@@ -7,7 +7,7 @@ import {
   TextInput,
   TouchableHighlight,
   ScrollView,
-  FlatList
+  FlatList,
 } from "react-native";
 
 import {
@@ -26,12 +26,18 @@ import MapView from "react-native-maps";
 import { Rating } from "react-native-elements";
 import { Button } from "native-base";
 
+import ImageGallery from './ImageGallery.js';
+
 export default class Details extends React.Component {
   static navigationOptions = {
     title: "Details"
   };
   constructor(props) {
     super(props);
+    this.state = {
+      stopId: null, 
+      modalVisible: false,
+    };
   }
 
   render() {
@@ -41,10 +47,11 @@ export default class Details extends React.Component {
 
     return (
       <Container>
-        <Image
+        {/* <Image
           source={{ uri: 'https://media-cdn.tripadvisor.com/media/photo-s/01/7c/15/9f/mc-way-falls.jpg' }}
           style={{ height: 200, width: 100 + "%", flex: 1 }}
-        />
+        /> */}
+        
         <Text 
           style={{
             fontSize: 22,
@@ -61,7 +68,7 @@ export default class Details extends React.Component {
         </Button>
   
         <ScrollView>
-          <FlatList
+          {/* <FlatList
             data={[
               {
                 albumId: 1,
@@ -92,7 +99,8 @@ export default class Details extends React.Component {
               </TouchableHighlight>
             )}
             keyExtractor={(item, index) => index.toString()}
-          />
+          /> */}
+          <ImageGallery></ImageGallery>
         </ScrollView>
         <TextInput
           style={styles.inputStyle}
