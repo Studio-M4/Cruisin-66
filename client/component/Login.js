@@ -1,5 +1,4 @@
 import React from "react";
-import ReactNative from 'react-native'
 import { NavigationEvents } from "react-navigation";
 
 import {
@@ -17,6 +16,13 @@ import {
 import { InputGroup, Input, Container, Content, Icon } from "native-base";
 
 const axios = require("axios");
+
+
+import {
+  InputGroup,
+  Input,
+  Icon
+} from 'native-base';
 
 class Login extends React.Component {
   static navigationOptions = {
