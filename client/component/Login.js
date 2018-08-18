@@ -1,5 +1,8 @@
 import React from "react";
+<<<<<<< HEAD
 import { NavigationEvents } from "react-navigation";
+=======
+>>>>>>> set up snapshot testing
 
 import {
   StyleSheet,
@@ -11,12 +14,23 @@ import {
   ScrollView,
   ActivityIndicator,
   AsyncStorage
+<<<<<<< HEAD
 } from "react-native";
 
 import { InputGroup, Input, Container, Content, Icon } from "native-base";
 
 const axios = require("axios");
 
+=======
+} from 'react-native';
+
+// import {
+//   InputGroup,
+//   Input,
+//   Icon
+// } from 'native-base';
+// import FormMessage from './FormMessage'
+>>>>>>> set up snapshot testing
 class Login extends React.Component {
   static navigationOptions = {
     title: "Cruisin'66"

@@ -22,8 +22,8 @@ import {
   Body
 } from "native-base";
 
-import MapView from "react-native-maps";
-import { Rating } from "react-native-elements";
+// import MapView from "react-native-maps";
+// import { Rating } from "react-native-elements";
 import { Button } from "native-base";
 
 import ImageGallery from './ImageGallery.js';
