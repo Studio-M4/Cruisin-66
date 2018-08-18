@@ -61,8 +61,11 @@
   },
   "jest": {
     "preset": "react-native",
+    "transformIgnorePatterns": [
+			"node_modules/(?!native-base-shoutem-theme|native-base|react-native|react-navigation|react-native-fs|victory-*)"
+		],
     "transform": {
-      "^.+\\.js$": "<rootDir>/node_modules/react-native/jest/preprocessor.js"
+      "^.+\\.js$": "<rootDir>/node_modules/react-native/jest/preprocessor.js" 
     }
   }
 }
