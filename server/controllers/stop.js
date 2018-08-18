@@ -3,12 +3,12 @@ const db = require('../../db/models/');
 
 let getAllStops = (query, callback) => {
   console.log('controller', query);
-  
+  let id = Number(query.itineraryId);
   db.Stop.findAll({
     include: [{
-      model: db.Itinerary,
-      though: {
-        where: query
+      model: db.Itinerary,     
+      where: {
+        id: id
       }
     }]
   })

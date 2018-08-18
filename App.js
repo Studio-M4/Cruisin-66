@@ -90,7 +90,7 @@ const AppStack = createStackNavigator({
   Profile:Profile,
   CommentStop:CommentStop,
   MapComponent: MapComponent,
-  CreateStop:CreateStop
+  CreateStop:CreateStop,
 });
 // Auth navigator
 const AuthStack = createStackNavigator(

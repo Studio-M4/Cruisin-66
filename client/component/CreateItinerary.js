@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavigationEvents } from "react-navigation";
 import {
   StyleSheet,
   Text,
@@ -6,6 +7,7 @@ import {
   Image,
   TextInput,
   TouchableHighlight,
+  AsyncStorage,
   ScrollView,
   Button
 } from 'react-native';
@@ -20,17 +22,38 @@ export default class CreateItinerary extends React.Component {
 
   constructor(props) {
     super(props);
+    this.state = {
+      user: {}
+    }
   }
 
   handleSubmit = () => {
-    const valuesObj = this._form.getValue();
+    let valuesObj = this._form.getValue();   
+    valuesObj.userId = this.state.user.userId;
     console.log('Form values: ', valuesObj);
+    
     this.createItinerary(valuesObj)
       .then(itinerary =>{
         console.log('ITINERARAY ', itinerary);
         this.props.navigation.navigate('Stops', { itinerary: itinerary })}
       )
       .catch(err => console.log(err));
+  };
+
+  _retrieveData = async () => {
+    try {
+      const value = await AsyncStorage.getItem("userInfo");
+      if (value !== null) {
+        // We have data!!
+        userObject = JSON.parse(value);
+        this.setState({
+          user: userObject.data.token
+        });
+      }
+    } catch (error) {
+      // Error retrieving data
+      alert(error);
+    }
   };
 
   /**
@@ -58,6 +81,7 @@ export default class CreateItinerary extends React.Component {
   };
 
   render() {
+    <NavigationEvents onDidFocus={payload => this._retrieveData()} />
     return (
       <ScrollView>
         <View style={styles.container}>
