@@ -1,1 +1,38 @@
-// This is the file that pass request to db Itineraries comment model
+// This is the file that pass request to db Stop model
+const db = require('../../db/models/');
+
+let getItineraryComments = (query, callback) => {
+  console.log('controller', query);
+  let itineraryId = Number(query.itineraryId);
+  db.ItinerariesComment.findAll({    
+    where: {
+      itineraryId: itineraryId
+    }
+  })
+  .then((itineraryComments) => {
+    console.log(itineraryComments);
+    callback(null, itineraryComments);
+  })
+  .catch((err) => {
+    // Handle any error in the chain
+    console.error(err);
+    callback(err, null);
+  });
+};
+
+const createItineraryComment = (newItineraryComment, callback) => {
+  let itineraryId = newItineraryComment.itineraryId;
+  let userId = newItineraryComment.userId;
+
+  db.ItinerariesComment.create(newItineraryComment)
+    .setItineraryId([itineraryId])
+    .setUserId([userId])
+    .then(createdItineraryComment => callback(null, createdItineraryComment))
+    .catch((err) => {
+      console.error(err);
+      callback(err, null);
+    });
+};
+
+module.exports.createItineraryComment = createItineraryComment;
+module.exports.getAllStops = getItineraryComments;

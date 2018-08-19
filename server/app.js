@@ -46,6 +46,9 @@ app.get('/stop', require('./routes/getStopById.js'));
 
 app.get('/categories', require('./routes/getCategories.js'));
 
+app.post('/itinerarycomments', require('./routes/createItineraryComments.js'));
+app.get('/itinerarycomments', require('./routes/getItineraryComments.js'));
+
 if (!module.parent) {
   app.listen(app.get('port'));
   console.log('Listening on', app.get('port'));
