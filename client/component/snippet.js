@@ -1,53 +1,28 @@
-{
-    /* <Container>
-        <Header>
-        <Left>
-            <Button transparent>
-            <Icon name='arrow-back' />
-            </Button>
-        </Left>
-        <Body>
-            <Title>Header</Title>
-        </Body>
-        <Right>
-            <Button transparent>
-            <Icon name='menu' />
-            </Button>
-        </Right>
-        </Header> 
+// const user = require ('../controllers/user')
+// const { makeResObj } = require ('./testHelpers');
 
-        import { SearchBar } from "react-native-elements";
-        <SearchBar
-            lightTheme
-            searchIcon=""
-            // onChangeText={someMethod}
-            // onClear={someMethod}
-            placeholder="Type Here..."
-        />
-        <MapView
-    initialRegion={{
-      latitude: 37.78825,
-      longitude: -122.4324,
-      latitudeDelta: 0.0922,
-      longitudeDelta: 0.0421,
-    }}
-  />
+// jest.mock('../routes/login');
+// const login = require ('../routes/login');
 
-  import {
-  Container,
-  Header,
-  Content,
-  Card,
-  CardItem,
-  Thumbnail,
-  Text,
-  Button,
-  Icon,
-  Left,
-  Body,
-  Right,
-  Title,
-  Item,Input
-} from "native-base";
-    */
-}
+// jest.mock('bcrypt-nodejs');
+// const bcrypt = require('bcrypt-nodejs');
+
+
+// describe ('Login', () => {
+
+    // bcrypt.compare = (pass, hash, cb) => cb (null, pass + 'hashed' === hash); 
+
+    // it ('should log in if the username exists and password matches', async () => {
+    //     let req = { body: { username: 'exists', password: 'password' }, session: { regenerate: cb => cb() } };
+    //     let sessionCreation = {regenerate: req.session.regenerate, user: 'exists'};
+    //     let res = makeResObj(200, sessionCreation); 
+    //     await user.login(req,res);
+    // })
+
+    // test('should logout', async () => {
+    //     let req = { session: { destroy: cb => cb() } };
+    //     let res = makeResObj(200);
+    //     await user.logout(req, res);
+    // });
+  
+// })

@@ -1,5 +1,5 @@
 {
-  "name": "cruisin66",
+  "name": "cruisin66v1",
   "version": "0.0.1",
   "description": "Studio-M4 Hack Reactor Thesis project",
   "author": "Studio-M4",
@@ -43,7 +43,7 @@
   "devDependencies": {
     "babel-jest": "23.4.2",
     "babel-preset-react-native": "^5",
-    "jest": "23.4.1",
+    "jest": "23.5.0",
     "react-test-renderer": "16.3.1",
     "enzyme": "3.3.0",
     "enzyme-adapter-react-16": "1.1.1",
@@ -60,7 +60,7 @@
     "preset": "react-native",
     "transformIgnorePatterns": [
       "node_modules/(?!react-native|expo|native-base|react-navigation|tcomb-form-native)"
-      ],
+    ],
     "transform": {
       "^.+\\.js$": "<rootDir>/node_modules/react-native/jest/preprocessor.js"
     }
