@@ -1,4 +1,5 @@
 import React from "react";
+import ReactNative from 'react-native'
 import { NavigationEvents } from "react-navigation";
 
 import {
