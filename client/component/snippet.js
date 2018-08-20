@@ -26,3 +26,26 @@
     // });
   
 // })
+
+
+            // data={[
+            //   {
+            //     id: 1,
+            //     name: "Taipei 101",
+            //     description: "Come here for a spectacular view. Best time is at sunset!",
+            //     url: "http://images.skyscrapercenter.com/building/tapei101_ext-main2_(c)taipeifinancial.jpg",
+            //   },
+            //   {
+            //     id: 2,
+            //     name: "Taroko National Park",
+            //     description: 'My favorite site is the Eternal Spring Shrine!',
+            //     url: "http://www.thelostpassport.com/wp-content/uploads/2016/09/Overlooking-the-river-in-Taroko-Gorge-National-Park.jpg",
+            //   },
+
+            //   {
+            //     id: 6,
+            //     title: "accusamus ea aliquid et amet sequi nemo",
+            //     url: "http://placehold.it/600/56a8c2",
+            //     thumbnailUrl: "http://placehold.it/150/56a8c2"
+            //   }
+            // ]}

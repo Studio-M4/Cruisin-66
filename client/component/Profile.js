@@ -55,6 +55,40 @@ export default class Profile extends React.Component {
         alert(error)
       }
   }
+
+  getUserItineraries() {
+    let userId = this.state.user.userId;
+    
+    return fetch(`http://localhost:3000/stops?userId=${userId}`, {
+      method: 'GET', 
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      }
+    })
+    .then((response) => {
+      if (response.error) {
+        console.log(response.error);
+      } else {
+        return response.json();
+      }
+    })
+    .then(data => {
+      console.log('stops', data);
+      this.setState({
+        stops: data
+      })
+    })
+    .catch((error) => {
+      console.log(error)
+    });
+  }
+
+
+  componentDidMount() {
+    // this.getUserItineraries();
+  }
+
   //NavigationEvents  instead of wcdl
   render() {
     return (
@@ -68,8 +102,7 @@ export default class Profile extends React.Component {
             />
           </View>
           <Text style={styles.title}>
-            {this.state.user.lastName} /{this.state.user.firstName} / id's
-            {this.state.user.userId}
+            {this.state.user.firstName} {this.state.user.lastName} 
           </Text>
        
            <Text onPress={this._logOut} style={styles.logout}> Logout </Text>
@@ -87,6 +120,7 @@ export default class Profile extends React.Component {
             values={["Itineraries", "Stops", "Favorites"]}
             onPress={index => this.setState({ selected: index })}
           />
+
         </View>
       </ScrollView>
     );

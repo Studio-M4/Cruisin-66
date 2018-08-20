@@ -14,28 +14,20 @@ VALUES
 ('history', NOW(), NOW()), 
 ('food', NOW(), NOW());
 
-INSERT INTO itineraries (name, description, categoryId, userId, createdat, updatedat)
--- VALUES ('Pacific Coast Highway Tour', 'beautiful spots along the famous Pacific Coast highway', 1, 1, NOW(), NOW());
-VALUES 
-('NYC Pizza Time', 'scrum master', 3, 1, NOW(), NOW()),
-('Super cool tour name', 'likes to wear beanies', 2, 2, NOW(), NOW()),
-('Taiwan 101', 'from the land of pineapple cakes', 3, 3, NOW(), NOW()),
-('Bay Area Tour', 'master pepper', 1, 4, NOW(), NOW());
+INSERT INTO itineraries (name, description, categoryId, userId, createdat, updatedat, photoUrl)
+VALUES ('Pacific Coast Highway', 'beautiful spots along the famous Pacific Coast highway', 1, 1, NOW(), NOW(), 'https://i0.wp.com/travelfreak.net/wp-content/uploads/2017/11/bixby-creek-bridge.jpg?fit=800%2C533&ssl=1');
+
+INSERT INTO itineraries (name, description, categoryId, userId, createdat, updatedat, photoUrl)
+VALUES ('NYC Pizza Time', 'The Ultimate NYC Pizza Tour', 1, 1, NOW(), NOW(), 'https://amp.businessinsider.com/images/5ad8ae04cd862425008b4898-750-563.jpg');
+
+INSERT INTO itineraries (name, description, categoryId, userId, createdat, updatedat, photoUrl)
+VALUES ('Bay Area', 'See all the well known sites SF has to offer!', 2, 1, NOW(), NOW(), 'https://media-cdn.tripadvisor.com/media/photo-s/06/b2/0f/a6/golden-gate-bridge.jpg');
 
 INSERT INTO itinerariescomments (text, rating, itineraryId, userId, createdat, updatedat)
 VALUES ('this tour was the best, highly recommend!', '4', 1, 1, NOW(), NOW());
 
-INSERT INTO itineraryphotos (url, description, itineraryid, createdat, updatedat)
--- VALUES ('https://i0.wp.com/wearetravelgirls.com/wp-content/uploads/2016/10/big-sur-pacific-coast-highway.jpg', 'view of bixby bridge', 1, NOW(), NOW());
-VALUES 
-('https://amp.businessinsider.com/images/5ad8ae04cd862425008b4898-750-563.jpg', 'view of NYC', 1, NOW(), NOW()),
-('http://haitianhollywood.com/images/banners/Port-au-Prince.jpg', 'view of Port-au-Prince', 2, NOW(), NOW()),
-('https://www.worldatlas.com/r/w728-h425-c728x425/upload/3c/e1/38/shutterstock-425692558.jpg', 'view of Taipei', 3, NOW(), NOW()),
-('https://media-cdn.tripadvisor.com/media/photo-s/06/b2/0f/a6/golden-gate-bridge.jpg', 'view of bay area', 4, NOW(), NOW());
-
-
 INSERT INTO stops (name, longitude, latitude, description, avgRating, address, zipcode, audiofile, createdat, updatedat)
-VAlues ('mcway falls', 36.157, -121.672, 'beautiful falls', 5, 'California 93920', '93920', 'exaudiofile', NOW(), NOW());
+VAlues ('McWay Falls', 36.157, -121.672, 'beautiful falls', 5, 'California 93920', '93920', 'exaudiofile', NOW(), NOW());
 
 INSERT INTO stopphotos (url, description, stopid, createdat, updatedat)
 VALUES ('https://i2.wp.com/wearetravelgirls.com/wp-content/uploads/2016/10/california-roadtrip-we-are-travel-girls-2.jpg', 'mcway falls', 1, NOW(), NOW());
