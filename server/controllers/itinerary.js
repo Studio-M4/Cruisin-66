@@ -30,7 +30,7 @@ let getItineraryById = (query, callback) => {
 }
 
 let getItinerariesByUserId = (query, callback) => {
-  console.log('profile', query)
+
   db.Itinerary.findAll({
     where: {
       UserId: query.UserId
