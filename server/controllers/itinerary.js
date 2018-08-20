@@ -30,6 +30,7 @@ let getItineraryById = (query, callback) => {
 }
 
 let getItinerariesByUserId = (query, callback) => {
+
   db.Itinerary.findAll({
     where: {
       UserId: query.UserId
@@ -67,3 +68,4 @@ let createItinerary = (newItineray, callback) => {
 module.exports.createItinerary = createItinerary;
 module.exports.getAllItineraries = getAllItineraries;
 module.exports.getItineraryById = getItineraryById;
+module.exports.getItinerariesByUserId = getItinerariesByUserId;
