@@ -30,7 +30,14 @@ let getItineraryById = (query, callback) => {
 }
 
 let createItinerary = (newItineray, callback) => {
-  db.Itinerary.create(newItineray)
+  console.log('newItineray', newItineray);
+  
+  db.Itinerary.create({
+    name: newItineray.name,
+    description: newItineray.description,
+    UserId: newItineray.UserId,
+    CategoryId: newItineray.CategoryId
+  })
   .then((createdItinerary) => {
     console.log(createdItinerary);
     callback(null, createdItinerary);

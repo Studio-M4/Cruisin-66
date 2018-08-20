@@ -6,10 +6,12 @@ itinerary.post('/itinerary', (req, res) => {
   let newItinerary = {
     name: req.body.name || '',
     description: req.body.description || '',
-    userId: req.body.userId || 8
+    UserId: req.body.UserId,
+    CategoryId: req.body.CategoryId
   };
 
   db.createItinerary(newItinerary, (err, data) => {
+    console.log(newItinerary);
     if (err) {
       res.sendStatus(500);
       res.send('Server side error happened');

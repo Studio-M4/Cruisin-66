@@ -25,8 +25,6 @@ const createItineraryComment = (newItineraryComment, callback) => {
   let userId = newItineraryComment.userId;
 
   db.ItinerariesComment.create(newItineraryComment)
-    .setItineraryId([itineraryId])
-    .setUserId([userId])
     .then(createdItineraryComment => callback(null, createdItineraryComment))
     .catch((err) => {
       console.error(err);

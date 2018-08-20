@@ -27,9 +27,10 @@ export default class CreateItinerary extends React.Component {
     }
   }
 
-  handleSubmit = () => {
+  handleSubmit = async () => {
+    let UserId = await this.state.user.userId;
     let valuesObj = this._form.getValue();   
-    valuesObj.userId = this.state.user.userId;
+    valuesObj.UserId = UserId;
     console.log('Form values: ', valuesObj);
     
     this.createItinerary(valuesObj)
@@ -86,7 +87,7 @@ export default class CreateItinerary extends React.Component {
       <ScrollView>
         <View style={styles.container}>
           <Form ref={c => (this._form = c)} type={Itinerary} />
-          <Button title='Create' onPress={this.handleSubmit} />
+          <Button title='Create' onPress={this.handleSubmit.bind(this)} />
         </View>
       </ScrollView>
     );
