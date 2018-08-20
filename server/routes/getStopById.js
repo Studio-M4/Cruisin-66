@@ -3,8 +3,7 @@ const app = require('../app.js');
 const getStopById = require('express').Router();
 
 getStopById.get('/stop', (req, res) => {
-  console.log(req.params);
-  let query = req.params;
+  let query = req.query;
 
   db.getStopById(query, (err, data) => {
     console.log(query);

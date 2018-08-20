@@ -29,6 +29,22 @@ let getItineraryById = (query, callback) => {
   })
 }
 
+let getItinerariesByUserId = (query, callback) => {
+  db.Itinerary.findAll({
+    where: {
+      UserId: query.UserId
+    }
+  })
+  .then((itineraries) => {
+    console.log(itineraries);
+    callback(null, itineraries);
+  })
+  .catch((err) => {
+    console.error(err);
+    callback(err, null);
+  })
+}
+
 let createItinerary = (newItineray, callback) => {
   console.log('newItineray', newItineray);
   
