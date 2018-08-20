@@ -3,8 +3,7 @@ const app = require('../app.js');
 const getItineraryById = require('express').Router();
 
 getItineraryById.get('/itinerary', (req, res) => {
-  console.log(req.params);
-  let query = req.params;
+  let query = req.query;
   
   db.getItineraryById(query, (err, data) => {
     console.log(query);
