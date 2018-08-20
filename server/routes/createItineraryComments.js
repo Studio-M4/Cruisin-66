@@ -6,8 +6,8 @@ itineraryComment.post('/itinerarycomments', (req, res) => {
   let newItineraryComment = {
     text: req.body.text || '',
     rating: req.body.rating || '',
-    userId: req.body.userId,
-    itineraryId: req.body.itineraryId
+    UserId: req.body.UserId,
+    ItineraryId: req.body.ItineraryId
   };
 
   db.createItineraryComment(newItineraryComment, (err, data) => {

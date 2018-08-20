@@ -26,7 +26,8 @@ app.use(
     secret: 'jurassic eggs',
     resave: false,
     saveUninitialized: false,
-    cookie: {secure: true}
+    cookie: {secure: true},
+    expires: new Date(Date.now() + (60 * 1000))
   })
 );
 

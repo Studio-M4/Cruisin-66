@@ -124,7 +124,6 @@ class Login extends React.Component {
                 />
                 <TouchableHighlight
                   style={styles.button}
-                  onPress={this.onLoginPressed.bind(this)}
                   onPress={this.submintLoginAxios.bind(this)}
                 >
                   <Text style={styles.buttonTextColor}> LOGIN </Text>
