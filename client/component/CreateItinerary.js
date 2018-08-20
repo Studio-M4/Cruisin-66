@@ -28,12 +28,17 @@ export default class CreateItinerary extends React.Component {
   }
 
   handleSubmit = async () => {
-    let UserId = await this.state.user.userId;
-    let valuesObj = this._form.getValue();   
-    valuesObj.UserId = UserId;
-    console.log('Form values: ', valuesObj);
+    var UserId = this.state.user.userId;
+    console.log(UserId); //get the user id
+
+    var valuesObj = this._form.getValue();    // return 
     
-    this.createItinerary(valuesObj)
+    var stringObj = JSON.stringify(valuesObj);
+    var realObj = JSON.parse(stringObj);
+    realObj.UserId = UserId; 
+    console.log('Form after transformation not Struct: ', realObj);
+    
+    this.createItinerary(realObj)
       .then(itinerary =>{
         console.log('ITINERARAY ', itinerary);
         this.props.navigation.navigate('Stops', { itinerary: itinerary })}
@@ -85,6 +90,7 @@ export default class CreateItinerary extends React.Component {
     <NavigationEvents onDidFocus={payload => this._retrieveData()} />
     return (
       <ScrollView>
+        <NavigationEvents onDidFocus={payload => this._retrieveData()} />
         <View style={styles.container}>
           <Form ref={c => (this._form = c)} type={Itinerary} />
           <Button title='Create' onPress={this.handleSubmit.bind(this)} />
