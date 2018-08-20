@@ -6,6 +6,9 @@ cloudinary.config({
   api_secret: 'yq_e727Jnw2Yk7hASZ8yyl7J-zI' 
 });
 
+const convertToHttps = url => `https:${url.split(':')[1]}`;
+
 module.exports = {
-  cloudinary: cloudinary
+  cloudinary: cloudinary,
+  convertToHttps: convertToHttps,
 };
