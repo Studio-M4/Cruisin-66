@@ -1,6 +1,16 @@
 import React from "react";
-import { StyleSheet, Text, View, Image, TextInput, TouchableHighlight, ScrollView, Button, CameraRoll } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  TextInput,
+  ScrollView,
+  Button,
+} from "react-native";
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
+import ImagePicker from "react-native-image-picker";
+import axios from "axios";
 
 export default class CreateStop extends React.Component {
   static navigationOptions = {
@@ -9,51 +19,79 @@ export default class CreateStop extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      photos: [], 
-      itineraryId: null, 
+      photos: [],
+      itineraryId: null,
       address: null,
       description: null,
       name: null,
+      imageSource: null,
     };
+
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handlePhotoUpload = this.handlePhotoUpload.bind(this);
   }
 
   componentDidMount() {
     const { navigation } = this.props;
     // This itineraryId is passed from Stops component.
-    const itineraryId = navigation.getParam('itineraryId');
-    this.setState({itineraryId});
+    const itineraryId = navigation.getParam("itineraryId");
+    this.setState({ itineraryId });
   }
 
-  handleSubmit = () => {
-    const {name, address, description, itineraryId} = this.state;
-    console.log('ITINERARY_ID', itineraryId);
-    this.createStop({name, address, description, itineraryId})
-        .then((itineraryId) => this.props.navigation.navigate('Stops', {itineraryId: itineraryId}))
-        .catch((err) => console.log(err));
-  }
-
-  /**
-   * Should be used to connect to endpoint for creating a Stop.
-   * @param {object} params - parameters for post request
-   */
-  createStop = (params) => {
-    return fetch('http://localhost:3000/stop', {
-      method: 'POST', 
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
+  handleSubmit() {
+    const postData = {
+      stop: {
+        name: this.state.name,
+        description: this.state.description,
+        address: this.state.address,
+        userId: 8, // TODO: replace hardcoded
+        StopPhotos: [{ url: '', description: '' }] // TODO: desciption
       },
-      body: JSON.stringify(params)
-    })
-    .then((res) => {
-      if (res.error) {
-        throw res.error;
+      itineraryId: this.state.itineraryId
+    };
+
+    this.createStop(postData)
+      .then(() => this.props.navigation.navigate('Stops', {itineraryId: this.state.itineraryId}))
+      .catch(err => console.log(err));
+  }
+
+  handlePhotoUpload() {
+    const options = {
+      title: "Select Photo",
+      storageOptions: {
+        skipBackup: true,
+        path: "images"
       }
-      return params.itineraryId;
-    })
-    .catch((error) => {
-      console.log(error)
+    };
+
+    ImagePicker.showImagePicker(options, response => {
+      console.log("Response = ", response);
+      if (response.didCancel) {
+        console.log("User cancelled image picker");
+      } else if (response.error) {
+        console.log("ImagePicker Error: ", response.error);
+      } else if (response.customButton) {
+        console.log("User tapped custom button: ", response.customButton);
+      } else {
+        const source = { uri: "data:image/jpeg;base64," + response.data };
+        this.setState({
+          imageSource: source
+        });
+      }
     });
+  }
+
+  uploadToCloudinary(imageUri) {
+    const url = "http://localhost:4000/cloudinary/photo/upload";
+    return axios.post(url, { imageUri });
+  }
+
+  createStop(postData) {
+    const url = "http://localhost:3000/stop";
+
+    return this.uploadToCloudinary(this.state.imageSource.uri)
+      .then(res => postData.stop.StopPhotos[0].url = res.data)
+      .then(() => axios.post(url, postData));
   }
 
   render() {
@@ -72,7 +110,10 @@ export default class CreateStop extends React.Component {
               // 'details' is provided when fetchDetails = true
               console.log(data, details);
               const fullInfo = data.description;
-              this.setState({ name: getName(fullInfo), address: getAddress(fullInfo) });
+              this.setState({
+                name: getName(fullInfo),
+                address: getAddress(fullInfo)
+              });
             }}
             getDefaultValue={() => ""}
             query={{
@@ -107,7 +148,7 @@ export default class CreateStop extends React.Component {
               "locality",
               "administrative_area_level_3"
             ]} // filter the reverse geocoding results by types - ['locality', 'administrative_area_level_3'] if you want to display only cities
-            debounce={800} // debounce the requests in ms. Set to 0 to remove debounce. By default 0ms.
+            debounce={600} // debounce the requests in ms. Set to 0 to remove debounce. By default 0ms.
           />
           <Text style={styles.title}> Description: </Text>
           <TextInput
@@ -120,7 +161,9 @@ export default class CreateStop extends React.Component {
             onChangeText={description => this.setState({ description })}
             value={this.state.description}
           />
-          <Button title="Create" onPress={this.handleSubmit}/>
+          <Button title="Add Photo" onPress={this.handlePhotoUpload} />
+          <Image style={styles.photo} source={this.state.imageSource} />
+          <Button title="Create" onPress={this.handleSubmit} />
         </View>
       </ScrollView>
     );
@@ -128,19 +171,23 @@ export default class CreateStop extends React.Component {
 }
 
 /**
- * Get location address from google api info.
+ * Get location address from google api returned data.
  */
-const getAddress = (info) => {
-  return info.split(',').slice(1).join(',');
+const getAddress = info => {
+  return info
+    .split(",")
+    .slice(1)
+    .join(",");
 };
 
 /**
- * Get location name from google api info.
+ * Get location name from google api returned data.
  */
-const getName = (info) => {
-  return info.split(',')[0];
-}
+const getName = info => {
+  return info.split(",")[0];
+};
 
+// Styles 😎
 const styles = StyleSheet.create({
   container: {
     alignItems: "center",
@@ -169,6 +216,10 @@ const styles = StyleSheet.create({
     borderWidth: 0.4,
     paddingLeft: 10,
     marginTop: 10,
-    backgroundColor: 'white'
+    backgroundColor: "white"
   },
+  photo: {
+    height: 200,
+    width: 200
+  }
 });
