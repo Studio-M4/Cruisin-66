@@ -4,7 +4,7 @@ const morgan = require("morgan");
 const bodyParser = require("body-parser");
 const service = express();
 
-const { cloudinary } = require("./api.js");
+const { cloudinary, convertToHttps } = require("./api.js");
 
 /****** SETUP HEADERS *****/
 service.use((req, res, next) => {
@@ -31,7 +31,7 @@ service.post("/cloudinary/photo/upload", (req, res) => {
     if (result.error) {
       res.status(500).send(result.error);
     } else {
-      res.status(201).send(result.url);
+      res.status(201).send(convertToHttps(result.url));
     }
   });
 });

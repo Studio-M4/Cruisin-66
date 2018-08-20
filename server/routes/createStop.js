@@ -3,19 +3,11 @@ const db = require('../controllers/stop.js');
 
 
 stop.post('/stop', (req, res) => {
-  const { itineraryId } = req.body;
-  const newStop = {
-    name: req.body.name || '',
-    description: req.body.description || '',
-    address: req.body.address || '',
-    UserId: req.body.userId || 8,
-    ItineraryId: req.body.itineraryId
-  };
+  const { itineraryId, stop } = req.body;
 
-  db.createStop(newStop, itineraryId, (err, data) => {
+  db.createStop(stop, itineraryId, (err, data) => {
     if (err) {
-      res.sendStatus(500);
-      res.send('Server side error happened');
+      res.status(500).send('Server side error happened');
     } else {
       console.log('stopsBeforeJson', data);
       res.json(data);

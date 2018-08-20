@@ -132,7 +132,7 @@ class Stops extends React.Component {
                 <Card>
                   <CardItem>
                     <Left>
-                      <Thumbnail square style={{width: 75, height: 75}} source={{ uri: item.photo || 'https://images-na.ssl-images-amazon.com/images/I/11qnZ2RCZML._SX331_BO1,204,203,200_.jpg' }} />
+                      <Thumbnail square style={{width: 75, height: 75}} source={{ uri: item.StopPhotos[0] ? item.StopPhotos[0].url : 'https://images-na.ssl-images-amazon.com/images/I/11qnZ2RCZML._SX331_BO1,204,203,200_.jpg' }} />
                       <Body>
                         <Text>{item.name}</Text>
                         <Text note>{item.description}</Text>
