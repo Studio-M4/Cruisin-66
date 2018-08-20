@@ -12,6 +12,7 @@ describe('Profile component', () => {
   // });
 
 
+  //error because 
   it('Profile: renders correctly', () => {
     const wrapper = shallow (<Profile/>)
     expect (wrapper).toMatchSnapshot();

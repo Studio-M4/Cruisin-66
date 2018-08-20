@@ -54,6 +54,7 @@ class Stops extends React.Component {
     };
   }
 
+
   componentWillMount() {
     const { navigation } = this.props;
     // This is passed from Itinerary component.
@@ -99,42 +100,24 @@ class Stops extends React.Component {
   }
 
   render() {
+    const { navigation } = this.props;
     return (
       <Container>
         <NavigationEvents
           onDidFocus = {payload => this.handleFocus()}
         />
         <Content>
-          {/* <CardItem cardBody>
+          <CardItem cardBody>
             <ImageBackground
-              source={{ uri: 'https://imagesvc.timeincapp.com/v3/mm/image?url=https%3A%2F%2Fcdn-image.travelandleisure.com%2Fsites%2Fdefault%2Ffiles%2Fstyles%2F1600x1000%2Fpublic%2F1440464211%2FPCH0815-brixy-bridge.jpg%3Fitok%3DtDtK_XRW&w=700&q=85' }}
+              source={{ uri: navigation.getParam('itinerary').photoUrl }}
               style={{ height: 200, width: null, flex: 1 }}
             >
-            <Text style={styles.tourname}>Pacific Coast Highway</Text>
+            <Text style={styles.tourname}>{navigation.getParam('itinerary').name}</Text>
             </ImageBackground>
-          </CardItem> */}
+          </CardItem>
+          <Text>Description: {navigation.getParam('itinerary').description} </Text>
+          <Text>Number of Stops: {this.state.stops.length}</Text>
           <FlatList
-            // data={[
-            //   {
-            //     id: 1,
-            //     name: "Taipei 101",
-            //     description: "Come here for a spectacular view. Best time is at sunset!",
-            //     url: "http://images.skyscrapercenter.com/building/tapei101_ext-main2_(c)taipeifinancial.jpg",
-            //   },
-            //   {
-            //     id: 2,
-            //     name: "Taroko National Park",
-            //     description: 'My favorite site is the Eternal Spring Shrine!',
-            //     url: "http://www.thelostpassport.com/wp-content/uploads/2016/09/Overlooking-the-river-in-Taroko-Gorge-National-Park.jpg",
-            //   },
-
-            //   {
-            //     id: 6,
-            //     title: "accusamus ea aliquid et amet sequi nemo",
-            //     url: "http://placehold.it/600/56a8c2",
-            //     thumbnailUrl: "http://placehold.it/150/56a8c2"
-            //   }
-            // ]}
             data = {this.state.stops}
             
             renderItem={({ item }) => (
