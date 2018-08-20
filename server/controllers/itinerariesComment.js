@@ -21,9 +21,6 @@ let getItineraryComments = (query, callback) => {
 };
 
 const createItineraryComment = (newItineraryComment, callback) => {
-  let itineraryId = newItineraryComment.itineraryId;
-  let userId = newItineraryComment.userId;
-
   db.ItinerariesComment.create(newItineraryComment)
     .then(createdItineraryComment => callback(null, createdItineraryComment))
     .catch((err) => {

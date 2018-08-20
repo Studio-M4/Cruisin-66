@@ -8,7 +8,8 @@ stop.post('/stop', (req, res) => {
     name: req.body.name || '',
     description: req.body.description || '',
     address: req.body.address || '',
-    userId: req.body.userId || 8,
+    UserId: req.body.userId || 8,
+    ItineraryId: req.body.itineraryId
   };
 
   db.createStop(newStop, itineraryId, (err, data) => {
@@ -16,8 +17,9 @@ stop.post('/stop', (req, res) => {
       res.sendStatus(500);
       res.send('Server side error happened');
     } else {
+      console.log('stopsBeforeJson', data);
       res.json(data);
-      console.log(data);
+      console.log('stops', data);
     }
   });
 });
