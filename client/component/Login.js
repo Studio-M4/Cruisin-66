@@ -17,7 +17,6 @@ import { InputGroup, Input, Container, Content, Icon } from "native-base";
 
 const axios = require("axios");
 
-
 import {
   InputGroup,
   Input,
