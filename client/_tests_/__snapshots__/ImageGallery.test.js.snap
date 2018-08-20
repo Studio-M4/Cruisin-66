@@ -1,0 +1,354 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Image Gallery renders correctly 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "#eee",
+      "flex": 1,
+      "flexDirection": "row",
+      "flexWrap": "wrap",
+    }
+  }
+>
+  <Modal
+    animationType="fade"
+    hardwareAccelerated={false}
+    onRequestClose={[Function]}
+    style={
+      Object {
+        "backgroundColor": "rgba(0, 0, 0, 0.9)",
+        "flex": 1,
+        "padding": 40,
+      }
+    }
+    transparent={true}
+    visible={false}
+  >
+    <View
+      style={
+        Object {
+          "backgroundColor": "rgba(0, 0, 0, 0.9)",
+          "flex": 1,
+          "padding": 40,
+        }
+      }
+    >
+      <Text
+        onPress={[Function]}
+        style={
+          Object {
+            "color": "#fff",
+          }
+        }
+      >
+        Close
+      </Text>
+      <Image
+        source={
+          Object {
+            "testUri": "../../../client/component/images/amy.jpg",
+          }
+        }
+      />
+    </View>
+  </Modal>
+  <View
+    accessible={true}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "backgroundColor": "#fff",
+        "height": 432.6666666666667,
+        "margin": 2,
+        "padding": 2,
+        "width": 371,
+      }
+    }
+  >
+    <Image
+      source={
+        Object {
+          "testUri": "../../../client/component/images/amy.jpg",
+        }
+      }
+      style={
+        Object {
+          "alignSelf": "stretch",
+          "flex": 1,
+          "width": null,
+        }
+      }
+    />
+  </View>
+  <View
+    accessible={true}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "backgroundColor": "#fff",
+        "height": 432.6666666666667,
+        "margin": 2,
+        "padding": 2,
+        "width": 371,
+      }
+    }
+  >
+    <Image
+      source={
+        Object {
+          "testUri": "../../../client/component/images/couple1.jpg",
+        }
+      }
+      style={
+        Object {
+          "alignSelf": "stretch",
+          "flex": 1,
+          "width": null,
+        }
+      }
+    />
+  </View>
+  <View
+    accessible={true}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "backgroundColor": "#fff",
+        "height": 432.6666666666667,
+        "margin": 2,
+        "padding": 2,
+        "width": 371,
+      }
+    }
+  >
+    <Image
+      source={
+        Object {
+          "testUri": "../../../client/component/images/couple2.jpg",
+        }
+      }
+      style={
+        Object {
+          "alignSelf": "stretch",
+          "flex": 1,
+          "width": null,
+        }
+      }
+    />
+  </View>
+  <View
+    accessible={true}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "backgroundColor": "#fff",
+        "height": 432.6666666666667,
+        "margin": 2,
+        "padding": 2,
+        "width": 371,
+      }
+    }
+  >
+    <Image
+      source={
+        Object {
+          "testUri": "../../../client/component/images/miller1.jpg",
+        }
+      }
+      style={
+        Object {
+          "alignSelf": "stretch",
+          "flex": 1,
+          "width": null,
+        }
+      }
+    />
+  </View>
+  <View
+    accessible={true}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "backgroundColor": "#fff",
+        "height": 432.6666666666667,
+        "margin": 2,
+        "padding": 2,
+        "width": 371,
+      }
+    }
+  >
+    <Image
+      source={
+        Object {
+          "testUri": "../../../client/component/images/miller2.jpg",
+        }
+      }
+      style={
+        Object {
+          "alignSelf": "stretch",
+          "flex": 1,
+          "width": null,
+        }
+      }
+    />
+  </View>
+  <View
+    accessible={true}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "backgroundColor": "#fff",
+        "height": 432.6666666666667,
+        "margin": 2,
+        "padding": 2,
+        "width": 371,
+      }
+    }
+  >
+    <Image
+      source={
+        Object {
+          "testUri": "../../../client/component/images/miller3.jpg",
+        }
+      }
+      style={
+        Object {
+          "alignSelf": "stretch",
+          "flex": 1,
+          "width": null,
+        }
+      }
+    />
+  </View>
+  <View
+    accessible={true}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "backgroundColor": "#fff",
+        "height": 432.6666666666667,
+        "margin": 2,
+        "padding": 2,
+        "width": 371,
+      }
+    }
+  >
+    <Image
+      source={
+        Object {
+          "testUri": "../../../client/component/images/pusheen.jpg",
+        }
+      }
+      style={
+        Object {
+          "alignSelf": "stretch",
+          "flex": 1,
+          "width": null,
+        }
+      }
+    />
+  </View>
+  <View
+    accessible={true}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "backgroundColor": "#fff",
+        "height": 432.6666666666667,
+        "margin": 2,
+        "padding": 2,
+        "width": 371,
+      }
+    }
+  >
+    <Image
+      source={
+        Object {
+          "testUri": "../../../client/component/images/stormy1.jpg",
+        }
+      }
+      style={
+        Object {
+          "alignSelf": "stretch",
+          "flex": 1,
+          "width": null,
+        }
+      }
+    />
+  </View>
+  <View
+    accessible={true}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "backgroundColor": "#fff",
+        "height": 432.6666666666667,
+        "margin": 2,
+        "padding": 2,
+        "width": 371,
+      }
+    }
+  >
+    <Image
+      source={
+        Object {
+          "testUri": "../../../client/component/images/stormy2.jpg",
+        }
+      }
+      style={
+        Object {
+          "alignSelf": "stretch",
+          "flex": 1,
+          "width": null,
+        }
+      }
+    />
+  </View>
+</View>
+`;
