@@ -50,6 +50,9 @@ app.get('/categories', require('./routes/getCategories.js'));
 app.post('/itinerarycomments', require('./routes/createItineraryComments.js'));
 app.get('/itinerarycomments', require('./routes/getItineraryComments.js'));
 
+app.post('/stopcomments', require('./routes/createStopComments.js'));
+app.get('/stopcomments', require('./routes/getStopComments.js'));
+
 app.get('/profile/itineraries', require('./routes/getItinerariesByUserId.js'))
 
 if (!module.parent) {

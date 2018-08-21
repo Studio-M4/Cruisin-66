@@ -6,7 +6,7 @@ let getItineraryComments = (query, callback) => {
   let itineraryId = Number(query.itineraryId);
   db.ItinerariesComment.findAll({    
     where: {
-      itineraryId: itineraryId
+      ItineraryId: itineraryId
     }
   })
   .then((itineraryComments) => {
@@ -30,4 +30,4 @@ const createItineraryComment = (newItineraryComment, callback) => {
 };
 
 module.exports.createItineraryComment = createItineraryComment;
-module.exports.getAllStops = getItineraryComments;
+module.exports.getItineraryComments = getItineraryComments;
