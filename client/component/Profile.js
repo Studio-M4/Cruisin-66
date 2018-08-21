@@ -9,7 +9,8 @@ import {
   TouchableHighlight,
   ScrollView,
   Modal,
-  FlatList
+  FlatList,
+  AsyncStorage
 } from "react-native";
 
 import SegmentedControlTab from "react-native-segmented-control-tab";
@@ -21,7 +22,8 @@ import {
   Left,
   Body,
   Item,
-  Input
+  Input,
+  Content
 } from "native-base";
 
 export default class Profile extends React.Component {
@@ -131,29 +133,35 @@ export default class Profile extends React.Component {
             values={["Itineraries", "Stops", "Favorites"]}
             onPress={index => this.setState({ selected: index })}
           />
-          <FlatList
-           data = {this.state.userItineraries}
+          <Content>
+            <FlatList
+            data = {this.state.userItineraries}
 
-           renderItem={({ item }) => (
-            <TouchableHighlight
+            renderItem={({ item }) => (
+              <TouchableHighlight
                 onPress={() => {
-                  console.log('hi')
+                  /* 1. Navigate to the Details route with params */
+                  this.props.navigation.navigate("Stops", {
+                    itinerary: item
+                  });
                 }}
-            >
-              <Card>
-                <CardItem>
-                  <Left>
-                    <Thumbnail square style={{width: 75, height: 75}} source={{ uri: item.photoUrl || 'https://images-na.ssl-images-amazon.com/images/I/11qnZ2RCZML._SX331_BO1,204,203,200_.jpg' }} />
-                    <Body>
-                      <Text>{item.name}</Text>
-                    </Body>
-                  </Left>
-                </CardItem>
-              </Card>
-            </TouchableHighlight>
-            )}
-            keyExtractor={(item, index) => index.toString()}
-          />
+              >
+                <Card>
+                    <CardItem cardBody>
+                      <ImageBackground
+                        source={{ uri: item.photoUrl }}
+                        style={{ height: 120, width: null, flex: 1, opacity: .8 }}
+                      >
+                      <Text style={styles.tourname}>{item.name}</Text>
+                      </ImageBackground>
+                    </CardItem>
+                  </Card>
+                
+              </TouchableHighlight>
+              )}
+              keyExtractor={(item, index) => index.toString()}
+            />
+          </Content>
         </View>
       </ScrollView>
     );
@@ -163,7 +171,7 @@ export default class Profile extends React.Component {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: "#eee",
-    alignItems: "center",
+    // alignItems: "center",
     width: "100%",
     height: "100%"
   },
@@ -230,5 +238,15 @@ const styles = StyleSheet.create({
     right:0,
     marginLeft:'80%',
     position:'absolute'
+  },
+  tourname: {
+    color: '#fff',
+    textAlign: 'center',
+    marginTop:50,
+    fontSize:25,
+    fontWeight: 'bold',
+    textShadowColor: '#000',
+    textShadowOffset: {width: -1, height: 1},
+    textShadowRadius: 10
   }
 });

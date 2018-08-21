@@ -95,7 +95,7 @@ export default class Itinerary extends React.Component {
                   <CardItem cardBody>
                     <ImageBackground
                       source={{ uri: item.photoUrl }}
-                      style={{ height: 200, width: null, flex: 1 }}
+                      style={{ height: 200, width: null, flex: 1, opacity: .95 }}
                     >
                      <Text style={styles.tourname}>{item.name}</Text>
                     </ImageBackground>
@@ -164,6 +164,6 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textShadowColor: '#000',
     textShadowOffset: {width: -1, height: 1},
-    textShadowRadius: 10
+    textShadowRadius: 12
   }
 });
