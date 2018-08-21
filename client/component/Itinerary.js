@@ -92,63 +92,15 @@ export default class Itinerary extends React.Component {
                 }}
               >
                 <Card>
-                  {/* <CardItem cardBody>
-                    <Body>
-                      <Text>{item.name}</Text>
-                      <Text>{item.description}</Text>
-                    </Body>
-                  </CardItem> */}
                   <CardItem cardBody>
                     <ImageBackground
                       source={{ uri: item.photoUrl }}
-                      style={{ height: 200, width: null, flex: 1 }}
+                      style={{ height: 200, width: null, flex: 1, opacity: .95 }}
                     >
                      <Text style={styles.tourname}>{item.name}</Text>
                     </ImageBackground>
                   </CardItem>
                 </Card>
-                {/* <Card>
-                  <CardItem>
-                    <Left>
-                      <Thumbnail source={{ uri: item.thumbnailUrl }} />
-                      <Body>
-                        <Text>{item.name}</Text>
-                        <Text note>{item.notes}</Text>
-                      </Body>
-                    </Left>
-                  </CardItem>
-                  <CardItem cardBody>
-                    <ImageBackground
-                      source={{ uri: item.url }}
-                      style={{ height: 200, width: null, flex: 1 }}
-                    >
-                     <Text style={styles.tourname}>{item.itinerary}</Text>
-                    </ImageBackground>
-                  </CardItem>
-                  <CardItem>
-                    <Left>
-                      <Button transparent>
-                        <Icon active name="thumbs-up" />
-                        <Text>12 Likes</Text>
-                      </Button>
-                    </Left>
-                    <Body>
-                      <Button transparent>
-                        <Icon active name="chatbubbles" />
-                        <Text
-                          onPress={() => {
-                            //  1. Navigate to the Details route with params 
-                            this.props.navigation.navigate("CommentStop", {
-                              itinerary: item
-                            });
-                          }}>4 Comments</Text>
-                      </Button>
-                    </Body>
-                    <Right>
-                      <Text>11h ago</Text>
-                    </Right>
-                  </CardItem>
-                </Card> */}
               </TouchableHighlight>
             )}
             keyExtractor={(item, index) => index.toString()}
@@ -212,6 +164,6 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textShadowColor: '#000',
     textShadowOffset: {width: -1, height: 1},
-    textShadowRadius: 10
+    textShadowRadius: 12
   }
 });
