@@ -2,17 +2,29 @@ import React from "react";
 import { NavigationEvents } from "react-navigation";
 import {
   StyleSheet,
-  Text,
   View,
   Image,
-  AsyncStorage,
+  ImageBackground,
   TextInput,
   TouchableHighlight,
-  ScrollView
+  ScrollView,
+  Modal,
+  FlatList,
+  AsyncStorage
 } from "react-native";
 
 import SegmentedControlTab from "react-native-segmented-control-tab";
-import { Right } from "native-base";
+import {
+  Card,
+  CardItem,
+  Thumbnail,
+  Text,
+  Left,
+  Body,
+  Item,
+  Input,
+  Content
+} from "native-base";
 
 export default class Profile extends React.Component {
   static navigationOptions = {
@@ -22,7 +34,8 @@ export default class Profile extends React.Component {
     super(props);
     this.state = {
       selectedIndex: 0,
-      user: {}
+      user: {},
+      userItineraries: []
     };
   }
   handleIndexChange = index => {
@@ -59,7 +72,7 @@ export default class Profile extends React.Component {
   getUserItineraries() {
     let userId = this.state.user.userId;
     
-    return fetch(`http://localhost:3000/stops?userId=${userId}`, {
+    return fetch(`http://localhost:3000/itineraries?UserId=${userId}`, {
       method: 'GET', 
       headers: {
         'Accept': 'application/json',
@@ -76,7 +89,7 @@ export default class Profile extends React.Component {
     .then(data => {
       console.log('stops', data);
       this.setState({
-        stops: data
+        userItineraries: data
       })
     })
     .catch((error) => {
@@ -86,7 +99,7 @@ export default class Profile extends React.Component {
 
 
   componentDidMount() {
-    // this.getUserItineraries();
+    this.getUserItineraries();
   }
 
   //NavigationEvents  instead of wcdl
@@ -120,7 +133,35 @@ export default class Profile extends React.Component {
             values={["Itineraries", "Stops", "Favorites"]}
             onPress={index => this.setState({ selected: index })}
           />
+          <Content>
+            <FlatList
+            data = {this.state.userItineraries}
 
+            renderItem={({ item }) => (
+              <TouchableHighlight
+                onPress={() => {
+                  /* 1. Navigate to the Details route with params */
+                  this.props.navigation.navigate("Stops", {
+                    itinerary: item
+                  });
+                }}
+              >
+                <Card>
+                    <CardItem cardBody>
+                      <ImageBackground
+                        source={{ uri: item.photoUrl }}
+                        style={{ height: 120, width: null, flex: 1, opacity: .8 }}
+                      >
+                      <Text style={styles.tourname}>{item.name}</Text>
+                      </ImageBackground>
+                    </CardItem>
+                  </Card>
+                
+              </TouchableHighlight>
+              )}
+              keyExtractor={(item, index) => index.toString()}
+            />
+          </Content>
         </View>
       </ScrollView>
     );
@@ -130,7 +171,7 @@ export default class Profile extends React.Component {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: "#eee",
-    alignItems: "center",
+    // alignItems: "center",
     width: "100%",
     height: "100%"
   },
@@ -197,5 +238,15 @@ const styles = StyleSheet.create({
     right:0,
     marginLeft:'80%',
     position:'absolute'
+  },
+  tourname: {
+    color: '#fff',
+    textAlign: 'center',
+    marginTop:50,
+    fontSize:25,
+    fontWeight: 'bold',
+    textShadowColor: '#000',
+    textShadowOffset: {width: -1, height: 1},
+    textShadowRadius: 10
   }
 });
