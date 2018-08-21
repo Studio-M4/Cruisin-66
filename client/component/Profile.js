@@ -2,17 +2,27 @@ import React from "react";
 import { NavigationEvents } from "react-navigation";
 import {
   StyleSheet,
-  Text,
   View,
   Image,
-  AsyncStorage,
+  ImageBackground,
   TextInput,
   TouchableHighlight,
-  ScrollView
+  ScrollView,
+  Modal,
+  FlatList
 } from "react-native";
 
 import SegmentedControlTab from "react-native-segmented-control-tab";
-import { Right } from "native-base";
+import {
+  Card,
+  CardItem,
+  Thumbnail,
+  Text,
+  Left,
+  Body,
+  Item,
+  Input
+} from "native-base";
 
 export default class Profile extends React.Component {
   static navigationOptions = {
@@ -22,7 +32,8 @@ export default class Profile extends React.Component {
     super(props);
     this.state = {
       selectedIndex: 0,
-      user: {}
+      user: {},
+      userItineraries: []
     };
   }
   handleIndexChange = index => {
@@ -59,7 +70,7 @@ export default class Profile extends React.Component {
   getUserItineraries() {
     let userId = this.state.user.userId;
     
-    return fetch(`http://localhost:3000/stops?userId=${userId}`, {
+    return fetch(`http://localhost:3000/itineraries?UserId=${userId}`, {
       method: 'GET', 
       headers: {
         'Accept': 'application/json',
@@ -76,7 +87,7 @@ export default class Profile extends React.Component {
     .then(data => {
       console.log('stops', data);
       this.setState({
-        stops: data
+        userItineraries: data
       })
     })
     .catch((error) => {
@@ -86,7 +97,7 @@ export default class Profile extends React.Component {
 
 
   componentDidMount() {
-    // this.getUserItineraries();
+    this.getUserItineraries();
   }
 
   //NavigationEvents  instead of wcdl
@@ -120,7 +131,29 @@ export default class Profile extends React.Component {
             values={["Itineraries", "Stops", "Favorites"]}
             onPress={index => this.setState({ selected: index })}
           />
+          <FlatList
+           data = {this.state.userItineraries}
 
+           renderItem={({ item }) => (
+            <TouchableHighlight
+                onPress={() => {
+                  console.log('hi')
+                }}
+            >
+              <Card>
+                <CardItem>
+                  <Left>
+                    <Thumbnail square style={{width: 75, height: 75}} source={{ uri: item.photoUrl || 'https://images-na.ssl-images-amazon.com/images/I/11qnZ2RCZML._SX331_BO1,204,203,200_.jpg' }} />
+                    <Body>
+                      <Text>{item.name}</Text>
+                    </Body>
+                  </Left>
+                </CardItem>
+              </Card>
+            </TouchableHighlight>
+            )}
+            keyExtractor={(item, index) => index.toString()}
+          />
         </View>
       </ScrollView>
     );
