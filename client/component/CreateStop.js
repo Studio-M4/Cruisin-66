@@ -148,6 +148,34 @@ export default class CreateStop extends React.Component {
     return axios.post(url, { photoreference });
   }
 
+  /**
+   * Get photos from google place photo api and then save them into cloudinary.
+   * @param {array} photosReferences - An array of photoreferences that can be used for fetching google place photos
+   */
+  fetchAndSaveAllGooglePhotos(photosReferences = []) {
+    if (photosReferences.length == 0) {
+      return;
+    }
+    const promises = photosReferences.map(ref =>
+      this.fetchAndSaveOneGooglePhoto(ref)
+    );
+    return axios
+      .all(promises)
+      .then(axios.spread((...responses) => responses))
+      .catch(err => console.log(err));
+  }
+
+  /**
+   * Get one photo from google place photo api and then save it into cloudinary.
+   * @param {array} photosReferences - An photoreference sent back by google map autocomplete.
+   *                                   It can be used for fetching a google place photo.
+   */
+  fetchAndSaveOneGooglePhoto(photoreference) {
+    const url = "http://localhost:4000/google/photo";
+    console.log(photoreference);
+    return axios.post(url, { photoreference });
+  }
+
   createStop(postData) {
     const url = "http://localhost:3000/stop";
     return axios.post(url, postData);
@@ -155,18 +183,24 @@ export default class CreateStop extends React.Component {
 
   render() {
     return (
-      <ImageBackground style={styles.background} source={{uri: 'https://i.pinimg.com/564x/bf/a8/fa/bfa8faf7d84fe084ef38ff5667656d85.jpg'}}>
+      <ImageBackground
+        style={styles.background}
+        source={{
+          uri:
+            "https://i.pinimg.com/564x/bf/a8/fa/bfa8faf7d84fe084ef38ff5667656d85.jpg"
+        }}
+      >
         <ScrollView>
           <View style={styles.container}>
             <GooglePlacesAutocomplete
               styles={{
                 poweredContainer: {
-                  width:0,
-                  height:0,
+                  width: 0,
+                  height: 0
                 },
                 powered: {
-                  width:0,
-                  height:0
+                  width: 0,
+                  height: 0
                 }
               }}
               placeholder="Search"
@@ -268,7 +302,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     width: "100%",
     borderColor: "#000",
-    height: "100%",
+    height: "100%"
   },
 
   title: {
