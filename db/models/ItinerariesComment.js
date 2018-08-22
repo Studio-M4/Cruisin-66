@@ -8,6 +8,8 @@ module.exports = (Sequelize, type) => {
   ItinerariesComment.associate = function(models) {
     // Itinerary.belongsTo(models.Category)
     // Itinerary.hasMany(models.Favorite)
+    ItinerariesComment.belongsTo(models.User);
+    ItinerariesComment.belongsTo(models.Itinerary);
   };
 
   return ItinerariesComment;
