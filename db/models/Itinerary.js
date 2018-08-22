@@ -7,8 +7,9 @@ module.exports = (Sequelize, type) => {
   });
 
   Itinerary.associate = function(models) {
-    Itinerary.hasMany(models.ItinerariesComment)
+    Itinerary.hasMany(models.ItinerariesComment);
     Itinerary.belongsToMany(models.Stop, {through: 'ItineraryStops'});
+    Itinerary.belongsTo(models.User);
   };
 
   return Itinerary;
