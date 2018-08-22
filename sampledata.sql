@@ -21,7 +21,7 @@ INSERT INTO itineraries (name, description, categoryId, userId, createdat, updat
 VALUES ('NYC Pizza Time', 'The Ultimate NYC Pizza Tour', 1, 1, NOW(), NOW(), 'https://amp.businessinsider.com/images/5ad8ae04cd862425008b4898-750-563.jpg');
 
 INSERT INTO itineraries (name, description, categoryId, userId, createdat, updatedat, photoUrl)
-VALUES ('Bay Area', 'See all the well known sites SF has to offer!', 2, 1, NOW(), NOW(), 'https://media-cdn.tripadvisor.com/media/photo-s/06/b2/0f/a6/golden-gate-bridge.jpg');
+VALUES ('Bay Area', 'See all the well known sites SF has to offer!', 2, 2, NOW(), NOW(), 'https://media-cdn.tripadvisor.com/media/photo-s/06/b2/0f/a6/golden-gate-bridge.jpg');
 
 INSERT INTO itinerariescomments (text, rating, itineraryId, userId, createdat, updatedat)
 VALUES ('this tour was the best, highly recommend!', '4', 1, 1, NOW(), NOW());
