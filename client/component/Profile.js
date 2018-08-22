@@ -26,6 +26,8 @@ import {
   Content
 } from "native-base";
 
+const axios = require("axios");
+
 export default class Profile extends React.Component {
   static navigationOptions = {
     title: "Profile"
@@ -54,6 +56,7 @@ export default class Profile extends React.Component {
         this.setState({
           user: userObject.data.token
         });
+        this.getUserItineraries();
       }
     } catch (error) {
       // Error retrieving data
@@ -69,38 +72,51 @@ export default class Profile extends React.Component {
       }
   }
 
-  getUserItineraries() {
+  getUserItineraries = () => {
     let userId = this.state.user.userId;
-    
-    return fetch(`http://localhost:3000/itineraries?UserId=${userId}`, {
-      method: 'GET', 
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-      }
-    })
+
+    axios
+    .get(`http://localhost:3000/profile/itineraries?UserId=${userId}`)
     .then((response) => {
-      if (response.error) {
-        console.log(response.error);
-      } else {
-        return response.json();
-      }
-    })
-    .then(data => {
-      console.log('stops', data);
+      // console.log(response.data);
       this.setState({
-        userItineraries: data
+        userItineraries: response.data
       })
     })
     .catch((error) => {
-      console.log(error)
+      console.log(error);
+      alert(error);
     });
-  }
+}
+    
+  //   return fetch(`http://localhost:3000/itineraries?UserId=${userId}`, {
+  //     method: 'GET', 
+  //     headers: {
+  //       'Accept': 'application/json',
+  //       'Content-Type': 'application/json',
+  //     }
+  //   })
+  //   .then((response) => {
+  //     if (response.error) {
+  //       console.log(response.error);
+  //     } else {
+  //       return response.json();
+  //     }
+  //   })
+  //   .then(data => {
+  //     console.log('here on 94', data);
+  //     this.setState({
+  //       userItineraries: data
+  //     })
+  //   })
+  //   .catch((error) => {
+  //     console.log(error)
+  //   });
+  // }
 
-
-  componentDidMount() {
-    this.getUserItineraries();
-  }
+  // componentDidMount() {
+  //   this.getUserItineraries();
+  // }
 
   //NavigationEvents  instead of wcdl
   render() {

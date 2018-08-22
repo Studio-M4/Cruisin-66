@@ -99,6 +99,10 @@ class Stops extends React.Component {
     this.getStopsById();
   }
 
+  addItineraryToFavorites() {
+    console.log('hi')
+  }
+
   render() {
     const { navigation } = this.props;
     return (
@@ -155,6 +159,7 @@ class Stops extends React.Component {
         </Content>
         <Footer>
           <FooterTab>
+
             <Button onPress={() => {
                   /* 1. Navigate to the Details route with params */
                   this.props.navigation.navigate("CommentItinerary", {
