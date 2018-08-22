@@ -155,29 +155,19 @@ export default class CreateStop extends React.Component {
 
   render() {
     return (
-      <ImageBackground
-        style={styles.background}
-        source={{
-          uri:
-            "https://i.pinimg.com/564x/bf/a8/fa/bfa8faf7d84fe084ef38ff5667656d85.jpg"
-        }}
-      >
+      <ImageBackground style={styles.background} source={{uri: 'https://i.pinimg.com/564x/bf/a8/fa/bfa8faf7d84fe084ef38ff5667656d85.jpg'}}>
         <ScrollView>
           <View style={styles.container}>
             <GooglePlacesAutocomplete
-              style={{
-                container: {
-                  backgroundColor: 'transparent',
-                  borderWidth: 0
+              styles={{
+                poweredContainer: {
+                  width:0,
+                  height:0,
                 },
-                textInputContainer: {
-                  backgroundColor: 'transparent',
-                  borderColor: 'yellow',
-                  borderWidth: 0
-                },
-                textInput: {
-                  borderWidth: 0
-                },
+                powered: {
+                  width:0,
+                  height:0
+                }
               }}
               placeholder="Search"
               minLength={2} // minimum length of text to search
@@ -278,7 +268,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     width: "100%",
     borderColor: "#000",
-    height: "100%"
+    height: "100%",
   },
 
   title: {
