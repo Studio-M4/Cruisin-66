@@ -50,6 +50,7 @@ service.post("/google/photo", (req, endResponse) => {
     responseType: 'arraybuffer',
   })
   // decode binary data to base64
+<<<<<<< HEAD
   .then((res) => new Buffer(res.data, 'binary').toString('base64'))
   // convert to image format uri so that cloudinary can regonize
   .then((base64) => `data:image/jpeg;base64,${base64}`)
@@ -59,6 +60,17 @@ service.post("/google/photo", (req, endResponse) => {
   }) )
   // return the image url from cloudinary
   .then((cloudResponse) => endResponse.send(cloudResponse.data))
+=======
+  .then((res) => {console.log('RES', res.data); return new Buffer(res.data, 'binary').toString('base64')})
+  // convert to image format uri so that cloudinary can regonize
+  .then((base64) => `data:image/jpeg;base64,${base64}`)
+  // upload to cloudinary
+  .then((data) => axios.post('http://localhost:4000/cloudinary/photo/upload', {
+    imageUri: data
+  }))
+  // return the image url from cloudinary
+  .then((clouResponse) => endResponse.send(clouResponse.data))
+>>>>>>> (feat) Add fetching google photos.
   .catch(err => console.log(err));
 });
 
