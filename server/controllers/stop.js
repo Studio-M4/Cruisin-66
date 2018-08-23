@@ -41,7 +41,7 @@ const getStopById = (query, callback) => {
 
 const createStop = (stop, itineraryId, callback) => {
   console.log("ITINERARY_ID ", itineraryId);
-
+  console.log('STOP', stop.StopPhotos);
   // { include: [db.StopPhoto] } will insert associated StopPhotos into database.
   db.Stop.create(stop, { include: [db.StopPhoto] })
     // Insert into join table: ItineraryStops.
