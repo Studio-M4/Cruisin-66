@@ -13,6 +13,7 @@ import {
 
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
 import ImagePicker from "react-native-image-picker";
+import { InputGroup, Input, Container, Content, Icon } from "native-base";
 
 import axios from "axios";
 
