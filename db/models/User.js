@@ -23,7 +23,7 @@ module.exports = (Sequelize, type) => {
     User.hasMany(models.Itinerary)
     User.hasMany(models.ItinerariesComment)
     User.hasMany(models.StopsComment)
-    User.hasMany(models.Favorite)
+    User.belongsToMany(models.Itinerary, {through: 'Favorites'});
   };
   
   // User.sync();

@@ -88,35 +88,7 @@ export default class Profile extends React.Component {
       alert(error);
     });
 }
-    
-  //   return fetch(`http://localhost:3000/itineraries?UserId=${userId}`, {
-  //     method: 'GET', 
-  //     headers: {
-  //       'Accept': 'application/json',
-  //       'Content-Type': 'application/json',
-  //     }
-  //   })
-  //   .then((response) => {
-  //     if (response.error) {
-  //       console.log(response.error);
-  //     } else {
-  //       return response.json();
-  //     }
-  //   })
-  //   .then(data => {
-  //     console.log('here on 94', data);
-  //     this.setState({
-  //       userItineraries: data
-  //     })
-  //   })
-  //   .catch((error) => {
-  //     console.log(error)
-  //   });
-  // }
 
-  // componentDidMount() {
-  //   this.getUserItineraries();
-  // }
 
   //NavigationEvents  instead of wcdl
   render() {

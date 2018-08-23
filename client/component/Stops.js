@@ -101,6 +101,7 @@ class Stops extends React.Component {
 
   addItineraryToFavorites() {
     console.log('hi')
+    
   }
 
   render() {
@@ -128,7 +129,6 @@ class Stops extends React.Component {
                <Text>Number of Stops: {this.state.stops.length}</Text>
               </Body>
             </CardItem>
-       
           <FlatList
             data = {this.state.stops}
             
@@ -159,6 +159,7 @@ class Stops extends React.Component {
         </Content>
         <Footer>
           <FooterTab>
+<<<<<<< HEAD
 
             <Button onPress={() => {
                   /* 1. Navigate to the Details route with params */
@@ -167,6 +168,14 @@ class Stops extends React.Component {
                   });
                 }}>
               <Icon name="ios-chatbubbles-outline" />
+=======
+            <Button>
+              <Icon name='camera' 
+                onPress={() => {
+                this.addItineraryToFavorites()
+              }}
+             />
+>>>>>>> set up favorite controller and routes
             </Button>
             <Button
               onPress={() => {
@@ -192,6 +201,17 @@ class Stops extends React.Component {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flexDirection:'row',
+    flex: 1,
+    marginLeft:'5%',
+    justifyContent: 'center'
+  },
+  container2: {
+    flexDirection:'row',
+    flex: 1,
+    justifyContent: 'flex-end'
+  },
   tourname: {
     color: '#fff',
     textAlign: 'center',
