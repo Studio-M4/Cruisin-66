@@ -7,7 +7,7 @@ let getItineraryComments = (query, callback) => {
   db.ItinerariesComment.findAll({    
     where: {
       ItineraryId: itineraryId
-    }
+    }, include: [db.User]
   })
   .then((itineraryComments) => {
     console.log(itineraryComments);
