@@ -83,6 +83,7 @@ class Login extends React.Component {
   };
 
   render() {
+    console.disableYellowBox = true;
     setTimeout(() => {
       this.setState({
         showProgress: false

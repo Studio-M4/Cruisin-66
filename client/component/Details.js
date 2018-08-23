@@ -76,12 +76,13 @@ export default class Details extends React.Component {
           }}> 
           {item.name}
         </Text>
-        <Button transparent textStyle={{color: '#87838B'}} >
+        <Directions></Directions>
+        {/* <Button transparent textStyle={{color: '#87838B'}} >
           <Icon name="heart" />
           <Text>1,926</Text>
-        </Button>
+        </Button> */}
 
-        {/* <Directions></Directions> */}
+
 
         <ScrollView>
         <SegmentedControlTab
@@ -94,7 +95,7 @@ export default class Details extends React.Component {
             selectedIndex={this.state.selectedIndex}
             onTabPress={this.handleIndexChange}
             allowFontScaling={false}
-            values={["My itineraries", "Favorites"]}
+            values={["Gallery", "Comments"]}
             onPress={index => this.setState({ selected: index })}
           />
           {

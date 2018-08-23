@@ -159,7 +159,6 @@ class Stops extends React.Component {
         </Content>
         <Footer>
           <FooterTab>
-<<<<<<< HEAD
 
             <Button onPress={() => {
                   /* 1. Navigate to the Details route with params */
@@ -168,14 +167,7 @@ class Stops extends React.Component {
                   });
                 }}>
               <Icon name="ios-chatbubbles-outline" />
-=======
-            <Button>
-              <Icon name='camera' 
-                onPress={() => {
-                this.addItineraryToFavorites()
-              }}
-             />
->>>>>>> set up favorite controller and routes
+
             </Button>
             <Button
               onPress={() => {
