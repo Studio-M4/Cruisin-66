@@ -61,6 +61,7 @@ export default class Details extends React.Component {
           style={{ height: 200, width: 100 + "%", flex: 1 }}
         /> */}
         
+        
         <Text 
           style={{
             fontSize: 22,

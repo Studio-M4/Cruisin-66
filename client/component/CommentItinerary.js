@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, View,FlatList,Image, TextInput,
-  ImageBackground, TouchableHighlight,ScrollView,Modal } from 'react-native';
-
+  ImageBackground, TouchableHighlight,AsyncStorage,ScrollView,Modal } from 'react-native';
+  import TimeAgo from 'react-native-timeago';
 import {
   Container,
   Header,
@@ -20,17 +20,76 @@ import {
   Title,
   Item,Input
 } from "native-base";
+import { NavigationEvents } from "react-navigation";
 
+const axios = require("axios");
 export default class CommentItinerary extends React.Component {
     static navigationOptions = {
-        title: 'Comments',
+        title: 'Comments itinerary',
     };
   constructor(props) {
     super(props);
     this.state = {
         modalVisible: false,
+        data: [],
+        text:"",
+        UserId: "",
     }; 
   }
+  postComment(){
+    const { navigation } = this.props;
+    axios.post('http://localhost:3000/itinerarycomments', {
+        "text":this.state.text,
+        "UserId": this.state.UserId,
+        "ItineraryId": navigation.getParam("itinerary").id,
+        "rating": 1
+    })
+    .then(response => {
+      console.log(response);
+      this.setState({"text":""})
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  }
+  getComment(){
+    const { navigation } = this.props;
+    console.log(navigation)
+    axios.get(`http://localhost:3000/itinerarycomments?itineraryId=${navigation.getParam("itinerary").id}
+    `)
+  .then( response=> {
+    // handle success
+    console.log("my responce ",response.data);
+    this.setState({
+      data: response.data
+    })
+    this.getComment()
+  })
+  .catch(error => {
+    // handle error
+    console.log(error);
+  })
+  }
+ 
+  _retrieveData = async () => {
+    this.getComment()
+    try {
+      const value = await AsyncStorage.getItem("userInfo");
+      if (value !== null) {
+        // We have data!!
+        userObject = JSON.parse(value);
+        this.setState({
+          UserId: userObject.data.token.userId
+        });
+        //console.log("dass",userObject.data.token.userId)
+      }
+    } catch (error) {
+      // Error retrieving data
+      alert(error);
+    }
+    console.log("user info ", user)
+  
+  };
 
   goDetails(){
     this.props.navigation.navigate('Profile');
@@ -41,6 +100,8 @@ export default class CommentItinerary extends React.Component {
     console.log(navigation)
     return (  
       <Container>
+      <NavigationEvents onDidFocus={payload => this._retrieveData()} />
+
       <CardItem cardBody>
           <ImageBackground
             source={{ uri: navigation.getParam('itinerary').photoUrl }}
@@ -52,42 +113,21 @@ export default class CommentItinerary extends React.Component {
       <Content>
         <List>
         <FlatList
-          data={[
-            {
-              albumId: 1,
-              id: 2,
-              title: "reprehenderit est deserunt velit ipsam",
-              url: "http://placehold.it/600/771796",
-              thumbnailUrl: "http://placehold.it/150/771796"
-            },
-            {
-              albumId: 1,
-              id: 2,
-              title: "reprehenderit est deserunt velit ipsam",
-              url: "http://placehold.it/600/771796",
-              thumbnailUrl: "http://placehold.it/150/771796"
-            },{
-              albumId: 1,
-              id: 2,
-              title: "reprehenderit est deserunt velit ipsam",
-              url: "http://placehold.it/600/771796",
-              thumbnailUrl: "http://placehold.it/150/771796"
-            }
-          ]}
+          data={this.state.data}
           renderItem={({ item }) =>
           <TouchableHighlight>
     
           <ListItem thumbnail>
             <Left>
-              <Thumbnail round  source={{ uri: item.thumbnailUrl }} />
+              <Thumbnail round  source={{ uri: item.User.password }} />
             </Left>
             <Body>
-              <Text>Julio</Text>
-              <Text note numberOfLines={1}>{item.title}</Text>
+              <Text>{item.User.lastName}</Text>
+              <Text note numberOfLines={1}>{item.text}</Text>
             </Body>
             <Right>
               <Button transparent>
-                <Text like>  1h ago</Text>
+                <Text like>  <TimeAgo time={item.updatedAt} hideAgo={true} /></Text>
               </Button>
             </Right>
           </ListItem>
@@ -99,10 +139,14 @@ export default class CommentItinerary extends React.Component {
         </List>
         <View style={styles.container}>
         <TextInput
+         onChangeText={(text) => this.setState({"text":text})}
+         value={this.state.text}
          style={styles.inputStyle}
          placeholder="Be nice !!!"
        />
-         <Button rounded light>
+         <Button rounded light onPress={() => {
+            this.postComment()
+        }}>
             <Text>Post</Text>
           </Button>
           </View>
