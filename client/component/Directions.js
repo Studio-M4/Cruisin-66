@@ -16,12 +16,12 @@ export default class gmapsDirections extends React.Component {
   handleGetDirections = () => {
     const data = {
        source: {
-        latitude: -33.8356372,
-        longitude: 18.6947617
+        latitude: 36.602951,
+        longitude: -121.895763
       },
       destination: {
-        latitude: -33.8600024,
-        longitude: 18.697459
+        latitude: 36.157,
+        longitude: -121.672
       },
       params: [
         {

@@ -58,8 +58,8 @@ export default class CommentStop extends React.Component {
               <Thumbnail round  source={{ uri: item.thumbnailUrl }} />
             </Left>
             <Body>
-              <Text>Sankhadeep</Text>
-              <Text note numberOfLines={1}>{item.title}</Text>
+              <Text>Henry</Text>
+              <Text note>My favorite stop!</Text>
             </Body>
             <Right>
               <Button transparent>

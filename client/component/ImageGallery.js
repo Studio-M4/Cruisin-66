@@ -16,38 +16,33 @@ export default class ImageGallery extends React.Component {
     super(props);
     this.state = {
       modalVisible: false,
-      modalImage: require('./images/amy.jpg'),
-      images: [
-        require('./images/amy.jpg'),
-        require('./images/couple1.jpg'),
-        require('./images/couple2.jpg'),
-        require('./images/miller1.jpg'),
-        require('./images/miller2.jpg'),
-        require('./images/miller3.jpg'),
-        require('./images/pusheen.jpg'),
-        require('./images/stormy1.jpg'),
-        require('./images/stormy2.jpg'),
-      ]
+      modalImageUrl: 'https://res.cloudinary.com/db5rb32ne/image/upload/v1535046177/skfljwaqqz4681lzuhel.jpg',
+      imageUrls: this.props.photoUrls,
     }
+    console.log('imageUrls ', this.state.imageUrls);
   }
 
   setModalVisible(visible, imageKey) {
+    console.log('imageKey', imageKey);
+    console.log('modal clicked modelUrls  ', this.state.imageUrls[imageKey]);
     this.setState({
-      modalImage: this.state.images[imageKey],
+      modalImageUrl: this.state.imageUrls[imageKey],
       modalVisible: visible
-    });
+    }, console.log('modelUrl ', this.state.modalImageUrl));
   }
 
   getImage() {
-    return this.state.modalImage;
+    return this.state.modalImageUrl;
   }
 
   render() {
-    let images = this.state.images.map((image, key) => {
+    console.log('modelImage ', this.state.modalImageUrl);
+    let images = this.state.imageUrls.map((imageURL, key) => {
+      console.log('key ', key);
       return <TouchableWithoutFeedback key={key}
                 onPress={() => { this.setModalVisible(true, key)}}>
                 <View style={styles.imagewrap}>
-                  <Image source={image} style={styles.image}></Image>
+                  <Image source={{uri: imageURL}} style={styles.image}></Image>
                 </View>
               </TouchableWithoutFeedback>
     })
@@ -63,7 +58,7 @@ export default class ImageGallery extends React.Component {
               onPress={() => {this.setModalVisible(false)}}>
               Close
             </Text>
-            <Image source={this.state.modalImage}></Image>
+            <Image source={{uri: 'https://res.cloudinary.com/db5rb32ne/image/upload/v1535046177/skfljwaqqz4681lzuhel.jpg'}}></Image>
           </View>
         </Modal>
         {images}

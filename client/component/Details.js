@@ -28,11 +28,9 @@ import SegmentedControlTab from "react-native-segmented-control-tab";
 import { Button } from "native-base";
 
 import ImageGallery from './ImageGallery.js';
-
 import CommentStop from "./CommentStop.js";
 
-import Directions from './Directions.js';
-
+import Directions from './Directions.js'
 
 export default class Details extends React.Component {
   static navigationOptions = {
@@ -77,13 +75,6 @@ export default class Details extends React.Component {
           {item.name}
         </Text>
         <Directions></Directions>
-        {/* <Button transparent textStyle={{color: '#87838B'}} >
-          <Icon name="heart" />
-          <Text>1,926</Text>
-        </Button> */}
-
-
-
         <ScrollView>
         <SegmentedControlTab
             tabsContainerStyle={styles.tabsContainerStyle}
@@ -100,7 +91,7 @@ export default class Details extends React.Component {
           />
           {
              this.state.selectedIndex === 0 ?  
-             <ImageGallery></ImageGallery>:
+             <ImageGallery photoUrls={item.StopPhotos.map((photo) => photo.url)}></ImageGallery>:
              <CommentStop /> 
           }  
         </ScrollView>
