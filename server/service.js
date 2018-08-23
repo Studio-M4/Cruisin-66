@@ -4,6 +4,8 @@ const morgan = require("morgan");
 const bodyParser = require("body-parser");
 const service = express();
 
+const axios = require('axios');
+
 const { cloudinary, convertToHttps } = require("./api.js");
 
 /****** SETUP HEADERS *****/
@@ -26,8 +28,8 @@ service.use(bodyParser.json({ limit: "50mb", extended: true }));
 // Upload a photo to Cloudinary and then return photo's url.
 service.post("/cloudinary/photo/upload", (req, res) => {
   const { imageUri } = req.body;
+  console.log('imageUri ', imageUri);
   cloudinary.uploader.upload(imageUri, result => {
-    console.log(result);
     if (result.error) {
       res.status(500).send(result.error);
     } else {
@@ -35,6 +37,31 @@ service.post("/cloudinary/photo/upload", (req, res) => {
     }
   });
 });
+
+// Get photos from google place photos api and then save them into cloudinary.
+service.post("/google/photo", (req, endResponse) => {
+  const apiUrl = 'https://maps.googleapis.com/maps/api/place/photo';
+  axios.get(apiUrl, {
+    params: {
+      key: 'AIzaSyBHNIOJemEkEyO4gI_hask8BO6bJno9Q58',
+      photoreference: req.body.photoreference, // photoreference is sent from google map search autocomplete
+      maxwidth: 200,
+    },
+    responseType: 'arraybuffer',
+  })
+  // decode binary data to base64
+  .then((res) => new Buffer(res.data, 'binary').toString('base64'))
+  // convert to image format uri so that cloudinary can regonize
+  .then((base64) => `data:image/jpeg;base64,${base64}`)
+  // upload to cloudinary
+  .then((data) =>axios.post('http://localhost:4000/cloudinary/photo/upload', {
+    imageUri: data
+  }) )
+  // return the image url from cloudinary
+  .then((cloudResponse) => endResponse.send(cloudResponse.data))
+  .catch(err => console.log(err));
+});
+
 
 if (!module.parent) {
   service.listen(service.get("port"));

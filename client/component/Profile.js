@@ -253,7 +253,7 @@ const styles = StyleSheet.create({
   },
   logout:{
     color:'red',
-    marginTop:'45%',
+    marginTop:'34%',
     right:0,
     marginLeft:'80%',
     position:'absolute'

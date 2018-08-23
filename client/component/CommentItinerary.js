@@ -122,8 +122,8 @@ export default class CommentItinerary extends React.Component {
               <Thumbnail round  source={{ uri: item.User.password }} />
             </Left>
             <Body>
-              <Text>{item.User.lastName}</Text>
-              <Text note numberOfLines={1}>{item.text}</Text>
+              <Text>{item.User.firstName}</Text>
+              <Text note>{item.text}</Text>
             </Body>
             <Right>
               <Button transparent>
