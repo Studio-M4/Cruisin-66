@@ -27,7 +27,7 @@ export default class CreateItinerary extends React.Component {
     }
   }
 
-  handleSubmit = async () => {
+  handleSubmit = () => {
     var UserId = this.state.user.userId;
     console.log(UserId); //get the user id
 
@@ -87,9 +87,10 @@ export default class CreateItinerary extends React.Component {
   };
 
   render() {
-    <NavigationEvents onDidFocus={payload => this._retrieveData()} />
     return (
       <ScrollView>
+        <NavigationEvents onDidFocus={payload => this._retrieveData()} />
+
         <NavigationEvents onDidFocus={payload => this._retrieveData()} />
         <View style={styles.container}>
           <Form ref={c => (this._form = c)} type={Itinerary} />

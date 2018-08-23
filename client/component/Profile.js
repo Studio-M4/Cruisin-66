@@ -130,13 +130,15 @@ export default class Profile extends React.Component {
             selectedIndex={this.state.selectedIndex}
             onTabPress={this.handleIndexChange}
             allowFontScaling={false}
-            values={["Itineraries", "Stops", "Favorites"]}
+            values={["My itineraries", "Favorites"]}
             onPress={index => this.setState({ selected: index })}
           />
           <Content>
+
+            {
+              this.state.selectedIndex === 0 ?              
             <FlatList
             data = {this.state.userItineraries}
-
             renderItem={({ item }) => (
               <TouchableHighlight
                 onPress={() => {
@@ -161,6 +163,35 @@ export default class Profile extends React.Component {
               )}
               keyExtractor={(item, index) => index.toString()}
             />
+            : 
+            
+            <FlatList
+            data = {this.state.userItineraries}
+            renderItem={({ item }) => (
+              <TouchableHighlight
+                onPress={() => {
+                  /* 1. Navigate to the Details route with params */
+                  this.props.navigation.navigate("Stops", {
+                    itinerary: item
+                  });
+                }}
+              >
+                <Card>
+                    <CardItem cardBody>
+                      <ImageBackground
+                        source={{ uri: item.photoUrl }}
+                        style={{ height: 120, width: null, flex: 1, opacity: .8 }}
+                      >
+                      <Text style={styles.tourname}>{item.name}</Text>
+                      </ImageBackground>
+                    </CardItem>
+                  </Card>
+                
+              </TouchableHighlight>
+              )}
+              keyExtractor={(item, index) => index.toString()}
+            />
+            }
           </Content>
         </View>
       </ScrollView>
@@ -187,12 +218,12 @@ const styles = StyleSheet.create({
     padding: 20
   },
   imagesStyle: {
-    width: 120,
-    height: 120,
+    width: 80,
+    height: 80,
     marginTop: 20,
     marginBottom: 20,
     backgroundColor: "#336699",
-    borderRadius: 60,
+    borderRadius: 40,
     padding: 5
   },
   button: {
@@ -234,7 +265,7 @@ const styles = StyleSheet.create({
   },
   logout:{
     color:'red',
-    marginTop:'49%',
+    marginTop:'45%',
     right:0,
     marginLeft:'80%',
     position:'absolute'
