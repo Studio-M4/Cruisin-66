@@ -28,7 +28,11 @@ import SegmentedControlTab from "react-native-segmented-control-tab";
 import { Button } from "native-base";
 
 import ImageGallery from './ImageGallery.js';
+
 import CommentStop from "./CommentStop.js";
+
+import Directions from './Directions.js';
+
 
 export default class Details extends React.Component {
   static navigationOptions = {
@@ -76,6 +80,9 @@ export default class Details extends React.Component {
           <Icon name="heart" />
           <Text>1,926</Text>
         </Button>
+
+        {/* <Directions></Directions> */}
+
         <ScrollView>
         <SegmentedControlTab
             tabsContainerStyle={styles.tabsContainerStyle}
