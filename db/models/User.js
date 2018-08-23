@@ -20,8 +20,8 @@ module.exports = (Sequelize, type) => {
 
   User.associate = (models) => {
     User.belongsToMany(models.Category, {through: 'userInterests'});
-    User.hasMany(models.Itinerary)
-    User.hasMany(models.ItinerariesComment)
+    User.hasMany(models.Itinerary);
+    User.hasMany(models.ItinerariesComment);
     User.hasMany(models.StopsComment)
     User.belongsToMany(models.Itinerary, {through: 'Favorites'});
   };
