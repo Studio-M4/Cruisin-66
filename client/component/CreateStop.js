@@ -62,13 +62,13 @@ export default class CreateStop extends React.Component {
       itineraryId: itineraryId,
     };
 
-    this.createStop(postData)
-      .then(() =>
-        this.props.navigation.navigate("Stops", {
-          itineraryId: this.state.itineraryId
-        })
-      )
-      .catch(err => console.log(err));
+    // this.createStop(postData)
+    //   .then(() =>
+    //     this.props.navigation.navigate("Stops", {
+    //       itineraryId: this.state.itineraryId
+    //     })
+    //   )
+    //   .catch(err => console.log(err));
   }
 
   handleAutoCompletePress(data, details) {
@@ -161,8 +161,7 @@ export default class CreateStop extends React.Component {
     );
     return axios
       .all(promises)
-      .then(axios.spread((...responses) => responses))
-      .catch(err => console.log(err));
+      .then(axios.spread((...responses) => responses.map((res) => res.data)));
   }
 
   /**
