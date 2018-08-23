@@ -39,14 +39,13 @@ const TabsIcons = (isFocused) => (
 );
 // can't swipe createBottomTabNavigator 
 // createTabNavigator depreciate but can swip :)
-const Tabs = createBottomTabNavigator(
-  {
+const Tabs = createBottomTabNavigator({
     Itinerary: Itinerary,
     Favorites: Favorites,
     CreateItinerary: CreateItinerary,
     Profile: Profile
     },
-  {
+    {
     navigationOptions: ({ navigation }) => ({
       tabBarIcon: ({ focused, tintColor }) => {
         const { routeName } = navigation.state;
@@ -56,10 +55,14 @@ const Tabs = createBottomTabNavigator(
         return <Ionicons name={iconName} size={20} color={tintColor} />;
       }
     }),
+   
     tabBarOptions: {
       activeTintColor: "tomato",
-      inactiveTintColor: "gray"
+      inactiveTintColor: "gray",
+       
     },
+    
+   // tabBarComponent: () => null,
     swipeEnabled: true,
     
   }
