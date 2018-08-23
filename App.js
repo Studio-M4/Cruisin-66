@@ -26,31 +26,15 @@ import CreateStop from './client/component/CreateStop';
 import Stops from "./client/component/Stops";
 import CommentStop from "./client/component/CommentStop";
 import MapComponent from "./client/component/MapComponent";
-
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
-  android:
-    'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
-});
-
-// type Props = {};
-// export default class App extends Component<Props> {
-//   render() {
-//     return (
-//     <Login/>
-//     );
-//   }
-// }
-
+import CommentItinerary from "./client/component/CommentItinerary";
 
 const TabsIcons = (isFocused) => (
   {
-    Profile: `ios-person${isFocused ? "" : "-outline"}`,
-    Favorites: `ios-folder${isFocused ? "" : "-outline"}`,
-    CreateItinerary: `ios-add-circle${isFocused ? "" : "-outline"}`,
-    CreateStop: `ios-add-circle${isFocused ? "" : "-outline"}`,
-    Itinerary: `ios-menu${isFocused ? "" : "-outline"}`,
+    Profile: `ios-person${isFocused ? "" : ""}`,
+    Favorites: `ios-folder${isFocused ? "" : ""}`,
+    CreateItinerary: `ios-add-circle${isFocused ? "" : ""}`,
+    CreateStop: `ios-add-circle${isFocused ? "" : ""}`,
+    Itinerary: `ios-menu${isFocused ? "" : ""}`,
   }
 );
 // can't swipe createBottomTabNavigator 
@@ -91,6 +75,7 @@ const AppStack = createStackNavigator({
   CommentStop:CommentStop,
   MapComponent: MapComponent,
   CreateStop:CreateStop,
+  CommentItinerary:CommentItinerary
 });
 // Auth navigator
 const AuthStack = createStackNavigator(

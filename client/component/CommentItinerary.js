@@ -1,5 +1,6 @@
 import React from 'react';
-import { StyleSheet, View,FlatList,Image, TextInput, TouchableHighlight,ScrollView,Modal } from 'react-native';
+import { StyleSheet, View,FlatList,Image, TextInput,
+  ImageBackground, TouchableHighlight,ScrollView,Modal } from 'react-native';
 
 import {
   Container,
@@ -20,7 +21,7 @@ import {
   Item,Input
 } from "native-base";
 
-export default class CommentStop extends React.Component {
+export default class CommentItinerary extends React.Component {
     static navigationOptions = {
         title: 'Comments',
     };
@@ -36,13 +37,36 @@ export default class CommentStop extends React.Component {
   }
 
   render() {
+    const { navigation } = this.props;
+    console.log(navigation)
     return (  
       <Container>
+      <CardItem cardBody>
+          <ImageBackground
+            source={{ uri: navigation.getParam('itinerary').photoUrl }}
+            style={{ height: 160, width: null, flex: 1 }}
+          >
+          <Text style={styles.tourname}>{navigation.getParam('itinerary').name}</Text>
+          </ImageBackground>
+        </CardItem>
       <Content>
         <List>
         <FlatList
           data={[
             {
+              albumId: 1,
+              id: 2,
+              title: "reprehenderit est deserunt velit ipsam",
+              url: "http://placehold.it/600/771796",
+              thumbnailUrl: "http://placehold.it/150/771796"
+            },
+            {
+              albumId: 1,
+              id: 2,
+              title: "reprehenderit est deserunt velit ipsam",
+              url: "http://placehold.it/600/771796",
+              thumbnailUrl: "http://placehold.it/150/771796"
+            },{
               albumId: 1,
               id: 2,
               title: "reprehenderit est deserunt velit ipsam",
@@ -58,7 +82,7 @@ export default class CommentStop extends React.Component {
               <Thumbnail round  source={{ uri: item.thumbnailUrl }} />
             </Left>
             <Body>
-              <Text>Sankhadeep</Text>
+              <Text>Julio</Text>
               <Text note numberOfLines={1}>{item.title}</Text>
             </Body>
             <Right>
@@ -98,6 +122,16 @@ const styles = StyleSheet.create({
     backgroundColor:'#fff',
     margin:4,
     borderRadius: 5
+  },
+  tourname: {
+    color: '#fff',
+    textAlign: 'center',
+    marginTop:60,
+    fontSize:30,
+    fontWeight: 'bold',
+    textShadowColor: '#000',
+    textShadowOffset: {width: -1, height: 1},
+    textShadowRadius: 10
   },
   container2: {
     display: "flex",

@@ -115,8 +115,16 @@ class Stops extends React.Component {
             <Text style={styles.tourname}>{navigation.getParam('itinerary').name}</Text>
             </ImageBackground>
           </CardItem>
-          <Text>Description: {navigation.getParam('itinerary').description} </Text>
-          <Text>Number of Stops: {this.state.stops.length}</Text>
+          <CardItem>
+              <Body>
+                  <Button transparent>
+                  <Icon active name="heart" /> 
+                </Button>
+               <Text>Description: {navigation.getParam('itinerary').description} </Text>
+               <Text>Number of Stops: {this.state.stops.length}</Text>
+              </Body>
+            </CardItem>
+       
           <FlatList
             data = {this.state.stops}
             
@@ -147,8 +155,13 @@ class Stops extends React.Component {
         </Content>
         <Footer>
           <FooterTab>
-            <Button>
-              <Icon name="camera" />
+            <Button onPress={() => {
+                  /* 1. Navigate to the Details route with params */
+                  this.props.navigation.navigate("CommentItinerary", {
+                    itinerary: navigation.getParam('itinerary')
+                  });
+                }}>
+              <Icon name="ios-chatbubbles-outline" />
             </Button>
             <Button
               onPress={() => {

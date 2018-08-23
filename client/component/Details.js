@@ -21,12 +21,14 @@ import {
   Left,
   Body
 } from "native-base";
+import SegmentedControlTab from "react-native-segmented-control-tab";
 
 // import MapView from "react-native-maps";
 // import { Rating } from "react-native-elements";
 import { Button } from "native-base";
 
 import ImageGallery from './ImageGallery.js';
+import CommentStop from "./CommentStop.js";
 
 export default class Details extends React.Component {
   static navigationOptions = {
@@ -37,8 +39,15 @@ export default class Details extends React.Component {
     this.state = {
       stopId: null, 
       modalVisible: false,
+      selectedIndex: 0
     };
   }
+  handleIndexChange = index => {
+    this.setState({
+      ...this.state,
+      selectedIndex: index
+    });
+  };
 
   render() {
     // retrieve data
@@ -66,49 +75,26 @@ export default class Details extends React.Component {
           <Icon name="heart" />
           <Text>1,926</Text>
         </Button>
-  
         <ScrollView>
-          {/* <FlatList
-            data={[
-              {
-                albumId: 1,
-                id: 2,
-                title: "Had a lot of fun",
-                url: "http://placehold.it/600/771796",
-                thumbnailUrl:
-                  "https://avatars1.githubusercontent.com/u/37286505?s=460&v=4"
-              },
-              {
-                albumId: 1,
-                id: 2,
-                title: "it' was fun",
-                url: "http://placehold.it/600/771796",
-                thumbnailUrl:
-                  "https://avatars0.githubusercontent.com/u/37286505?s=460&v=4"
-              }
-            ]}
-            renderItem={({ item }) => (
-              <TouchableHighlight>
-                <View style={styles.container2}>
-                  <Image
-                    style={styles.imagesStyle2}
-                    source={{ uri: item.thumbnailUrl }}
-                  />
-                  <Text style={styles.title}>{item.title}</Text>
-                </View>
-              </TouchableHighlight>
-            )}
-            keyExtractor={(item, index) => index.toString()}
-          /> */}
-          <ImageGallery></ImageGallery>
+        <SegmentedControlTab
+            tabsContainerStyle={styles.tabsContainerStyle}
+            tabStyle={styles.tabStyle}
+            tabTextStyle={styles.tabTextStyle}
+            activeTabStyle={styles.activeTabStyle}
+            activeTabTextStyle={styles.activeTabTextStyle}
+            selectedIndex={1}
+            selectedIndex={this.state.selectedIndex}
+            onTabPress={this.handleIndexChange}
+            allowFontScaling={false}
+            values={["My itineraries", "Favorites"]}
+            onPress={index => this.setState({ selected: index })}
+          />
+          {
+             this.state.selectedIndex === 0 ?  
+             <ImageGallery></ImageGallery>:
+             <CommentStop /> 
+          }  
         </ScrollView>
-        <TextInput
-          style={styles.inputStyle}
-          onFocus={() => {
-            this.props.navigation.navigate("CommentStop");
-          }}
-          placeholder="Be nice !!!"
-        />
       </Container>
     );
   }
