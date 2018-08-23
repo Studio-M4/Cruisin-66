@@ -62,13 +62,13 @@ export default class CreateStop extends React.Component {
       itineraryId: itineraryId,
     };
 
-    // this.createStop(postData)
-    //   .then(() =>
-    //     this.props.navigation.navigate("Stops", {
-    //       itineraryId: this.state.itineraryId
-    //     })
-    //   )
-    //   .catch(err => console.log(err));
+    this.createStop(postData)
+      .then(() =>
+        this.props.navigation.navigate("Stops", {
+          itineraryId: this.state.itineraryId
+        })
+      )
+      .catch(err => console.log(err));
   }
 
   handleAutoCompletePress(data, details) {
@@ -192,15 +192,19 @@ export default class CreateStop extends React.Component {
         <ScrollView>
           <View style={styles.container}>
             <GooglePlacesAutocomplete
-              styles={{
-                poweredContainer: {
-                  width: 0,
-                  height: 0
+              style={{
+                container: {
+                  backgroundColor: 'transparent',
+                  borderWidth: 0
                 },
-                powered: {
-                  width: 0,
-                  height: 0
-                }
+                textInputContainer: {
+                  backgroundColor: 'transparent',
+                  borderColor: 'yellow',
+                  borderWidth: 0
+                },
+                textInput: {
+                  borderWidth: 0
+                },
               }}
               placeholder="Search"
               minLength={2} // minimum length of text to search
