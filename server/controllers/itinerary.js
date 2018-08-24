@@ -1,10 +1,33 @@
 const db = require('../../db/models/');
 
 let getAllItineraries = (callback) => {
-  db.Itinerary.findAll() 
+  db.Itinerary.findAll({
+    include: [{
+      model: db.User
+    }]
+  }) 
   .then((itineraries) => {
-    console.log(itineraries);    
-    callback(null, itineraries);
+    console.log(itineraries);
+    let itinerariesWithoutPassword = itineraries.map((itinerary) => {
+      return {
+        id: itinerary.id,
+        name: itinerary.name,
+        description: itinerary.description,
+        photoUrl: itinerary.photoUrl,
+        createdAt: itinerary.createdAt,
+        updatedAt: itinerary.updatedAt,
+        CategoryId: itinerary.CategoryId,
+        User: {
+          id: itinerary.User.id,
+          userName: itinerary.User.userName,
+          firstName: itinerary.User.firstName,
+          lastName: itinerary.User.lastName,
+          email: itinerary.User.email,
+          photoAvatar: itinerary.User.photoAvatar,
+        }
+      }
+    })   
+    callback(null, itinerariesWithoutPassword);
   })
   .catch((err) => {
     // Handle any error in the chain
