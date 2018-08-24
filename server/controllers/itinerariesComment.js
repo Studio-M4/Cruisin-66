@@ -4,14 +4,32 @@ const db = require('../../db/models/');
 let getItineraryComments = (query, callback) => {
   console.log('controller', query);
   let itineraryId = Number(query.itineraryId);
-  db.ItinerariesComment.findAll({    
+  db.ItinerariesComment.findAll({
     where: {
       ItineraryId: itineraryId
     }, include: [db.User]
   })
   .then((itineraryComments) => {
     console.log(itineraryComments);
-    callback(null, itineraryComments);
+    let commentsWithoutPassword = itineraryComments.map((itineraryComment) => {
+      return {
+        id: itineraryComment.id,
+        text: itineraryComment.text,
+        rating: itineraryComment.rating,
+        createdAt: itineraryComment.createdAt,
+        updatedAt: itineraryComment.updatedAt,
+        ItineraryId: itineraryComment.ItineraryId,
+        User: {
+          id: itineraryComment.User.id,
+          userName: itineraryComment.User.userName,
+          firstName: itineraryComment.User.firstName,
+          lastName: itineraryComment.User.lastName,
+          email: itineraryComment.User.email,
+          photoAvatar: itineraryComment.User.photoAvatar,
+        }
+      }
+    });
+    callback(null, commentsWithoutPassword);
   })
   .catch((err) => {
     // Handle any error in the chain
