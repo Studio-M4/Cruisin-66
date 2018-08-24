@@ -8,7 +8,8 @@ import {
   ImageBackground,
   TouchableHighlight,
   ScrollView,
-  Modal
+  Modal,
+  AsyncStorage
 } from "react-native";
 
 import {
@@ -31,7 +32,7 @@ import {
   FooterTab
 } from "native-base";
 
-import {NavigationEvents} from 'react-navigation';
+import { NavigationEvents } from "react-navigation";
 
 class Stops extends React.Component {
   static navigationOptions = {
@@ -48,19 +49,28 @@ class Stops extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      itineraryId: null, 
+      itineraryId: null,
       modalVisible: false,
-      stops: []
+      stops: [],
+      showAddIcon: true
     };
   }
-
 
   componentWillMount() {
     const { navigation } = this.props;
     // This is passed from Itinerary component.
-    const itineraryId = navigation.getParam('itinerary').id;
-    console.log(navigation);
-    this.setState({ itineraryId });
+    const itinerary = navigation.getParam("itinerary");
+    const itineraryOwnerId = itinerary.UserId;
+
+    AsyncStorage.getItem("userInfo")
+      .then(storageStr => {
+        const userId = JSON.parse(storageStr).data.token.userId;
+        // If the itinerary belongs to current user, then he can add stops to it.
+        const showAddIcon = userId === itineraryOwnerId;
+        this.setState({ itineraryId: itinerary.id, showAddIcon }),
+          console.log(this.state);
+      })
+      .catch(err => console.log(err));
   }
 
   componentDidMount() {
@@ -69,55 +79,70 @@ class Stops extends React.Component {
 
   getStopsById = () => {
     let itineraryId = this.state.itineraryId;
-    
+
     return fetch(`http://localhost:3000/stops?itineraryId=${itineraryId}`, {
-      method: 'GET', 
+      method: "GET",
       headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
+        Accept: "application/json",
+        "Content-Type": "application/json"
       }
     })
-    .then((response) => {
-      if (response.error) {
-        console.log(response.error);
-      } else {
-        return response.json();
-      }
-    })
-    .then(data => {
-      console.log('stops', data);
-      this.setState({
-        stops: data
+      .then(response => {
+        if (response.error) {
+          console.log(response.error);
+        } else {
+          return response.json();
+        }
       })
-    })
-    .catch((error) => {
-      console.log(error)
-    });
-  }
+      .then(data => {
+        console.log("stops", data);
+        this.setState({
+          stops: data
+        });
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
 
   handleFocus() {
     this.getStopsById();
   }
 
   addItineraryToFavorites() {
-    console.log('hi')
-    
+    console.log("hi");
   }
 
   render() {
+    const defautImageUrl = 'https://www.telegraph.co.uk/content/dam/Travel/2018/April/road-trip-GettyImages-655931324.jpg?imwidth=1400'
     const { navigation } = this.props;
+    const renderAddIcon = () => {
+      return this.state.showAddIcon ? (
+        <Button
+          onPress={() => {
+            /* 1. Navigate map and see the direction */
+            navigation.navigate("CreateStop", {
+              itineraryId: this.state.itineraryId
+            });
+          }}
+        >
+          <Icon name="add" />
+        </Button>
+      ) : null;
+    };
+
     return (
       <Container>
-        <NavigationEvents
-          onDidFocus = {payload => this.handleFocus()}
-        />
+        <NavigationEvents onDidFocus={payload => this.handleFocus()} />
         <Content>
           <CardItem cardBody>
             <ImageBackground
-              source={{ uri: navigation.getParam('itinerary').photoUrl }}
+              source={{ uri: navigation.getParam("itinerary").photoUrl || defautImageUrl }}
               style={{ height: 200, width: null, flex: 1 }}
             >
-            <Text style={styles.tourname}>{navigation.getParam('itinerary').name}</Text>
+              <Text style={styles.tourname}>
+                {navigation.getParam("itinerary").name}
+              </Text>
             </ImageBackground>
           </CardItem>
           <CardItem>
@@ -130,8 +155,7 @@ class Stops extends React.Component {
               </Body>
             </CardItem>
           <FlatList
-            data = {this.state.stops}
-            
+            data={this.state.stops}
             renderItem={({ item }) => (
               <TouchableHighlight
                 onPress={() => {
@@ -144,7 +168,15 @@ class Stops extends React.Component {
                 <Card>
                   <CardItem>
                     <Left>
-                      <Thumbnail square style={{width: 75, height: 75}} source={{ uri: item.StopPhotos[0] ? item.StopPhotos[0].url : 'https://images-na.ssl-images-amazon.com/images/I/11qnZ2RCZML._SX331_BO1,204,203,200_.jpg' }} />
+                      <Thumbnail
+                        square
+                        style={{ width: 75, height: 75 }}
+                        source={{
+                          uri: item.StopPhotos[0]
+                            ? item.StopPhotos[0].url
+                            : "https://images-na.ssl-images-amazon.com/images/I/11qnZ2RCZML._SX331_BO1,204,203,200_.jpg"
+                        }}
+                      />
                       <Body>
                         <Text>{item.name}</Text>
                         <Text note>{item.description}</Text>
@@ -159,24 +191,17 @@ class Stops extends React.Component {
         </Content>
         <Footer>
           <FooterTab>
-
-            <Button onPress={() => {
-                  /* 1. Navigate to the Details route with params */
-                  this.props.navigation.navigate("CommentItinerary", {
-                    itinerary: navigation.getParam('itinerary')
-                  });
-                }}>
-              <Icon name="ios-chatbubbles-outline" />
-
-            </Button>
             <Button
               onPress={() => {
-                /* 1. Navigate map and see the direction */
-                this.props.navigation.navigate("CreateStop", {itineraryId: this.state.itineraryId})
+                /* 1. Navigate to the Details route with params */
+                this.props.navigation.navigate("CommentItinerary", {
+                  itinerary: navigation.getParam("itinerary")
+                });
               }}
             >
-              <Icon name="add" />
+              <Icon name="ios-chatbubbles-outline" />
             </Button>
+            {renderAddIcon()}
             <Button
               onPress={() => {
                 /* 1. Navigate map and see the direction */
@@ -194,27 +219,26 @@ class Stops extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection:'row',
+    flexDirection: "row",
     flex: 1,
-    marginLeft:'5%',
-    justifyContent: 'center'
+    marginLeft: "5%",
+    justifyContent: "center"
   },
   container2: {
-    flexDirection:'row',
+    flexDirection: "row",
     flex: 1,
-    justifyContent: 'flex-end'
+    justifyContent: "flex-end"
   },
   tourname: {
-    color: '#fff',
-    textAlign: 'center',
-    marginTop:90,
-    fontSize:30,
-    fontWeight: 'bold',
-    textShadowColor: '#000',
-    textShadowOffset: {width: -1, height: 1},
+    color: "#fff",
+    textAlign: "center",
+    marginTop: 90,
+    fontSize: 30,
+    fontWeight: "bold",
+    textShadowColor: "#000",
+    textShadowOffset: { width: -1, height: 1 },
     textShadowRadius: 10
   }
 });
-
 
 export default Stops;
