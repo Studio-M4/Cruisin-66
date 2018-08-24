@@ -59,3 +59,6 @@ buck-out/
 package-lock.json
 *config.js
 
+ios/cruisin66v1.xcodeproj/project.pbxproj
+ios/cruisin66v1/Info.plist
+
