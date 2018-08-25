@@ -7,8 +7,10 @@ import {
   TextInput,
   TouchableHighlight,
   ScrollView,
-  FlatList,
+  FlatList,AsyncStorage
 } from "react-native";
+
+import TimeAgo from 'react-native-timeago';
 
 import {
   Container,
@@ -16,11 +18,16 @@ import {
   Content,
   Card,
   CardItem,
-  Thumbnail,
-  Icon,
+  Thumbnail,  Icon,
   Left,
-  Body
+  List,
+  ListItem,
+  Body,
+  Right,
+  Title,
+  Item,Input
 } from "native-base";
+
 import SegmentedControlTab from "react-native-segmented-control-tab";
 
 // import MapView from "react-native-maps";
@@ -41,7 +48,9 @@ export default class Details extends React.Component {
     this.state = {
       stopId: null, 
       modalVisible: false,
-      selectedIndex: 0
+      selectedIndex: 0,
+      data:[],
+      UserId:""
     };
   }
   handleIndexChange = index => {
@@ -58,12 +67,6 @@ export default class Details extends React.Component {
 
     return (
       <Container>
-        {/* <Image
-          source={{ uri: 'https://media-cdn.tripadvisor.com/media/photo-s/01/7c/15/9f/mc-way-falls.jpg' }}
-          style={{ height: 200, width: 100 + "%", flex: 1 }}
-        /> */}
-        
-        
         <Text 
           style={{
             fontSize: 22,
@@ -74,9 +77,7 @@ export default class Details extends React.Component {
           }}> 
           {item.name}
         </Text>
-        <Text>{item.description}</Text>
-        <Directions props={item}></Directions>
-        <ScrollView>
+        <Directions></Directions>
         <SegmentedControlTab
             tabsContainerStyle={styles.tabsContainerStyle}
             tabStyle={styles.tabStyle}
@@ -93,9 +94,8 @@ export default class Details extends React.Component {
           {
              this.state.selectedIndex === 0 ?  
              <ImageGallery photoUrls={item.StopPhotos.map((photo) => photo.url)}></ImageGallery>:
-             <CommentStop /> 
+             <CommentStop nav = {this.props.navigation} /> 
           }  
-        </ScrollView>
       </Container>
     );
   }
@@ -121,7 +121,7 @@ const styles = StyleSheet.create({
   },
   inputStyle: {
     height: 40,
-    width: "90%",
+    width: "80%",
     borderColor: "#ccc",
     borderWidth: 0.4,
     paddingLeft: 10,
@@ -161,16 +161,5 @@ const styles = StyleSheet.create({
     padding: 10,
     marginLeft: "80%",
     marginTop: 5
-  },
-  inputStyle: {
-    height: 40,
-    width: '98%',
-    borderColor: '#ccc',
-    borderWidth: 0.4,
-    paddingLeft: 10,
-    marginTop: 10,
-    marginLeft: 4,
-    bottom:5,
-    borderRadius:20
   }
 });
