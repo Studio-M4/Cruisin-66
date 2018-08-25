@@ -5,13 +5,12 @@ import { StyleSheet, View,FlatList,Image, TextInput,
   ImageBackground, TouchableHighlight,AsyncStorage,ScrollView,Modal } from 'react-native';
   import TimeAgo from 'react-native-timeago';
 import {
-  Container,
-  Header,
-  Content,
-  Card,
-  CardItem,
-  Thumbnail,
+  StyleSheet,
   Text,
+  View,
+  Image,
+  TextInput,
+  ScrollView,
   Button,
   Icon,
   Left,
@@ -149,6 +148,25 @@ export default class CommentStop extends React.Component {
     );
   }
 }
+
+/**
+ * Get location address from google api returned data.
+ */
+const getAddress = info => {
+  return info
+    .split(",")
+    .slice(1)
+    .join(",");
+};
+
+/**
+ * Get location name from google api returned data.
+ */
+const getName = info => {
+  return info.split(",")[0];
+};
+
+// Styles 😎
 const styles = StyleSheet.create({
   container: {
     display: "flex",
@@ -176,47 +194,31 @@ const styles = StyleSheet.create({
     margin:4,
     borderRadius: 5
   },
+
   title: {
-    fontSize: 14,
-    color: "#777",
-    marginTop: 7,
-    padding:9,
-    borderRadius:25,
-    marginLeft: 4,
-    width: "80%",
-    height:30
+    fontSize: 22,
+    fontWeight: "bold",
+    color: "#000",
+    marginTop: 1
   },
-  imagesStyle: {
-    width: 50,
-    height: 50,
-    borderRadius: 25,
-    marginBottom: 3,
-  }, 
-  imagesStyleModal: {
-    width: 80,
-    height: 80,
-    borderRadius: 40,
-    marginBottom: 20,
-  },
-  textDesign: {
-    width: "80%",
-    color: "#333",
-    marginBottom: 20
-  },
-  closeIt: {
+  button: {
+    alignItems: "center",
+    backgroundColor: "#336699",
+    marginTop: 20,
     padding: 10,
-    marginLeft: "80%",
-    marginTop: 5
+    width: 300
   },
   inputStyle: {
     height: 40,
-    width: '80%',
-    borderColor: '#ccc',
+    width: 300,
+    borderColor: "#ccc",
     borderWidth: 0.4,
     paddingLeft: 10,
     marginTop: 10,
-    marginLeft: 4,
-    bottom:5,
-    borderRadius:20
+    backgroundColor: "white"
+  },
+  photo: {
+    height: 200,
+    width: 200
   }
 });
