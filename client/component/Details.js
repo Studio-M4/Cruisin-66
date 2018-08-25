@@ -74,7 +74,8 @@ export default class Details extends React.Component {
           }}> 
           {item.name}
         </Text>
-        <Directions></Directions>
+        <Text>{item.description}</Text>
+        <Directions props={item}></Directions>
         <ScrollView>
         <SegmentedControlTab
             tabsContainerStyle={styles.tabsContainerStyle}

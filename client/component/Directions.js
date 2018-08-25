@@ -12,16 +12,26 @@ import {
   } from "native-base";
  
 export default class gmapsDirections extends React.Component {
+
+  constructor({props}) {
+    super(props);
+    this.state = {
+      currLatitude: 36.602951,
+      currLongitude: -121.895763,
+      destLatitude: props.latitude,
+      destLongitude: props.longitude
+    };
+  }
  
   handleGetDirections = () => {
     const data = {
        source: {
-        latitude: 36.602951,
-        longitude: -121.895763
+        latitude: this.state.currLatitude,
+        longitude: this.state.currLongitude
       },
       destination: {
-        latitude: 36.157,
-        longitude: -121.672
+        latitude: this.state.destLatitude,
+        longitude: this.state.destLongitude
       },
       params: [
         {
@@ -37,13 +47,27 @@ export default class gmapsDirections extends React.Component {
  
     getDirections(data)
   }
+
+  componentDidMount() {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        this.setState({
+          currLatitude: position.coords.latitude,
+          currLongitude: position.coords.longitude,
+          error: null,
+        });
+      },
+      (error) => this.setState({ error: error.message }),
+      { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 },
+    );
+  }
+  
+  
  
   render() {
     return (
-        <Button transparent textStyle={{color: '#87838B'}} >
-          <Icon name="navigate" 
-            onPress={this.handleGetDirections}
-          />
+        <Button transparent textStyle={{color: '#87838B'}} onPress={this.handleGetDirections}>
+          <Icon name="navigate"/>
           <Text>Directions</Text>
         </Button>
     );

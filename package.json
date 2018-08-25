@@ -65,12 +65,9 @@
   },
   "jest": {
     "preset": "react-native",
-<<<<<<< HEAD
     "transformIgnorePatterns": [
       "node_modules/(?!react-native|expo|native-base|react-navigation|tcomb-form-native)"
     ],
-=======
->>>>>>> set up snapshot testing
     "transform": {
       "^.+\\.js$": "<rootDir>/node_modules/react-native/jest/preprocessor.js"
     }

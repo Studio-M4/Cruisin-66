@@ -122,9 +122,9 @@ class Stops extends React.Component {
           </CardItem>
           <CardItem>
               <Body>
-                  {/* <Button transparent>
+                  <Button transparent>
                   <Icon active name="heart" /> 
-                </Button> */}
+                </Button>
                <Text>Description: {navigation.getParam('itinerary').description} </Text>
                <Text>Number of Stops: {this.state.stops.length}</Text>
               </Body>
