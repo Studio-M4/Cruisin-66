@@ -63,7 +63,6 @@ export default class CommentItinerary extends React.Component {
     this.setState({
       data: response.data
     })
-    this.getComment()
   })
   .catch(error => {
     // handle error
@@ -119,7 +118,7 @@ export default class CommentItinerary extends React.Component {
     
           <ListItem thumbnail>
             <Left>
-              <Thumbnail round  source={{ uri: item.User.password }} />
+              <Thumbnail round  source={{ uri: item.User.firstName }} /> 
             </Left>
             <Body>
               <Text>{item.User.firstName}</Text>

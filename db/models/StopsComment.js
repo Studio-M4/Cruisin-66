@@ -6,8 +6,9 @@ module.exports = (Sequelize, type) => {
   });
 
   StopsComment.associate = function(models) {
+    StopsComment.belongsTo(models.User);
+    StopsComment.belongsTo(models.Stop);
   };
 
   return StopsComment;
 };
-

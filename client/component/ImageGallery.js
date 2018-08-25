@@ -91,7 +91,6 @@ const styles = StyleSheet.create({
 
   modal: {
     flex: 1,
-    padding: 40,
     backgroundColor: 'rgba(0, 0, 0, 0.9)'
   },
 
