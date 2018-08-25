@@ -64,6 +64,7 @@ export default class Itinerary extends React.Component {
   }
 
   render() {
+    const defaultImageUrl = 'https://www.telegraph.co.uk/content/dam/Travel/2018/April/road-trip-GettyImages-655931324.jpg?imwidth=1400'
     return (
       <Container>
         <Header searchBar rounded>
@@ -94,7 +95,7 @@ export default class Itinerary extends React.Component {
                 <Card>
                   <CardItem cardBody>
                     <ImageBackground
-                      source={{ uri: item.photoUrl }}
+                      source={{ uri: item.photoUrl || defaultImageUrl}}
                       style={{ height: 200, width: null, flex: 1, opacity: .95 }}
                     >
                      <Text style={styles.tourname}>{item.name}</Text>
