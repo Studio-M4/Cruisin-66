@@ -44,6 +44,7 @@ app.get('/itinerary', require('./routes/getItineraryById.js'));
 app.post('/stop', require('./routes/createStop.js'));
 app.get('/stops', require('./routes/getStops.js'));
 app.get('/stop', require('./routes/getStopById.js'));
+app.get('/checkStop/:lng/:lat', require('./routes/checkIfStopExists.js'));
 
 app.get('/categories', require('./routes/getCategories.js'));
 
