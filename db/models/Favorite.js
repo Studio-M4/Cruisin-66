@@ -6,12 +6,12 @@ module.exports = (Sequelize, type) => {
     //   primaryKey: true,
     //   autoIncrement: true
     // }
-       ItineraryId: {
-         type: type.INTEGER
-       },
-       UserId: {
-         type: type.INTEGER
-       }
+    ItineraryId: {
+      type: type.INTEGER
+    },
+    UserId: {
+      type: type.INTEGER
+    }
   });
 
   Favorite.associate = function(models) {

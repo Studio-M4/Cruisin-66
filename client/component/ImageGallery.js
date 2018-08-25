@@ -58,7 +58,7 @@ export default class ImageGallery extends React.Component {
               onPress={() => {this.setModalVisible(false)}}>
               Close
             </Text>
-            <Image source={{uri: 'https://res.cloudinary.com/db5rb32ne/image/upload/v1535046177/skfljwaqqz4681lzuhel.jpg'}}></Image>
+            <Image style={styles.modalImage} source={{uri: this.state.modalImageUrl}}></Image>
           </View>
         </Modal>
         {images}
@@ -86,7 +86,13 @@ const styles = StyleSheet.create({
   image: {
     flex: 1,
     width: null,
-    alignSelf: 'stretch',
+    alignSelf: 'stretch',    
+  },
+
+  modalImage: {
+    zIndex: 2,
+    flex: 1,
+    justifyContent: 'center',
   },
 
   modal: {
@@ -96,5 +102,5 @@ const styles = StyleSheet.create({
 
   text: {
     color: '#fff',
-  }
+  },
 });

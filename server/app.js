@@ -55,7 +55,8 @@ app.get('/stopcomments', require('./routes/getStopComments.js'));
 
 app.get('/profile/itineraries', require('./routes/getItinerariesByUserId.js'))
 
-app.post('/favorite', require('./routes/addFavorite.js'))
+app.post('/favorite', require('./routes/addFavorite.js'));
+app.get('/favorite', require('./routes/getFavoritesByUserId.js'));
 
 if (!module.parent) {
   app.listen(app.get('port'));
