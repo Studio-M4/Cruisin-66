@@ -1,6 +1,21 @@
 // This file passes requests to db favorites model
 const db = require('../../db/models/');
 
+let getFavorites = (query, callback) => {
+  db.Favorite.findAll({
+    where: {
+      UserId: query.userId
+    },
+  })
+  .then((favorites) => {
+    console.log(favorites);
+    callback(null, favorites);
+  })
+  .catch((err) => {
+    console.log(err);
+    callback(err, null);
+  });
+}
 
 let addFavorite = (userId, itineraryId, callback) => {
     console.log('USER_ID ', userId);
@@ -21,3 +36,4 @@ let addFavorite = (userId, itineraryId, callback) => {
   }
   
   module.exports.addFavorite = addFavorite;
+  module.exports.getFavorites = getFavorites;
