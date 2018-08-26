@@ -59,15 +59,17 @@ const createStop = (stop, itineraryId, callback) => {
 /**
  * Check if the specific stop exists by given coordinate.
  */
-const checkIfStopExists = (coordinate, callback) => {
+const getStopByCoordinate = (coordinate, callback) => {
   console.log('COORDINATE: ', coordinate);
   const { longitude, latitude } = coordinate;
-  db.Stop.findOne({ where: {longitude, latitude} })
-         .then((stop) => callback(null, !!stop))
+  db.Stop.findOne({ where: {longitude, latitude}, include: [db.StopPhoto] })
+         .then((stop) => callback(null, stop))
          .catch((err) => callback(err, null));
 };
+
+
 
 module.exports.createStop = createStop;
 module.exports.getAllStops = getAllStops;
 module.exports.getStopById = getStopById;
-module.exports.checkIfStopExists = checkIfStopExists;
+module.exports.getStopByCoordinate = getStopByCoordinate;

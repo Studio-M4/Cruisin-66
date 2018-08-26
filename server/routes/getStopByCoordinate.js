@@ -1,12 +1,12 @@
-const checkStop = require('express').Router();
+const stop = require('express').Router();
 const db = require('../controllers/stop.js');
 
 
-checkStop.get('/checkStop/:lng/:lat', (req, res) => {
+stop.get('/stop/coordinate/:lng/:lat', (req, res) => {
   const { lng, lat } = req.params;
   const coordinate = { longitude: lng, latitude: lat };
 
-  db.checkIfStopExists(coordinate, (err, data) => {
+  db.getStopByCoordinate(coordinate, (err, data) => {
     if (err) {
       res.status(500).send('Server side error happened');
     } else {
@@ -15,4 +15,4 @@ checkStop.get('/checkStop/:lng/:lat', (req, res) => {
   });
 });
 
-module.exports = checkStop;
+module.exports = stop;

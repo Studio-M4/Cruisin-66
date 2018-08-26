@@ -44,12 +44,14 @@ app.get('/itinerary', require('./routes/getItineraryById.js'));
 app.post('/stop', require('./routes/createStop.js'));
 app.get('/stops', require('./routes/getStops.js'));
 app.get('/stop', require('./routes/getStopById.js'));
-app.get('/checkStop/:lng/:lat', require('./routes/checkIfStopExists.js'));
+app.get('/stop/coordinate/:lng/:lat', require('./routes/getStopByCoordinate.js'));
 
 app.get('/categories', require('./routes/getCategories.js'));
 
 app.post('/itinerarycomments', require('./routes/createItineraryComments.js'));
 app.get('/itinerarycomments', require('./routes/getItineraryComments.js'));
+
+app.post('/itinerarystops', require('./routes/createItineraryStops.js'));
 
 app.post('/stopcomments', require('./routes/createStopComments.js'));
 app.get('/stopcomments', require('./routes/getStopComments.js'));
