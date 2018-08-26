@@ -25,14 +25,16 @@ export default class CreateStop extends React.Component {
     super(props);
     this.state = {
       photos: [],
-      itineraryId: null,
       address: null,
       description: null,
       name: null,
-      imageSource: null,
       longitude: null,
-      latitude: null
+      latitude: null,
+      editable: true,
     };
+
+    this.stopId = null;
+    this.itineraryId = null;
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handlePhotoUpload = this.handlePhotoUpload.bind(this);
@@ -43,30 +45,38 @@ export default class CreateStop extends React.Component {
   componentDidMount() {
     const { navigation } = this.props;
     // This itineraryId is passed from Stops component.
-    const itineraryId = navigation.getParam("itineraryId");
-    this.setState({ itineraryId });
+    this.itineraryId = navigation.getParam("itineraryId");
   }
 
   handleSubmit() {
+    const { navigation } = this.props;
+
+    // If the stop is already in db, we just connect it to the specific itinerary.
+    if (this.stopId) {
+      this.connectStopToItinerary(this.itineraryId, this.stopId)
+          .then(() => navigation.navigate("Stops", { itineraryId: this.itineraryId }))
+          .catch((err) => console.log(err));
+      return;
+    }
+
     console.log(this.state);
-    const { itineraryId, name, description, address, photos, latitude, longitude } = this.state;
+    const { name, description, address, photos, latitude, longitude } = this.state;
     const postData = {
       stop: {
         name: name,
         description: description,
         address: address,
-        userId: 8, // TODO: replace hardcoded
-        StopPhotos: photos.map((url) => ({ url: url, description: "" })), // TODO: desciption
+        StopPhotos: photos.map((url) => ({ url: url, description: "" })), // description is decrecated
         latitude: latitude,
         longitude: longitude
       },
-      itineraryId: itineraryId,
+      itineraryId: this.itineraryId,
     };
 
     this.createStop(postData)
       .then(() =>
-        this.props.navigation.navigate("Stops", {
-          itineraryId: this.state.itineraryId
+        navigation.navigate("Stops", {
+          itineraryId: this.itineraryId
         })
       )
       .catch(err => console.log(err));
@@ -76,13 +86,30 @@ export default class CreateStop extends React.Component {
     console.log(data, details);
     const fullInfo = data.description;
     const { lat, lng } = details.geometry.location;
-    this.setState({name: getName(fullInfo), address: getAddress(fullInfo) ,latitude: lat, longitude: lng});
 
-    const { photos } = details;
-    const photorefs = photos ? photos.slice(0, 4).map(photo => photo.photo_reference) : [];
-    this.fetchAndSaveAllGooglePhotos(photorefs)
-        .then((imageUrls) => this.setState({photos: imageUrls}));
+    this.searchStopByCoordinate(lng, lat)
+        .then((res) => {
+          console.log('RES ', res);
+          const stop = res.data;
+          // If this stop already exists in the database, we just pull it out.
+          if (stop) {
+            this.stopId = stop.id;
+            this.setState({
+              photos: stop.StopPhotos.map(photo => photo.url),
+              description: stop.description,
+              editable: false,
+            });
+          // If this stop doesn't exist in the database, we need to upload photos and create this stop.
+          } else {
+            this.setState({name: getName(fullInfo), address: getAddress(fullInfo) ,latitude: lat, longitude: lng});
 
+            const { photos } = details;
+            const photorefs = photos ? photos.slice(0, 4).map(photo => photo.photo_reference) : [];
+            this.fetchAndSaveAllGooglePhotos(photorefs)
+                .then((imageUrls) => this.setState({photos: imageUrls}));
+          }
+        })
+        .catch((err) => console.log(err));
   }
 
   handlePhotoUpload() {
@@ -114,7 +141,7 @@ export default class CreateStop extends React.Component {
   }
 
   /**
-   * Return a cloudinary photo url.
+   * Upload a photo to cloudinary and then return the photo url on cloudinary.
    */
   uploadToCloudinary(imageUri) {
     const url = "http://localhost:4000/cloudinary/photo/upload";
@@ -150,35 +177,26 @@ export default class CreateStop extends React.Component {
   }
 
   /**
-   * Get photos from google place photo api and then save them into cloudinary.
-   * @param {array} photosReferences - An array of photoreferences that can be used for fetching google place photos
+   * Search a stop from DB by given coordinate.
    */
-  fetchAndSaveAllGooglePhotos(photosReferences = []) {
-    if (photosReferences.length == 0) {
-      return;
-    }
-    const promises = photosReferences.map(ref =>
-      this.fetchAndSaveOneGooglePhoto(ref)
-    );
-    return axios
-      .all(promises)
-      .then(axios.spread((...responses) => responses.map((res) => res.data)));
-  }
-
-  /**
-   * Get one photo from google place photo api and then save it into cloudinary.
-   * @param {array} photosReferences - An photoreference sent back by google map autocomplete.
-   *                                   It can be used for fetching a google place photo.
-   */
-  fetchAndSaveOneGooglePhoto(photoreference) {
-    const url = "http://localhost:4000/google/photo";
-    console.log(photoreference);
-    return axios.post(url, { photoreference });
+  searchStopByCoordinate(lng, lat) {
+    const url = `http://localhost:3000/stop/coordinate/${lng}/${lat}`;
+    return axios.get(url);
   }
 
   createStop(postData) {
     const url = "http://localhost:3000/stop";
-    return axios.post(url, postData);
+    return axios.post(url, postData)
+                .then((res) => console.log(res.data))
+                .catch((err) => console.log(err));
+  }
+
+  /**
+   * Connect the relationship between Itinerary and Stop.
+   */
+  connectStopToItinerary(itineraryId, stopId) {
+    const url = 'http://localhost:3000/itinerarystops';
+    return axios.post(url, { itineraryId, stopId });
   }
 
   render() {
@@ -256,7 +274,7 @@ export default class CreateStop extends React.Component {
             </View>
             
             <TextInput
-              editable={true}
+              editable={this.state.editable}
               multiline={true}
               numberOfLines={6}
               maxLength={100}
@@ -274,8 +292,8 @@ export default class CreateStop extends React.Component {
                 )
               })}
             </View>
-            <Button title="Add Photo" onPress={this.handlePhotoUpload} />
-            <Button title="Create" onPress={this.handleSubmit} />
+            <Button title="Upload Photo" onPress={this.handlePhotoUpload} />
+            <Button title="Add Stop" onPress={this.handleSubmit} />
           </View>
         </ScrollView>
       </ImageBackground>
