@@ -47,6 +47,7 @@ export default class CommentItinerary extends React.Component {
     .then(response => {
       console.log(response);
       this.setState({"text":""})
+      this.getComment(); // call it again
     })
     .catch(function (error) {
       console.log(error);
