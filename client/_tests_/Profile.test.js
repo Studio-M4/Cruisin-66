@@ -8,4 +8,3 @@ describe ('Profile component', () => {
         expect(tree).toMatchSnapshot();
     })
 })
->>>>>>> set up snapshot testing

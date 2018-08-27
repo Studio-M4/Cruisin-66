@@ -26,6 +26,10 @@ import {
   Content
 } from "native-base";
 
+
+import UserItineraries from './UserItineraries.js';
+import UserFavorites from "./UserFavorites.js";
+
 const axios = require("axios");
 
 export default class Profile extends React.Component {
@@ -37,7 +41,8 @@ export default class Profile extends React.Component {
     this.state = {
       selectedIndex: 0,
       user: {},
-      userItineraries: []
+      userItineraries: [],
+      userFavorites:[]
     };
   }
   handleIndexChange = index => {
@@ -57,6 +62,7 @@ export default class Profile extends React.Component {
           user: userObject.data.token
         });
         this.getUserItineraries();
+        this.getUserFavorites();
       }
     } catch (error) {
       // Error retrieving data
@@ -89,14 +95,29 @@ export default class Profile extends React.Component {
     });
 }
 
+  getUserFavorites = () => {
+    let userId = this.state.user.userId;
+    axios
+    .get(`http://localhost:3000/favorite?userId=${userId}`)
+    .then((response) => {
+      // console.log(response.data);
+      this.setState({
+        userFavorites: response.data
+      })
+    })
+    .catch((error) => {
+      console.log(error);
+      alert(error);
+    });
+  }
+
 
   //NavigationEvents  instead of wcdl
   render() {
     const itineraryDefaultImageUrl = ''
     return (
-      <ScrollView>
+      <View style={styles.container}>
         <NavigationEvents onDidFocus={payload => this._retrieveData()} />
-        <View style={styles.container}>
           <View>        
             <Image
               style={styles.imagesStyle}
@@ -122,70 +143,17 @@ export default class Profile extends React.Component {
             values={["My Itineraries", "Favorites"]}
             onPress={index => this.setState({ selected: index })}
           />
-          <Content>
 
-            {
-              this.state.selectedIndex === 0 ?              
-            <FlatList
-            data = {this.state.userItineraries}
-            renderItem={({ item }) => (
-              <TouchableHighlight
-                onPress={() => {
-                  /* 1. Navigate to the Details route with params */
-                  this.props.navigation.navigate("Stops", {
-                    itinerary: item
-                  });
-                }}
-              >
-                <Card>
-                    <CardItem cardBody>
-                      <ImageBackground
-                        source={{ uri: item.photoUrl || 'https://www.telegraph.co.uk/content/dam/Travel/2018/April/road-trip-GettyImages-655931324.jpg?imwidth=1400' }}
-                        style={{ height: 120, width: null, flex: 1, opacity: .8 }}
-                      >
-                      <Text style={styles.tourname}>{item.name}</Text>
-                      </ImageBackground>
-                    </CardItem>
-                  </Card>
-                
-              </TouchableHighlight>
-              )}
-              keyExtractor={(item, index) => index.toString()}
-            />
+          {this.state.selectedIndex === 0 ?              
+            <UserItineraries data={this.state.userItineraries} navigation = {this.props.navigation}></UserItineraries>
             : 
-            
-            <FlatList
-            data = {this.state.userItineraries}
-            renderItem={({ item }) => (
-              <TouchableHighlight
-                onPress={() => {
-                  /* 1. Navigate to the Details route with params */
-                  this.props.navigation.navigate("Stops", {
-                    itinerary: item
-                  });
-                }}
-              >
-                <Card>
-                    <CardItem cardBody>
-                      <ImageBackground
-                        source={{ uri: item.photoUrl || 'https://www.telegraph.co.uk/content/dam/Travel/2018/April/road-trip-GettyImages-655931324.jpg?imwidth=1400'}}
-                        style={{ height: 120, width: null, flex: 1, opacity: .8 }}
-                      >
-                      <Text style={styles.tourname}>{item.name}</Text>
-                      </ImageBackground>
-                    </CardItem>
-                  </Card>
-                
-              </TouchableHighlight>
-              )}
-              keyExtractor={(item, index) => index.toString()}
-            />
-            }
-          </Content>
-        </View>
-      </ScrollView>
-    );
-  }
+            <UserFavorites data={this.state.userFavorites} navigation = {this.props.navigation}></UserFavorites>
+          }
+
+      </View>    
+
+  );
+}
 }
 
 const styles = StyleSheet.create({
