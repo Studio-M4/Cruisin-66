@@ -9,11 +9,12 @@ import {
   TouchableHighlight,
   AsyncStorage,
   ScrollView,
-  Button
+  Button,
+  ImageBackground,
 } from 'react-native';
-import Tcomb from 'tcomb-form-native';
-
-const { Form } = Tcomb.form;
+import PickerSelect from 'react-native-picker-select';
+import { Container, Content } from "native-base";
+import axios from 'axios';
 
 export default class CreateItinerary extends React.Component {
   static navigationOptions = {
@@ -23,27 +24,26 @@ export default class CreateItinerary extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      categoryId: null,
+      categories: [],
+      name: null,
+      description: null,
       user: {}
-    }
+    };
+
+    this.getCategories = this.getCategories.bind(this);
+    this.createItinerary = this.createItinerary.bind(this);
+  }
+
+  componentDidMount() {
+    this.getCategories();
   }
 
   handleSubmit = () => {
-    var UserId = this.state.user.userId;
-    console.log(UserId); //get the user id
-
-    var valuesObj = this._form.getValue();    // return 
-    
-    var stringObj = JSON.stringify(valuesObj);
-    var realObj = JSON.parse(stringObj);
-    realObj.UserId = UserId; 
-    console.log('Form after transformation not Struct: ', realObj);
-    
-    this.createItinerary(realObj)
-      .then(itinerary =>{
-        console.log('ITINERARAY ', itinerary);
-        this.props.navigation.navigate('Stops', { itinerary: itinerary })}
-      )
-      .catch(err => console.log(err));
+    const { navigation } = this.props;
+    this.createItinerary()
+        .then((itinerary) => navigation.navigate("Stops", {itinerary}))
+        .catch((err) => console.log(err));
   };
 
   _retrieveData = async () => {
@@ -62,95 +62,88 @@ export default class CreateItinerary extends React.Component {
     }
   };
 
-  /**
-   * Should be used to connect to endpoint for creating an Itinerary.
-   * @param {object} params - parameters for post request
-   */
-  createItinerary = params => {
-    return fetch('http://localhost:3000/itinerary', {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(params)
-    })
-      .then(res => {
-        if (res.error) {
-          throw res.error;
-        }
-        return res.json(); // this is the created itinerary object.
-      })
-      .catch(error => {
-        console.log(error);
-      });
+  createItinerary() {
+    console.log(this.state);
+    const url = 'http://localhost:3000/itinerary';
+    const postData = {
+      name: this.state.name,
+      description: this.state.description,
+      UserId: this.state.user.userId,
+      CategoryId: this.state.categoryId
+    };
+    console.log('postData ', postData);
+    return axios.post(url, postData)
+                .then((res) => res.data); // res.data is the created Itinerary object.
   };
 
-  render() {
-    return (
-      <ScrollView>
-        <NavigationEvents onDidFocus={payload => this._retrieveData()} />
+  getCategories() {
+    const url = 'http://localhost:3000/categories';
+    axios.get(url)
+         .then((res) => {
+           const dropdownOptions = res.data.map((category) => ({label: category.name, value: category.id}));
+           this.setState({categories: dropdownOptions});
+         })
+         .catch((err) => console.log(err));
+  }
 
+  render() {
+    const defautImageUrl = 'https://www.telegraph.co.uk/content/dam/Travel/2018/April/road-trip-GettyImages-655931324.jpg?imwidth=1400'
+    return (
+      <Container>
+        <Content>
         <NavigationEvents onDidFocus={payload => this._retrieveData()} />
+        <ImageBackground
+          source={{ uri: defautImageUrl }}
+          style={{ height: 200, width: null, flex: 1 }}
+        >
+          <Text style={styles.tourname}>
+            {this.state.name}
+          </Text>
+        </ImageBackground>
         <View style={styles.container}>
-          <Form ref={c => (this._form = c)} type={Itinerary} />
+          <TextInput
+            name="name"
+            style={styles.inputStyle}
+            placeholder="Name"
+            onChangeText={(name) => this.setState({name})}
+            value={this.state.firstName}
+          />
+          <TextInput
+            name="description"
+            style={styles.inputStyle}
+            placeholder="Description"
+            onChangeText={(description) =>  this.setState({description})}
+            value={this.state.firstName}
+          />
+          <PickerSelect
+            placeholder={{
+                label: 'Select a category...',
+                value: null,
+            }}
+            items={this.state.categories}
+            onValueChange={(value) => {
+                this.setState({
+                  categoryId: value,
+                });
+            }}
+            value={this.state.categoryId}
+            style={{...pickerSelectStyles}}
+          />
+          <Button title='Upload Photo' onPress={this.handleSubmit.bind(this)} />
           <Button title='Create' onPress={this.handleSubmit.bind(this)} />
         </View>
-      </ScrollView>
+        </Content>
+      </Container>
     );
   }
 }
 
-/**
- * Get all the categories from server.
- */
-const getCategories = () => {
-  return fetch('http://localhost:3000/categories', {
-    method: 'GET',
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
-    }
-  })
-    .then(res => {
-      if (res.error) {
-        throw res.error;
-      }
-      return res.json();
-    })
-    .then(categories => {
-      return categories.reduce((accum, category) => {
-        accum[category.id] = category.name;
-        return accum;
-      }, {});
-    })
-    .catch(error => {
-      console.log(error);
-    });
-};
-
-/**
- * Dropdown list options. Key of property is the actual returned value.
- * The actual data should be replaced by getCategories().
- */
-let Itinerary;
-getCategories().then((categories) => {
-  /**
-   * Form storage object for 'tcomb-form-native'.
-   */
-  Itinerary = Tcomb.struct({
-    name: Tcomb.String,
-    description: Tcomb.String,
-    CategoryId: Tcomb.enums(categories)
-  });
-});
-
 const styles = StyleSheet.create({
   container: {
     justifyContent: 'center',
-    marginTop: 50,
+    marginTop: 0,
     padding: 20,
-    backgroundColor: '#ffffff'
+    backgroundColor: '#fff'
   },
   title: {
     fontSize: 22,
@@ -164,6 +157,49 @@ const styles = StyleSheet.create({
     marginTop: 20,
     padding: 10,
     width: 300
+  },
+  inputStyle: {
+    fontSize: 16,
+    height: 45,
+    width: 300,
+    borderColor: "#ccc",
+    borderWidth: 0.4,
+    borderRadius: 4,
+    paddingLeft: 10,
+    marginTop: 10
+  },
+  tourname : {
+    color: "#fff",
+    textAlign: "center",
+    marginTop: 90,
+    fontSize: 30,
+    fontWeight: "bold",
+    textShadowColor: "#000",
+    textShadowOffset: { width: -1, height: 1 },
+    textShadowRadius: 10
+  },
+});
+
+const pickerSelectStyles = StyleSheet.create({
+  inputIOS: {
+    height: 45,
+    width: 300,
+    fontSize: 16,
+    paddingTop: 13,
+    paddingHorizontal: 10,
+    paddingBottom: 12,
+    borderWidth: 1,
+    borderColor: "#ccc",
+    borderRadius: 4,
+    backgroundColor: 'white',
+    color: 'black',
+    marginTop: 10
+  },
+  icon: {
+    width: 0,
+    height: 0,
+    top: 28,
+    right: 50,
   }
 });
 
