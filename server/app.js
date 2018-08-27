@@ -59,6 +59,7 @@ app.get('/stopcomments', require('./routes/getStopComments.js'));
 app.get('/profile/itineraries', require('./routes/getItinerariesByUserId.js'))
 
 app.post('/favorite', require('./routes/addFavorite.js'));
+app.delete('/favorite', require('./routes/removeFavorite.js'));
 app.get('/favorite', require('./routes/getFavoritesByUserId.js'));
 
 if (!module.parent) {
