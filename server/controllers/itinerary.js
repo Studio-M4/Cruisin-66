@@ -1,7 +1,9 @@
 const db = require('../../db/models/');
 
 let getAllItineraries = (callback) => {
-  db.Itinerary.findAll() 
+  db.Itinerary.findAll({
+    order: [['updatedAt', 'DESC']]
+  }) 
   .then((itineraries) => {
     console.log(itineraries);    
     callback(null, itineraries);
@@ -33,7 +35,8 @@ let getItinerariesByUserId = (query, callback) => {
   db.Itinerary.findAll({
     where: {
       UserId: query.UserId
-    }
+    },
+    order: [['updatedAt', 'DESC']]
   })
   .then((itineraries) => {
     console.log(itineraries);

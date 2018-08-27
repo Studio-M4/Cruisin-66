@@ -7,7 +7,8 @@ let getStopComments = (query, callback) => {
   db.StopsComment.findAll({    
     where: {
       StopId: stopId
-    }
+    },
+    order: [['updatedAt', 'DESC']]
   })
   .then((stopComments) => {
     console.log(stopComments);
