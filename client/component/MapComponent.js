@@ -35,63 +35,74 @@ import MapView   from "react-native-maps";
 import { Marker } from "react-native-maps";
 
 export default class CommentStop extends React.Component {
-  static navigationOptions = {
-    title: "Map directions"
+  static navigationOptions = (navigation) => {
+    
+    console.log("The talk about nav ", navigation.state)
+    return {
+       title : "navigation"
+    }
+ 
   };
   constructor(props) {
     super(props);
     this.state = {},
     region = {};
+    stops = [];
+
   }
-  getInitialState() {
-    return {
-      region: {
-        latitude: 37.78825,
-        longitude: -122.4324,
-        latitudeDelta: 0.0922,
-        longitudeDelta: 0.0421,
-      },
-    };
+  componentWillMount(){
+    this.getStop()
   }
+
   onRegionChange = region => {
     this.setState({ region });
   }
+
+  getStop = () => {
+    const { navigation} = this.props;
+    var allStop = navigation.state.params.stop; 
+    this.setState({
+      stops: allStop
+    })
+  }
+
   
 
   render() {
+    const { navigation} = this.props;
+    var allStop = navigation.state.params.stop; 
+    console.log("Mm the long", typeof(allStop[0]))
     return (
       <View style={styles.container}>
- 
-        <MapView
-          userLocationAnnotationTitle="me"
-          followsUserLocation
-          showsUserLocation
-          
-          region={this.state.region}
-          onRegionChange={this.onRegionChange}
-          style={styles.map}
-          // region={{
-          //   latitude: 37.78825,
-          //   longitude: -122.4324,
-          //   latitudeDelta: 0.015,
-          //   longitudeDelta: 0.0121
-          // }}
-        >
-          {[
-            {
-              latlng: {37.78825: -122.4324},
-              title: "Don't know my name",
-              description:
-                " Grace waterfall i don't my name i don't play by the rules"
-            }
-          ].map(marker => (
+
+      <MapView
+         userLocationAnnotationTitle="me"
+         //followsUserLocation
+         showsUserLocation   
+        style={styles.map}
+        showsUserLocation      
+        initialRegion={{
+          latitude: allStop[0].latitude,
+          longitude: allStop[0].longitude,
+          latitudeDelta: 0.0922,
+          longitudeDelta: 0.0421,
+        }}
+      >
+      {this.state.stops.map(marker => {
+          const coordinate = {
+            latitude: marker.latitude,
+            longitude: marker.longitude
+          }
+          console.log("The coodinate 's ",coordinate)
+          return(
             <Marker
-              coordinate={marker.latlng}
-              title={marker.title}
+              //image = {marker.StopPhotos[0].url}
+              coordinate={coordinate}
               description={marker.description}
-            />
-          ))}
-        </MapView>
+           />
+          )}
+        )}
+      </MapView>
       </View>
     );
   }
@@ -106,5 +117,10 @@ const styles = StyleSheet.create({
   },
   map: {
     ...StyleSheet.absoluteFillObject
+  },
+  imageMap:{
+    width:100,
+    height:1000,
+    borderRadius:15
   }
 });

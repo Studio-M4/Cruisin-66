@@ -298,7 +298,9 @@ class Stops extends React.Component {
             <Button
               onPress={() => {
                 /* 1. Navigate map and see the direction */
-                this.props.navigation.navigate("MapComponent");
+                this.props.navigation.navigate("MapComponent",{
+                    stop: this.state.stops
+                });
               }}
             >
               <Icon name="navigate" />
