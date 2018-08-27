@@ -2,14 +2,16 @@
 const db = require('../../db/models/');
 
 let getFavorites = (query, callback) => {
-  db.Favorite.findAll({
+  db.User.findOne({
     where: {
-      UserId: query.userId
+      id: query.userId
     },
+    include:[db.Itinerary]
   })
-  .then((favorites) => {
-    console.log(favorites);
-    callback(null, favorites);
+  .then((response) => {
+    let itineraries = response.Itineraries;
+    console.log(itineraries);
+    callback(null, itineraries);
   })
   .catch((err) => {
     console.log(err);
