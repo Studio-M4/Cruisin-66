@@ -212,10 +212,6 @@ export default class CreateStop extends React.Component {
           <View style={styles.container}>
             <GooglePlacesAutocomplete
               style={{
-                container: {
-                  backgroundColor: 'transparent',
-                  borderWidth: 0
-                },
                 textInputContainer: {
                   backgroundColor: 'transparent',
                   borderColor: 'yellow',
