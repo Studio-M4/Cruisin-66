@@ -78,13 +78,14 @@ class Stops extends React.Component {
         const showAddIcon = userId === itineraryOwnerId;
         this.setState({ itineraryId: itinerary.id, userId: userId, showAddIcon }),
           console.log(this.state);
+        this.getStopsById();  
       })
       .catch(err => console.log(err));
   }
 
-  componentDidMount() {
-    this.getStopsById();
-  }
+  // componentDidMount() {
+  //   this.getStopsById();
+  // }
 
   getStopsById = () => {
     let itineraryId = this.state.itineraryId;
@@ -142,6 +143,33 @@ class Stops extends React.Component {
     });
   }
 
+  deleteItineraryFromFavorites() {
+    let userId = this.state.userId
+    let itineraryId = this.state.itineraryId
+
+    console.log('USER_ID line 150', userId)
+    console.log('ITINERARYID', itineraryId)
+
+    axios
+    .delete('http://localhost:3000/favorite', {params: 
+      {
+        userId: userId,
+        itineraryId: itineraryId
+      }
+    })
+    .then((response) => {
+      // console.log(response.data);
+      this.setState({
+        liked: false
+      })
+    })
+    .catch((error) => {
+      console.log(error);
+      alert(error);
+    });
+  }
+
+
 
   render() {
     const defautImageUrl = 'https://www.telegraph.co.uk/content/dam/Travel/2018/April/road-trip-GettyImages-655931324.jpg?imwidth=1400'
@@ -178,7 +206,11 @@ class Stops extends React.Component {
     const renderHeart = () => {
       return this.state.liked ? 
       (
-        <Button>
+        <Button
+          onPress={() => {
+            this.deleteItineraryFromFavorites()
+          }}
+        >
           <Ionicons name='ios-heart' size={20}/>
         </Button>
       )
