@@ -119,7 +119,7 @@ export default class Profile extends React.Component {
             selectedIndex={this.state.selectedIndex}
             onTabPress={this.handleIndexChange}
             allowFontScaling={false}
-            values={["My itineraries", "Favorites"]}
+            values={["My Itineraries", "Favorites"]}
             onPress={index => this.setState({ selected: index })}
           />
           <Content>

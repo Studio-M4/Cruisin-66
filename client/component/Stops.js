@@ -1,4 +1,9 @@
 import React from "react";
+
+import Ionicons from "react-native-vector-icons/Ionicons";
+
+import FontAwesome from "react-native-vector-icons/FontAwesome";
+
 import {
   StyleSheet,
   View,
@@ -15,13 +20,13 @@ import {
 import {
   Container,
   Header,
+  Icon,
   Content,
   Card,
   CardItem,
   Thumbnail,
   Text,
   Button,
-  Icon,
   Left,
   Body,
   Right,
@@ -52,7 +57,8 @@ class Stops extends React.Component {
       itineraryId: null,
       modalVisible: false,
       stops: [],
-      showAddIcon: true
+      showAddIcon: true,
+      userId: null
     };
   }
 
@@ -67,7 +73,7 @@ class Stops extends React.Component {
         const userId = JSON.parse(storageStr).data.token.userId;
         // If the itinerary belongs to current user, then he can add stops to it.
         const showAddIcon = userId === itineraryOwnerId;
-        this.setState({ itineraryId: itinerary.id, showAddIcon }),
+        this.setState({ itineraryId: itinerary.id, userId: userId, showAddIcon }),
           console.log(this.state);
       })
       .catch(err => console.log(err));
@@ -110,12 +116,31 @@ class Stops extends React.Component {
   }
 
   addItineraryToFavorites() {
-    console.log("hi");
+    let userId = this.state.userId
+    let itineraryId = this.state.itineraryId
+
+    console.log('USER_ID', userId)
+    console.log('ITINERARYID', itineraryId)
+
+    // axios
+    // .post(`http://localhost:3000/profile/itineraries?UserId=${userId}`)
+    // .then((response) => {
+    //   // console.log(response.data);
+    //   this.setState({
+    //     userItineraries: response.data
+    //   })
+    // })
+    // .catch((error) => {
+    //   console.log(error);
+    //   alert(error);
+    // });
   }
+
 
   render() {
     const defautImageUrl = 'https://www.telegraph.co.uk/content/dam/Travel/2018/April/road-trip-GettyImages-655931324.jpg?imwidth=1400'
     const { navigation } = this.props;
+    
     const renderAddIcon = () => {
       return this.state.showAddIcon ? (
         <Button
@@ -126,9 +151,22 @@ class Stops extends React.Component {
             });
           }}
         >
-          <Icon name="add" />
+          <FontAwesome name="comment-o" />
         </Button>
       ) : null;
+    };
+
+    const renderFavoriteIcon = () => {
+      return this.state.showAddIcon ? 
+        null : (
+          <Button
+            onPress={() => {
+              this.addItineraryToFavorites()
+            }}
+          >
+            <Ionicons name='ios-heart-empty' size={20}/>
+          </Button>
+        )
     };
 
     return (
@@ -147,9 +185,6 @@ class Stops extends React.Component {
           </CardItem>
           <CardItem>
               <Body>
-                  <Button transparent>
-                  <Icon active name="heart" /> 
-                </Button>
                <Text>Description: {navigation.getParam('itinerary').description} </Text>
                <Text>Number of Stops: {this.state.stops.length}</Text>
               </Body>
@@ -202,6 +237,7 @@ class Stops extends React.Component {
               <Icon name="ios-chatbubbles-outline" />
             </Button>
             {renderAddIcon()}
+            {renderFavoriteIcon()}
             <Button
               onPress={() => {
                 /* 1. Navigate map and see the direction */
@@ -215,6 +251,7 @@ class Stops extends React.Component {
       </Container>
     );
   }
+
 }
 
 const styles = StyleSheet.create({

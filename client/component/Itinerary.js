@@ -40,7 +40,8 @@ export default class Itinerary extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      itineraries: []
+      itineraries: [],
+      query: ''
     }
   }
 
@@ -63,6 +64,10 @@ export default class Itinerary extends React.Component {
     this.getItineraries();
   }
 
+  handleSearch(text){
+    this.setState({query:text})
+  }
+
   render() {
     const defaultImageUrl = 'https://www.telegraph.co.uk/content/dam/Travel/2018/April/road-trip-GettyImages-655931324.jpg?imwidth=1400'
     return (
@@ -71,10 +76,9 @@ export default class Itinerary extends React.Component {
           <Item>
             <Icon name="ios-search" />
             <Input placeholder="Search" />
-            <Icon name="ios-people" />
           </Item>
           <Button transparent>
-            <Text>Search</Text>
+            <Text handleTextChange>Search</Text>
           </Button>
         </Header>
 

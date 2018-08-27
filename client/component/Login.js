@@ -75,6 +75,10 @@ class Login extends React.Component {
       const value = await AsyncStorage.getItem("userInfo");
       if (value !== null) {
         // user already login -- go to home page
+        userObject = JSON.parse(value);
+        this.setState({
+          user: userObject.data.token
+        });
         navigate("Home");
       }
     } catch (error) {
