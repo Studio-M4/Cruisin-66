@@ -65,7 +65,8 @@ export default class Itinerary extends React.Component {
   }
 
   handleSearch(text){
-    this.setState({query:text})
+    console.log('text', text)
+    // this.setState({query:text}).bind(this)
   }
 
   render() {
@@ -75,7 +76,7 @@ export default class Itinerary extends React.Component {
         <Header searchBar rounded>
           <Item>
             <Icon name="ios-search" />
-            <Input placeholder="Search" />
+            <Input placeholder="Search" onChangeText={this.handleSearch} />
           </Item>
           <Button transparent>
             <Text handleTextChange>Search</Text>
