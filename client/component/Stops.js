@@ -39,6 +39,8 @@ import {
 
 import { NavigationEvents } from "react-navigation";
 
+const axios = require("axios");
+
 class Stops extends React.Component {
   static navigationOptions = {
     title: "Stops",
@@ -57,6 +59,7 @@ class Stops extends React.Component {
       itineraryId: null,
       modalVisible: false,
       stops: [],
+      liked: false,
       showAddIcon: true,
       userId: null
     };
@@ -122,18 +125,21 @@ class Stops extends React.Component {
     console.log('USER_ID', userId)
     console.log('ITINERARYID', itineraryId)
 
-    // axios
-    // .post(`http://localhost:3000/profile/itineraries?UserId=${userId}`)
-    // .then((response) => {
-    //   // console.log(response.data);
-    //   this.setState({
-    //     userItineraries: response.data
-    //   })
-    // })
-    // .catch((error) => {
-    //   console.log(error);
-    //   alert(error);
-    // });
+    axios
+    .post('http://localhost:3000/favorite', {
+      userId: userId,
+      itineraryId: itineraryId
+    })
+    .then((response) => {
+      // console.log(response.data);
+      this.setState({
+        liked: true
+      })
+    })
+    .catch((error) => {
+      console.log(error);
+      alert(error);
+    });
   }
 
 
@@ -168,6 +174,25 @@ class Stops extends React.Component {
           </Button>
         )
     };
+
+    const renderHeart = () => {
+      return this.state.liked ? 
+      (
+        <Button>
+          <Ionicons name='ios-heart' size={20}/>
+        </Button>
+      )
+      : (
+        <Button
+          onPress={() => {
+            this.addItineraryToFavorites()
+          }}
+        >
+          <Ionicons name='ios-heart-empty' size={20}/>
+        </Button>
+      )
+       
+    }
 
     return (
       <Container>
@@ -237,7 +262,7 @@ class Stops extends React.Component {
               <Icon name="ios-chatbubbles-outline" />
             </Button>
             {renderAddIcon()}
-            {renderFavoriteIcon()}
+            {renderHeart()}
             <Button
               onPress={() => {
                 /* 1. Navigate map and see the direction */

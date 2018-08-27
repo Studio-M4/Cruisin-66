@@ -17,7 +17,6 @@ import React, {Component} from 'react';
 import Login from './client/component/Login';
 import Signup from './client/component/Signup';
 import Details from './client/component/Details';
-import Favorites from './client/component/Favorites';
 import Itinerary from "./client/component/Itinerary";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import Profile from "./client/component/Profile";
@@ -31,7 +30,6 @@ import CommentItinerary from "./client/component/CommentItinerary";
 const TabsIcons = (isFocused) => (
   {
     Profile: `ios-person${isFocused ? "" : ""}`,
-    Favorites: `ios-folder${isFocused ? "" : ""}`,
     CreateItinerary: `ios-add-circle${isFocused ? "" : ""}`,
     CreateStop: `ios-add-circle${isFocused ? "" : ""}`,
     Itinerary: `ios-menu${isFocused ? "" : ""}`,
@@ -41,7 +39,6 @@ const TabsIcons = (isFocused) => (
 // createTabNavigator depreciate but can swip :)
 const Tabs = createBottomTabNavigator({
     Itinerary: Itinerary,
-    Favorites: Favorites,
     CreateItinerary: CreateItinerary,
     Profile: Profile
     },
@@ -71,7 +68,6 @@ const Tabs = createBottomTabNavigator({
 const AppStack = createStackNavigator({ 
   Home: Tabs, // Home 's a key not a component 
   Details: Details,
-  Favorites:Favorites,
   Itinerary:Itinerary,
   Stops:Stops,
   Profile:Profile,
