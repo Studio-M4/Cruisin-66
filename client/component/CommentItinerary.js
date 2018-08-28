@@ -119,7 +119,7 @@ export default class CommentItinerary extends React.Component {
     
           <ListItem thumbnail>
             <Left>
-              <Thumbnail round  source={{ uri: item.User.firstName }} /> 
+              <Thumbnail round  source={{ uri: item.User.photoAvatar }} /> 
             </Left>
             <Body>
               <Text>{item.User.firstName}</Text>
@@ -152,9 +152,6 @@ export default class CommentItinerary extends React.Component {
           </View>
       </Content>
     </Container>
-
-    
-
     );
   }
 }

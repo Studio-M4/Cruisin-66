@@ -185,7 +185,7 @@ class Stops extends React.Component {
             });
           }}
         >
-          <FontAwesome name="comment-o" />
+          <Icon name="add" />
         </Button>
       ) : null;
     };
@@ -198,7 +198,7 @@ class Stops extends React.Component {
               this.addItineraryToFavorites()
             }}
           >
-            <Ionicons name='ios-heart-empty' size={20}/>
+            <Icon name='ios-heart-empty' size={20}/>
           </Button>
         )
     };
@@ -318,7 +318,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     flex: 1,
     marginLeft: "5%",
-    justifyContent: "center"
+    justifyContent: "center" 
   },
   container2: {
     flexDirection: "row",

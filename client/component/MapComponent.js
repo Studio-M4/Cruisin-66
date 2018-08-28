@@ -39,10 +39,10 @@ export default class CommentStop extends React.Component {
     
     console.log("The talk about nav ", navigation.state)
     return {
-       title : "navigation"
+      title : "Map"
     }
- 
   };
+
   constructor(props) {
     super(props);
     this.state = {},
@@ -84,8 +84,8 @@ export default class CommentStop extends React.Component {
         initialRegion={{
           latitude: allStop[0].latitude,
           longitude: allStop[0].longitude,
-          latitudeDelta: 0.0922,
-          longitudeDelta: 0.0421,
+          latitudeDelta: 0.1,
+          longitudeDelta: 0.12,
         }}
       >
       {this.state.stops.map(marker => {
