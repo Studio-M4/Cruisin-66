@@ -42,7 +42,8 @@ export default class Itinerary extends React.Component {
     super(props);
     this.state = {
       itineraries: [],
-      query: ''
+      query: '',
+      allItineraries: [],
     }
 
     this.getItineraries = this.getItineraries.bind(this);
@@ -54,7 +55,8 @@ export default class Itinerary extends React.Component {
       .then((response) => {
         // console.log(response.data);
         this.setState({
-          itineraries: response.data
+          itineraries: response.data,
+          allItineraries: response.data
         })
       })
       .catch((error) => {
@@ -70,6 +72,14 @@ export default class Itinerary extends React.Component {
   handleSearch = (text) => {
     console.log('text', text)
     this.setState({query:text})
+
+    const newData = this.state.allItineraries.filter((item)=> {
+      if (item.name.includes(text) || item.description.includes(text)) {
+        return true;
+      }
+    })
+
+    this.setState({itineraries:newData})
   }
 
   render() {

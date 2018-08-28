@@ -197,7 +197,7 @@ class Stops extends React.Component {
               this.addItineraryToFavorites()
             }}
           >
-            <Icon name='ios-heart-empty' size={20}/>
+            <Ionicons name='ios-heart-empty' size={20}/>
           </Button>
         )
       } else if (this.state.liked === true && this.state.showAddIcon === false) {
