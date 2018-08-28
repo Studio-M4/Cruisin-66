@@ -159,7 +159,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginTop: 0,
     padding: 20,
-    backgroundColor: '#fff'
+    backgroundColor: '#fff',
+    alignItems: 'center',
   },
   title: {
     fontSize: 22,
@@ -209,7 +210,8 @@ const pickerSelectStyles = StyleSheet.create({
     borderRadius: 4,
     backgroundColor: 'white',
     color: 'black',
-    marginTop: 10
+    marginTop: 10,
+    right: -17,
   },
   icon: {
     width: 0,
