@@ -30,6 +30,9 @@ INSERT INTO itineraries (name, description, categoryId, userId, createdat, updat
 VALUES ('Ultimate Iceland', 'The land of fire and ice has so many amazing sites!', 2, 1, NOW(), NOW(), 'https://www.telegraph.co.uk/content/dam/Travel/2018/March/iceland-GettyImages-760156127.jpg?imwidth=450');
 
 INSERT INTO itineraries (name, description, categoryId, userId, createdat, updatedat, photoUrl)
+VALUES ('Cali 101', 'Drive the length of California and see all the Golden State has to offer.', 2, 3, NOW(), NOW(), 'https://www.visitcalifornia.com/sites/default/files/styles/welcome_image/public/vc_oceanside_st_rm_829793708_1280x640.jpeg');
+
+INSERT INTO itineraries (name, description, categoryId, userId, createdat, updatedat, photoUrl)
 VALUES ('Taiwan 101', 'The land of pineapple cakes', 2, 3, NOW(), NOW(), 'https://www.worldatlas.com/r/w728-h425-c728x425/upload/3c/e1/38/shutterstock-425692558.jpg');
 
 INSERT INTO stops (name, longitude, latitude, description, avgRating, address, zipcode, audiofile, createdat, updatedat)
@@ -70,10 +73,10 @@ INSERT INTO itinerariescomments (text, rating, createdAt, updatedAt, ItineraryId
 VALUES ('West Coast. Best coast.', 5, NOW(), NOW(), 1,3 );
 
 INSERT INTO stops (name, longitude, latitude, description, avgRating, address, zipcode, audiofile, createdat, updatedat)
-VAlues ('Jökulsárlón Lagoon', 36.157, -121.672, 'Icelands most famous glacier lagoon', 5, 'California 93920', '93920', 'exaudiofile', NOW(), NOW());
+VAlues ('Jökulsárlón Lagoon', -16.23055, 64.07844, 'Icelands most famous glacier lagoon', 5, 'Iceland', NULL, 'exaudiofile', NOW(), NOW());
 
 INSERT INTO stops (name, longitude, latitude, description, avgRating, address, zipcode, audiofile, createdat, updatedat)
-VAlues ('Reynisfjara', 36.157, -121.672, 'Black sand beach and cool basalt columns', 5, 'California 93920', '93920', 'exaudiofile', NOW(), NOW());
+VAlues ('Reynisfjara', -19.071619, 63.4057404, 'Black sand beach and cool basalt columns', 5, 'Iceland', NULL, 'exaudiofile', NOW(), NOW());
 
 SELECT id into @stopid from stops where id =3;
 SELECT id into @itineraryid from itineraries where id =4;
@@ -95,12 +98,3 @@ VALUES ('https://farm3.staticflickr.com/2836/34140581015_647b4b1100_c.jpg', 'mcw
 
 
 
-
-
-INSERT INTO stops (name, longitude, latitude, description, avgRating, address, zipcode, audiofile, createdat, updatedat)
-VAlues ('Bixby Bridge', 36.157, -121.672, 'A magnificent engineering feat', 5, 'California 93920', '93920', 'exaudiofile', NOW(), NOW());
-
-SELECT id into @stopid from stops where id =3;
-SELECT id into @itineraryid from itineraries where id =1;
-INSERT INTO itinerarystops (itineraryid, stopid, createdat, updatedat)
-VALUES (@itineraryid, @stopid, NOW(), NOW());
