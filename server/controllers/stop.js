@@ -10,7 +10,8 @@ let getAllStops = (query, callback) => {
       where: {
         id: id
       }
-    }, db.StopPhoto]
+    }, db.StopPhoto],
+    order: [['updatedAt', 'DESC']]
   })
   .then((stops) => {
     console.log(stops);

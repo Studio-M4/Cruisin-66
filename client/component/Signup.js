@@ -26,6 +26,7 @@ class Signup extends React.Component {
       lastName: "",
       userName: "",
       email: "",
+      photoAvatar: "",
       password: "",
       showProgress: false
     };
@@ -40,7 +41,8 @@ class Signup extends React.Component {
         lastName: this.state.lastName,
         userName: this.state.userName,
         email: this.state.email,
-        password: this.state.password
+        password: this.state.password,
+        photoAvatar: this.state.photoAvatar
       })
       .then(function(response) {
         if (response.err) {
@@ -70,24 +72,36 @@ class Signup extends React.Component {
               <TextInput
                 style={styles.inputStyle}
                 placeholder="First name"
+                autoCapitalize='none'
                 onChangeText={firstName => this.setState({ firstName })}
                 value={this.state.firstName}
               />
               <TextInput
                 style={styles.inputStyle}
                 placeholder="Last name"
+                autoCapitalize='none'
                 onChangeText={lastName => this.setState({ lastName })}
                 value={this.state.lastName}
               />
               <TextInput
                 style={styles.inputStyle}
                 placeholder="Email"
+                autoCapitalize='none'
+                keyboardType={'email-address'}
                 onChangeText={email => this.setState({ email })}
                 value={this.state.email}
               />
               <TextInput
                 style={styles.inputStyle}
+                placeholder="Photo avatar"
+                autoCapitalize='none'
+                onChangeText={photoAvatar => this.setState({ photoAvatar })}
+                value={this.state.photoAvatar}
+              />
+              <TextInput
+                style={styles.inputStyle}
                 placeholder="Password"
+                autoCapitalize='none'
                 onChangeText={password => this.setState({ password })}
                 value={this.state.password}
                 secureTextEntry
@@ -95,6 +109,7 @@ class Signup extends React.Component {
               <TextInput
                 style={styles.inputStyle}
                 placeholder="Re-enter password"
+                autoCapitalize='none'
                 onChangeText={password2 => this.setState({ password2 })}
                 value={this.state.password2}
                 secureTextEntry

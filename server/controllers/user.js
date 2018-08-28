@@ -55,7 +55,8 @@ let createNewUser = (newUser, callback) => {
           firstName: userResult.firstName,
           lastName: userResult.lastName,
           email: userResult.email,
-          password: userResult.password
+          password: userResult.password,
+          photoAvatar: userResult.photoAvatar
         }).then((createdUser) => {
           console.log(createdUser);
           callback(null, createdUser);
