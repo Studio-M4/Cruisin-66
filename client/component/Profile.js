@@ -118,11 +118,12 @@ export default class Profile extends React.Component {
     return (
       <View style={styles.container}>
         <NavigationEvents onDidFocus={payload => this._retrieveData()} />
-          <View>        
+          <View>  
             <Image
               style={styles.imagesStyle}
-              source={require("./imgs/icon.png")}
+              round source={{ uri: this.state.user.photoAvatar }} 
             />
+
           </View>
           <Text style={styles.title}>
             {this.state.user.firstName} {this.state.user.lastName} 
@@ -222,7 +223,7 @@ const styles = StyleSheet.create({
   },
   logout:{
     color:'red',
-    marginTop:'34%',
+    marginTop:'38%',
     right:0,
     marginLeft:'80%',
     position:'absolute'
