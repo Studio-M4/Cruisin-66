@@ -13,6 +13,7 @@ import {
   ImageBackground,
 } from 'react-native';
 import PickerSelect from 'react-native-picker-select';
+import { openImagePicker, uploadToCloudinary } from "../utilities/photoUtil";
 import { Container, Content } from "native-base";
 import axios from 'axios';
 
@@ -28,11 +29,13 @@ export default class CreateItinerary extends React.Component {
       categories: [],
       name: null,
       description: null,
+      photoUrl: null,
       user: {}
     };
 
     this.getCategories = this.getCategories.bind(this);
     this.createItinerary = this.createItinerary.bind(this);
+    this.handlePhotoUpload = this.handlePhotoUpload.bind(this);
   }
 
   componentDidMount() {
@@ -65,11 +68,13 @@ export default class CreateItinerary extends React.Component {
   createItinerary() {
     console.log(this.state);
     const url = 'http://localhost:3000/itinerary';
+    const { name, description, user, categoryId, photoUrl } = this.state;
     const postData = {
-      name: this.state.name,
-      description: this.state.description,
-      UserId: this.state.user.userId,
-      CategoryId: this.state.categoryId
+      name: name,
+      description: description,
+      UserId: user.userId,
+      CategoryId: categoryId,
+      photoUrl: photoUrl,
     };
     console.log('postData ', postData);
     return axios.post(url, postData)
@@ -86,6 +91,17 @@ export default class CreateItinerary extends React.Component {
          .catch((err) => console.log(err));
   }
 
+  handlePhotoUpload() {
+    openImagePicker(null, (response) => {
+      console.log('imagePickerResponse: ', response);
+      const source = { uri: "data:image/jpeg;base64," + response.data };
+
+    uploadToCloudinary(source.uri)
+      .then((url) => this.setState({photoUrl: url}))
+      .catch((err) => console.log(err));
+    });
+  }
+
   render() {
     const defautImageUrl = 'https://www.telegraph.co.uk/content/dam/Travel/2018/April/road-trip-GettyImages-655931324.jpg?imwidth=1400'
     return (
@@ -93,7 +109,7 @@ export default class CreateItinerary extends React.Component {
         <Content>
         <NavigationEvents onDidFocus={payload => this._retrieveData()} />
         <ImageBackground
-          source={{ uri: defautImageUrl }}
+          source={{ uri: this.state.photoUrl || defautImageUrl }}
           style={{ height: 200, width: null, flex: 1 }}
         >
           <Text style={styles.tourname}>
@@ -129,7 +145,7 @@ export default class CreateItinerary extends React.Component {
             value={this.state.categoryId}
             style={{...pickerSelectStyles}}
           />
-          <Button title='Upload Photo' onPress={this.handleSubmit.bind(this)} />
+          <Button title='Upload Photo' onPress={this.handlePhotoUpload} />
           <Button title='Create' onPress={this.handleSubmit.bind(this)} />
         </View>
         </Content>
