@@ -42,7 +42,6 @@ export default class Itinerary extends React.Component {
     super(props);
     this.state = {
       itineraries: [],
-      query: '',
       allItineraries: [],
     }
 
@@ -70,17 +69,23 @@ export default class Itinerary extends React.Component {
   }
 
   handleSearch = (text) => {
-    console.log('text', text)
-    this.setState({query:text})
+    // console.log('text', text)
 
     const newData = this.state.allItineraries.filter((item)=> {
-      if (item.name.includes(text) || item.description.includes(text)) {
+      if (item.name.includes(text) || item.description.includes(text) ) {
         return true;
       }
+      for (var i=0; i<item.Stops.length; i++) {
+        if (item.Stops[i].address.includes(text) || item.Stops[i].name.includes(text)) {
+          return true; 
+        } 
+      }
+
     })
 
     this.setState({itineraries:newData})
-  }
+  }  
+
 
   render() {
     const defaultImageUrl = 'https://www.telegraph.co.uk/content/dam/Travel/2018/April/road-trip-GettyImages-655931324.jpg?imwidth=1400'
@@ -92,9 +97,6 @@ export default class Itinerary extends React.Component {
             <Icon name="ios-search" />
             <Input placeholder="Search" onChangeText={this.handleSearch} />
           </Item>
-          <Button transparent>
-            <Text handleTextChange>Search</Text>
-          </Button>
         </Header>
 
         <Content>

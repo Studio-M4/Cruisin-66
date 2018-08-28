@@ -2,6 +2,7 @@ const db = require('../../db/models/');
 
 let getAllItineraries = (callback) => {
   db.Itinerary.findAll({
+    include: [db.Stop],
     order: [['updatedAt', 'DESC']]
   }) 
   .then((itineraries) => {
