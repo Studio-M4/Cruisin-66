@@ -62,7 +62,16 @@ export default class Itinerary extends React.Component {
         alert(error);
       });
   }
-  
+
+  componentDidMount() {
+    this.getItineraries();
+  }
+
+  handleSearch = (text) => {
+    console.log('text', text)
+    this.setState({query:text})
+  }
+
   render() {
     const defaultImageUrl = 'https://www.telegraph.co.uk/content/dam/Travel/2018/April/road-trip-GettyImages-655931324.jpg?imwidth=1400'
     return (

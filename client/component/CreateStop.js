@@ -179,10 +179,7 @@ export default class CreateStop extends React.Component {
     return (
       <ImageBackground
         style={styles.background}
-        source={{
-          uri:
-            "https://i.pinimg.com/564x/bf/a8/fa/bfa8faf7d84fe084ef38ff5667656d85.jpg"
-        }}
+        source={require('./imgs/createBG.jpg')}
       >
         <ScrollView>
           <View style={styles.container}>

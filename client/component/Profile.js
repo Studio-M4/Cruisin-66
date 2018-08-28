@@ -114,7 +114,6 @@ export default class Profile extends React.Component {
 
   //NavigationEvents  instead of wcdl
   render() {
-    const itineraryDefaultImageUrl = ''
     return (
       <View style={styles.container}>
         <NavigationEvents onDidFocus={payload => this._retrieveData()} />
