@@ -27,7 +27,8 @@ import {
   Item,Input
 } from "native-base";
 
-const axios = require("axios");
+import { NavigationEvents } from "react-navigation";
+import axios from "axios";
 
 export default class Itinerary extends React.Component {
   static navigationOptions = {
@@ -43,6 +44,8 @@ export default class Itinerary extends React.Component {
       itineraries: [],
       query: ''
     }
+
+    this.getItineraries = this.getItineraries.bind(this);
   }
 
   getItineraries() {
@@ -59,20 +62,12 @@ export default class Itinerary extends React.Component {
         alert(error);
       });
   }
-
-  componentDidMount() {
-    this.getItineraries();
-  }
-
-  handleSearch(text){
-    console.log('text', text)
-    // this.setState({query:text}).bind(this)
-  }
-
+  
   render() {
     const defaultImageUrl = 'https://www.telegraph.co.uk/content/dam/Travel/2018/April/road-trip-GettyImages-655931324.jpg?imwidth=1400'
     return (
       <Container>
+        <NavigationEvents onDidFocus={this.getItineraries}></NavigationEvents>
         <Header searchBar rounded>
           <Item>
             <Icon name="ios-search" />
