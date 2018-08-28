@@ -12,7 +12,8 @@ import {
 } from "react-native";
 
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
-import ImagePicker from "react-native-image-picker";
+import { openImagePicker, uploadToCloudinary } from "../utilities/photoUtil";
+// import photoUtil from "../utilities/photoUtil";
 import { InputGroup, Input, Container, Content, Icon } from "native-base";
 
 import axios from "axios";
@@ -113,40 +114,15 @@ export default class CreateStop extends React.Component {
   }
 
   handlePhotoUpload() {
-    const options = {
-      title: "Select Photo",
-      storageOptions: {
-        skipBackup: true,
-        path: "images"
-      }
-    };
+    openImagePicker(null, (response) => {
+      console.log('imagePickerResponse: ', response);
+      const { photos } = this.state;
+      const source = { uri: "data:image/jpeg;base64," + response.data };
 
-    ImagePicker.showImagePicker(options, response => {
-      console.log("Response = ", response);
-      if (response.didCancel) {
-        console.log("User cancelled image picker");
-      } else if (response.error) {
-        console.log("ImagePicker Error: ", response.error);
-      } else if (response.customButton) {
-        console.log("User tapped custom button: ", response.customButton);
-      } else {
-        const { photos } = this.state;
-        const source = { uri: "data:image/jpeg;base64," + response.data };
-
-        this.uploadToCloudinary(source.uri)
-            .then((url) => this.setState({photos: photos.concat(url)}))
-            .catch((err) => console.log(err));
-      }
+    uploadToCloudinary(source.uri)
+      .then((url) => this.setState({photos: photos.concat(url)}))
+      .catch((err) => console.log(err));
     });
-  }
-
-  /**
-   * Upload a photo to cloudinary and then return the photo url on cloudinary.
-   */
-  uploadToCloudinary(imageUri) {
-    const url = "http://localhost:4000/cloudinary/photo/upload";
-    return axios.post(url, { imageUri })
-                .then((res) => res.data);
   }
 
   /**

@@ -7,7 +7,8 @@ itinerary.post('/itinerary', (req, res) => {
     name: req.body.name || '',
     description: req.body.description || '',
     UserId: req.body.UserId,
-    CategoryId: req.body.CategoryId
+    CategoryId: req.body.CategoryId,
+    photoUrl: req.body.photoUrl
   };
 
   db.createItinerary(newItinerary, (err, data) => {
