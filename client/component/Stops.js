@@ -2,7 +2,6 @@ import React from "react";
 
 import Ionicons from "react-native-vector-icons/Ionicons";
 
-import FontAwesome from "react-native-vector-icons/FontAwesome";
 
 import {
   StyleSheet,
@@ -172,7 +171,7 @@ class Stops extends React.Component {
 
 
   render() {
-    const defautImageUrl = 'https://www.telegraph.co.uk/content/dam/Travel/2018/April/road-trip-GettyImages-655931324.jpg?imwidth=1400'
+    const defaultImageUrl = 'https://www.telegraph.co.uk/content/dam/Travel/2018/April/road-trip-GettyImages-655931324.jpg?imwidth=1400'
     const { navigation } = this.props;
     
     const renderAddIcon = () => {
@@ -185,14 +184,14 @@ class Stops extends React.Component {
             });
           }}
         >
-          <Icon name="add" />
+          <Ionicons name="ios-add" size={20}/>
         </Button>
       ) : null;
     };
 
     const renderFavoriteIcon = () => {
-      return this.state.showAddIcon ? 
-        null : (
+      if (this.state.liked === false && this.state.showAddIcon === false) {
+        return (
           <Button
             onPress={() => {
               this.addItineraryToFavorites()
@@ -201,28 +200,17 @@ class Stops extends React.Component {
             <Icon name='ios-heart-empty' size={20}/>
           </Button>
         )
-    };
-
-    const renderHeart = () => {
-      return this.state.liked ? 
-      (
-        <Button
-          onPress={() => {
-            this.deleteItineraryFromFavorites()
-          }}
-        >
-          <Ionicons name='ios-heart' size={20}/>
-        </Button>
-      )
-      : (
-        <Button
-          onPress={() => {
-            this.addItineraryToFavorites()
-          }}
-        >
-          <Ionicons name='ios-heart-empty' size={20}/>
-        </Button>
-      )
+      } else if (this.state.liked === true && this.state.showAddIcon === false) {
+        return (
+          <Button
+            onPress={() => {
+              this.deleteItineraryFromFavorites()
+            }}
+          >
+            <Ionicons name='ios-heart' size={20}/>
+          </Button>
+        )
+      }
        
     }
 
@@ -232,7 +220,7 @@ class Stops extends React.Component {
         <Content>
           <CardItem cardBody>
             <ImageBackground
-              source={{ uri: navigation.getParam("itinerary").photoUrl || defautImageUrl }}
+              source={{ uri: navigation.getParam("itinerary").photoUrl || defaultImageUrl }}
               style={{ height: 200, width: null, flex: 1 }}
             >
               <Text style={styles.tourname}>
@@ -291,10 +279,10 @@ class Stops extends React.Component {
                 });
               }}
             >
-              <Icon name="ios-chatbubbles-outline" />
+              <Ionicons name="md-chatbubbles" size={20}/>
             </Button>
             {renderAddIcon()}
-            {renderHeart()}
+            {renderFavoriteIcon()}
             <Button
               onPress={() => {
                 /* 1. Navigate map and see the direction */
@@ -303,7 +291,7 @@ class Stops extends React.Component {
                 });
               }}
             >
-              <Icon name="navigate" />
+              <Ionicons name="md-map" size={20} />
             </Button>
           </FooterTab>
         </Footer>

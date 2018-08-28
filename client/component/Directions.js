@@ -1,5 +1,7 @@
 import getDirections from 'react-native-google-maps-directions'
 
+import Ionicons from "react-native-vector-icons/Ionicons";
+
 import React from "react";
 
 import {
@@ -67,7 +69,7 @@ export default class gmapsDirections extends React.Component {
   render() {
     return (
         <Button transparent textStyle={{color: '#87838B'}} onPress={this.handleGetDirections}>
-          <Icon name="navigate"/>
+          <Ionicons name="ios-navigate" size={20}/>
           <Text>Directions</Text>
         </Button>
     );
