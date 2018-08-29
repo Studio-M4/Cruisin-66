@@ -8,7 +8,8 @@ import {
   ScrollView,
   Button,
   ImageBackground,
-  FlatList
+  FlatList,
+  ActivityIndicator,
 } from "react-native";
 
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
@@ -32,6 +33,7 @@ export default class CreateStop extends React.Component {
       longitude: null,
       latitude: null,
       editable: true,
+      showSpinner: false,
     };
 
     this.stopId = null;
@@ -107,7 +109,7 @@ export default class CreateStop extends React.Component {
             const { photos } = details;
             const photorefs = photos ? photos.slice(0, 4).map(photo => photo.photo_reference) : [];
             this.fetchAndSaveAllGooglePhotos(photorefs)
-                .then((imageUrls) => this.setState({photos: imageUrls}));
+                .then((imageUrls) => this.setState({photos: imageUrls, showSpinner: false}));
           }
         })
         .catch((err) => console.log(err));
@@ -119,8 +121,8 @@ export default class CreateStop extends React.Component {
       const { photos } = this.state;
       const source = { uri: "data:image/jpeg;base64," + response.data };
 
-    uploadToCloudinary(source.uri)
-      .then((url) => this.setState({photos: photos.concat(url)}))
+    uploadToCloudinary(source.uri, () => {this.setState({showSpinner: true})})
+      .then((url) => this.setState({photos: photos.concat(url), showSpinner:false}))
       .catch((err) => console.log(err));
     });
   }
@@ -133,6 +135,7 @@ export default class CreateStop extends React.Component {
     if (photosReferences.length == 0) {
       return;
     }
+    this.setState({showSpinner:true});
     const promises = photosReferences.map(ref =>
       this.fetchAndSaveOneGooglePhoto(ref)
     );
@@ -259,10 +262,11 @@ export default class CreateStop extends React.Component {
               {this.state.photos.map((url) => {
                 return (
                   <View style={{padding: 1, alignSelf: 'flex-start'}}>
-                    <Image style={styles.photo} source={{uri: url}} />
+                    <ImageBackground style={styles.photo}source={{uri: url}}/>
                   </View>
                 )
               })}
+              { this.state.showSpinner ? <ActivityIndicator style={styles.photo} animating={this.state.showSpinner} size="large" color="grey"/> : null }
             </View>
             <Button title="Upload Photo" onPress={this.handlePhotoUpload} />
             <Button title="Add Stop" onPress={this.handleSubmit} />

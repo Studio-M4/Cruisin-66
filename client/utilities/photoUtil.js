@@ -15,7 +15,8 @@ const openImagePicker = (options, callback) => {
   });
 };
 
-const uploadToCloudinary = (imageUri) => {
+const uploadToCloudinary = (imageUri, beforeStart) => {
+  beforeStart ? beforeStart() : null;
   const url = 'http://localhost:4000/cloudinary/photo/upload';
   return axios.post(url, { imageUri })
               .then((res) => res.data);
