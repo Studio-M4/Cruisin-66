@@ -17,6 +17,8 @@ import {
 
 import { InputGroup, Input, Container, Content, Icon } from "native-base";
 
+import validate from './Utilities';
+
 const axios = require("axios");
 
 class Login extends React.Component {
@@ -27,12 +29,11 @@ class Login extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: "",
-      password: "",
-      validUsername: false,
-      validPassword: false,
+      email: '',
+      emailError: '',
+      password: '',
+      passwordError: '',
       showProgress: true,
-      error: null
     };
   }
 
@@ -40,33 +41,51 @@ class Login extends React.Component {
     this.setState({ showProgress: true });
   }
 
+  validateInputs() {
+    const emailError = validate('email', this.state.email);
+    const passwordError = validate('password', this.state.password);
+
+    this.setState({
+      emailError: emailError,
+      passwordError: passwordError
+    });
+
+    if (!emailError && !passwordError) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   //submitLogin using axios
   submintLoginAxios() {
-    const { navigate } = this.props.navigation; // define here for the context
-
-    axios
-      .post("http://localhost:3000/login", {
-        email: this.state.email,
-        password: this.state.password
-      })
-      .then(function(response) {
-        if (response.data.messageCode === 103) {
-          alert(response.data.message);
-        } else {
-          var dataUser = AsyncStorage.setItem(
-            "userInfo",
-            JSON.stringify(response)
-          );
-          if (dataUser) {
-            console.log(dataUser);
-            navigate("Home");
+    if (this.validateInputs()) {
+      const { navigate } = this.props.navigation; // define here for the context
+  
+      axios
+        .post("http://localhost:3000/login", {
+          email: this.state.email,
+          password: this.state.password
+        })
+        .then(function(response) {
+          if (response.data.messageCode === 103) {
+            alert(response.data.message);
+          } else {
+            var dataUser = AsyncStorage.setItem(
+              "userInfo",
+              JSON.stringify(response)
+            );
+            if (dataUser) {
+              console.log(dataUser);
+              navigate("Home");
+            }
           }
-        }
-      })
-      .catch(function(error) {
-        console.log(error);
-        alert(error);
-      });
+        })
+        .catch(function(error) {
+          console.log(error);
+          alert(error);
+        });
+    }
   }
   _testIftheUserAlreadyLogin = async () => {
     const { navigate } = this.props.navigation; // define here for the context
@@ -119,19 +138,28 @@ class Login extends React.Component {
                 <TextInput
                   style={styles.inputStyle}
                   placeholder="Email"
-                  onChangeText={email => this.setState({ email })}
-                  value={this.state.email}
+                  onChangeText={value => this.setState({ email: value.trim() })}
+                  onBlur={() => {
+                    this.setState({
+                      emailError: validate('email', this.state.email),
+                    })
+                  }}
                   autoCapitalize='none'
                 />
+                <Text style={styles.inputError}>{ this.state.emailError ?  this.state.emailError : null}</Text>
                 <TextInput
                   style={styles.inputStyle}
                   placeholder="Password"
                   autoCapitalize='none'
-                  keyboardType={'email-address'}
-                  onChangeText={password => this.setState({ password })}
-                  value={this.state.password}
-                  secureTextEntry
+                  onChangeText={value => this.setState({ password: value.trim() })}
+                  onBlur={() => {
+                    this.setState({
+                      passwordError: validate('password', this.state.password),
+                    })
+                  }}
+                  secureTextEntry={true}
                 />
+                <Text style={styles.inputError}>{ this.state.passwordError ?  this.state.passwordError : null}</Text>
                 <TouchableHighlight
                   style={styles.button}
                   onPress={this.submintLoginAxios.bind(this)}
@@ -189,6 +217,11 @@ const styles = StyleSheet.create({
     height: "auto",
     paddingBottom: 20,
     paddingTop: 21
+  },
+  inputError: {
+    marginTop: 2,
+    color: "red",
+    justifyContent: "space-between",
   },
   button: {
     alignItems: "center",

@@ -12,6 +12,7 @@ import {
   ActivityIndicator
 } from "react-native";
 import { InputGroup, Input, Container, Content, Icon } from "native-base";
+import validate from './Utilities';
 
 const axios = require("axios");
 class Signup extends React.Component {
@@ -22,14 +23,46 @@ class Signup extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      firstName: "",
-      lastName: "",
-      userName: "",
-      email: "",
-      photoAvatar: "",
-      password: "",
+      firstName: '',
+      firstNameError: '',
+      lastName: '',
+      lastNameError: '',
+      userName: '',
+      userNameError: '',
+      email: '',
+      emailError: '',
+      // photoAvatar: '',
+      // photoAvatarError: '',
+      password: '',
+      passwordError: '',
+      confirmPassword: '',
+      confirmPasswordError: '',
       showProgress: false
     };
+  }
+
+  validateInputs() {
+    const firstNameError = validate('firstName', this.state.firstName);
+    const lastNameError = validate('lastName', this.state.lastName);
+    const userNameError = validate('userName', this.state.userName);
+    const emailError = validate('email', this.state.email);
+    const passwordError = validate('password', this.state.password);
+    const confirmPasswordError = validate('confirmPassword', this.state.confirmPassword);
+
+    this.setState({
+      firstNameError: firstNameError,
+      lastNameError: lastNameError,
+      userNameError: userNameError,
+      emailError: emailError,
+      passwordError: passwordError,
+      confirmPasswordError: confirmPasswordError
+    });
+
+    if (!emailError && !passwordError && !firstNameError && !lastNameError && !userNameError && !confirmPasswordError) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   //todo: error handling (Ex: account already exists)
@@ -42,7 +75,7 @@ class Signup extends React.Component {
         userName: this.state.userName,
         email: this.state.email,
         password: this.state.password,
-        photoAvatar: this.state.photoAvatar
+        // photoAvatar: this.state.photoAvatar
       })
       .then(function(response) {
         if (response.err) {
@@ -73,47 +106,88 @@ class Signup extends React.Component {
                 style={styles.inputStyle}
                 placeholder="First name"
                 autoCapitalize='none'
-                onChangeText={firstName => this.setState({ firstName })}
-                value={this.state.firstName}
+                onChangeText={value => this.setState({ firstName: value.trim() })}
+                onBlur={() => {
+                  this.setState({
+                    firstNameError: validate('firstName', this.state.firstName),
+                  })
+                }}
               />
+              <Text style={styles.inputError}>{ this.state.firstNameError ?  this.state.firstNameError : null}</Text>
               <TextInput
                 style={styles.inputStyle}
                 placeholder="Last name"
                 autoCapitalize='none'
-                onChangeText={lastName => this.setState({ lastName })}
-                value={this.state.lastName}
+                onChangeText={value => this.setState({ lastName: value.trim() })}
+                onBlur={() => {
+                  this.setState({
+                    lastNameError: validate('lastName', this.state.lastName),
+                  })
+                }}
               />
+              <Text style={styles.inputError}>{ this.state.lastNameError ?  this.state.lastNameError : null}</Text>
+              
+              <TextInput
+                style={styles.inputStyle}
+                placeholder="User name"
+                autoCapitalize='none'
+                onChangeText={value => this.setState({ userName: value.trim() })}
+                onBlur={() => {
+                  this.setState({
+                    userNameError: validate('userName', this.state.userName),
+                  })
+                }}
+              />
+              <Text style={styles.inputError}>{ this.state.userNameError ?  this.state.userNameError : null}</Text>
+              
               <TextInput
                 style={styles.inputStyle}
                 placeholder="Email"
+                onChangeText={value => this.setState({ email: value.trim() })}
+                onBlur={() => {
+                  this.setState({
+                    emailError: validate('email', this.state.email),
+                  })
+                }}
                 autoCapitalize='none'
-                keyboardType={'email-address'}
-                onChangeText={email => this.setState({ email })}
-                value={this.state.email}
               />
-              <TextInput
+              <Text style={styles.inputError}>{ this.state.emailError ?  this.state.emailError : null}</Text>
+                
+              {/* <TextInput
                 style={styles.inputStyle}
                 placeholder="Photo avatar"
                 autoCapitalize='none'
                 onChangeText={photoAvatar => this.setState({ photoAvatar })}
                 value={this.state.photoAvatar}
-              />
+              /> */}
+              
               <TextInput
                 style={styles.inputStyle}
                 placeholder="Password"
                 autoCapitalize='none'
-                onChangeText={password => this.setState({ password })}
-                value={this.state.password}
-                secureTextEntry
+                onChangeText={value => this.setState({ password: value.trim() })}
+                onBlur={() => {
+                  this.setState({
+                    passwordError: validate('password', this.state.password),
+                  })
+                }}
+                secureTextEntry={true}
               />
+              <Text style={styles.inputError}>{ this.state.passwordError ?  this.state.passwordError : null}</Text>
+              
               <TextInput
                 style={styles.inputStyle}
                 placeholder="Re-enter password"
                 autoCapitalize='none'
-                onChangeText={password2 => this.setState({ password2 })}
-                value={this.state.password2}
-                secureTextEntry
+                onChangeText={value => this.setState({ confirmPassword: value.trim() })}
+                onBlur={() => {
+                  this.setState({
+                    confirmPasswordError: validate('confirmPassword', this.state.confirmPassword),
+                  })
+                }}
+                secureTextEntry={true}
               />
+              <Text style={styles.inputError}>{ this.state.confirmPasswordError ?  this.state.confirmPasswordError : null}</Text>
               <ActivityIndicator
                 animating={this.state.showProgress}
                 size="large"
@@ -169,6 +243,11 @@ const styles = StyleSheet.create({
     height: "auto",
     paddingBottom: 20,
     paddingTop: 21
+  },
+  inputError: {
+    marginTop: 2,
+    color: "red",
+    justifyContent: "space-between",
   },
   button: {
     alignItems: "center",

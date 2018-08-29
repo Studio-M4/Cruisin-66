@@ -45,6 +45,7 @@ app.post('/stop', require('./routes/createStop.js'));
 app.get('/stops', require('./routes/getStops.js'));
 app.get('/stop', require('./routes/getStopById.js'));
 app.get('/stop/coordinate/:lng/:lat', require('./routes/getStopByCoordinate.js'));
+app.delete('/stop', require('./routes/deleteStopById.js'));
 
 app.get('/categories', require('./routes/getCategories.js'));
 
