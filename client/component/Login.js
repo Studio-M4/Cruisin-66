@@ -224,6 +224,11 @@ const styles = StyleSheet.create({
     marginRight: "auto",
     marginLeft: '10%'
   },
+  inputError: {
+    marginTop: 2,
+    color: "red",
+    justifyContent: "space-between",
+  },
   button: {
     alignItems: "center",
     backgroundColor: "#336699",
