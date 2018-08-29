@@ -93,6 +93,9 @@ const styles = StyleSheet.create({
     zIndex: 2,
     flex: 1,
     justifyContent: 'center',
+    marginTop: '10%',
+    height: (Dimensions.get('window').height) - 20,
+    width: (Dimensions.get('window').width) - 8,
   },
 
   modal: {
@@ -102,5 +105,7 @@ const styles = StyleSheet.create({
 
   text: {
     color: '#fff',
+    zIndex: 999,
+    marginTop: '5%',
   },
 });

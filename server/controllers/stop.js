@@ -67,9 +67,28 @@ const getStopByCoordinate = (coordinate, callback) => {
          .catch((err) => callback(err, null));
 };
 
+const deleteStopById = (query, callback) => {
+  let stopId = Number(query.stopId);
+  let itineraryId = Number(query.itineraryId);
 
+  db.ItineraryStops.destroy({
+    where: {
+      StopId: stopId,
+      ItineraryId: itineraryId
+    }
+  })
+  .then((response) => {
+    console.log(response);
+    callback(null, response);
+  })
+  .catch((err) => {
+    console.log(err);
+    callback(err, null);
+  });
+}
 
 module.exports.createStop = createStop;
 module.exports.getAllStops = getAllStops;
 module.exports.getStopById = getStopById;
 module.exports.getStopByCoordinate = getStopByCoordinate;
+module.exports.deleteStopById = deleteStopById;
