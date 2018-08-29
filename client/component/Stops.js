@@ -42,7 +42,7 @@ import {
 import { NavigationEvents } from "react-navigation";
 
 import axios from "axios";
-import { toSortableStops, getStopsOrder, updateStopsOrder } from '../utilities/sortableUtil';
+import { toSortableStops, getStopsIdsOrder, updateStopsOrder, sortStopsByOrder } from '../utilities/sortableUtil';
 
 class Stops extends React.Component {
   static navigationOptions = {
@@ -65,7 +65,7 @@ class Stops extends React.Component {
       sortableStops: {}, // this is for srotable list
       stopsOrder: [], // this is for srotable list
       liked: false,
-      showAddIcon: true,
+      isOwner: true,
       userId: null
     };
 
@@ -88,12 +88,15 @@ class Stops extends React.Component {
     AsyncStorage.getItem("userInfo")
       .then(storageStr => {
         const userId = JSON.parse(storageStr).data.token.userId;
-        // If the itinerary belongs to current user, then he can add stops to it.
-        const showAddIcon = userId === itineraryOwnerId;
-        this.setState({ itineraryId: itinerary.id, userId: userId, showAddIcon });
-        this.getStopsById().then(
-          (stops) => this.setState(
-            { stops, sortableStops: toSortableStops(stops), stopsOrder: getStopsOrder(stops) }, () => console.log(this.state)));
+        // If the itinerary belongs to current user, then the user is owner.
+        const isOwner = userId === itineraryOwnerId;
+        this.setState({ itineraryId: itinerary.id, userId: userId, isOwner });
+        this.getStopsById()
+            .then((stops) => { 
+              stops = sortStopsByOrder(stops);
+              this.setState({ stops, sortableStops: toSortableStops(stops), stopsOrder: getStopsIdsOrder(stops) }
+            )} 
+        );
         this.checkIfFavorited(); 
       })
       .catch(err => console.log(err));
@@ -183,18 +186,18 @@ class Stops extends React.Component {
   render() {
     const defaultImageUrl = 'https://www.telegraph.co.uk/content/dam/Travel/2018/April/road-trip-GettyImages-655931324.jpg?imwidth=1400'
     const { navigation } = this.props;
-    const { showAddIcon, liked , itineraryId, stops, sortableStops } = this.state;
+    const { isOwner, stops, sortableStops } = this.state;
 
     const renderAddIcon = () => {
-      return showAddIcon ? (
-        <Button onPress={() => navigation.navigate("CreateStop", { itineraryId, stopsAmount: stops.length })}>
+      return isOwner ? (
+        <Button onPress={() => navigation.navigate("CreateStop", { itineraryId: this.state.itineraryId, stopsAmount: stops.length })}>
           <Icon name="add" />
         </Button>
       ) : null;
     };
 
     const renderFavoriteIcon = () => {
-      if (this.state.liked === false && this.state.showAddIcon === false) {
+      if (this.state.liked === false && this.state.isOwner === false) {
         return (
           <Button
             onPress={() => {
@@ -204,7 +207,7 @@ class Stops extends React.Component {
             <Ionicons name='ios-heart-empty' size={20}/>
           </Button>
         )
-      } else if (this.state.liked === true && this.state.showAddIcon === false) {
+      } else if (this.state.liked === true && this.state.isOwner === false) {
         return (
           <Button
             onPress={() => {
@@ -223,7 +226,7 @@ class Stops extends React.Component {
         <NavigationEvents onDidFocus={payload => this.handleFocus()} />
         <CardItem cardBody>
           <ImageBackground
-            source={{ uri: navigation.getParam("itinerary").photoUrl || defautImageUrl }}
+            source={{ uri: navigation.getParam("itinerary").photoUrl || defaultImageUrl }}
             style={{ height: 125, width: null, flex: 1 }}
           >
             <Text style={styles.tourname}>
@@ -239,14 +242,15 @@ class Stops extends React.Component {
         </CardItem>
         <SortableListView
           style={{ flex: 1 }}
+          disableSorting={!this.state.isOwner}
           data={sortableStops}
           order={this.state.stopsOrder}
           onRowMoved={e => {
-            const { stopsOrder } = this.state;
+            const { stopsOrder, itineraryId } = this.state;
             stopsOrder.splice(e.to, 0, stopsOrder.splice(e.from, 1)[0]);
-            this.setState({stopsOrder}, () => updateStopsOrder(stopsOrder)); 
+            this.setState({stopsOrder}, () => updateStopsOrder(stopsOrder, itineraryId)); 
           }}
-          renderRow={stop => <StopItem stop={stop} />}
+          renderRow={stop => <StopItem stop={stop} navigation={this.props.navigation}/>}
         />
         <Footer>
           <FooterTab>

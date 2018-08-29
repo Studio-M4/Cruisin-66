@@ -42,7 +42,6 @@ app.get('/itineraries', require('./routes/getItineraries.js'));
 app.get('/itinerary', require('./routes/getItineraryById.js'));
 
 app.post('/stop', require('./routes/createStop.js'));
-app.put('/stops/order', require('./routes/updateStopsOrder.js'));
 app.get('/stops', require('./routes/getStops.js'));
 app.get('/stop', require('./routes/getStopById.js'));
 app.get('/stop/coordinate/:lng/:lat', require('./routes/getStopByCoordinate.js'));
@@ -51,6 +50,7 @@ app.delete('/stop', require('./routes/deleteStopById.js'));
 app.get('/categories', require('./routes/getCategories.js'));
 
 app.post('/itinerarycomments', require('./routes/createItineraryComments.js'));
+app.put('/itinerarystops/order', require('./routes/updateItineraryStopsOrder.js'));
 app.get('/itinerarycomments', require('./routes/getItineraryComments.js'));
 
 app.post('/itinerarystops', require('./routes/createItineraryStops.js'));
