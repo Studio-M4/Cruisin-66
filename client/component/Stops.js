@@ -3,6 +3,9 @@ import React from "react";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
 
+import StopItem from './StopItem';
+import SortableListView from 'react-native-sortable-listview';
+
 import {
   StyleSheet,
   View,
@@ -38,7 +41,8 @@ import {
 
 import { NavigationEvents } from "react-navigation";
 
-const axios = require("axios");
+import axios from "axios";
+import { toSortableStops, getStopsOrder } from '../utilities/sortableUtil';
 
 class Stops extends React.Component {
   static navigationOptions = {
@@ -58,13 +62,24 @@ class Stops extends React.Component {
       itineraryId: null,
       modalVisible: false,
       stops: [],
+      sortableStops: {}, // this is for srotable list
+      stopsOrder: [], // this is for srotable list
       liked: false,
       showAddIcon: true,
       userId: null
     };
+
+    this.addItineraryToFavorites = this.addItineraryToFavorites.bind(this);
+    this.deleteItineraryFromFavorites = this.deleteItineraryFromFavorites.bind(this);
   }
 
-  componentWillMount() {
+  getStopsById = () => {
+    const itineraryId = this.state.itineraryId;
+    const url = `http://localhost:3000/stops?itineraryId=${itineraryId}`;
+    return axios.get(url).then((res) => res.data);
+  };
+
+  handleFocus() {
     const { navigation } = this.props;
     // This is passed from Itinerary component.
     const itinerary = navigation.getParam("itinerary");
@@ -75,48 +90,13 @@ class Stops extends React.Component {
         const userId = JSON.parse(storageStr).data.token.userId;
         // If the itinerary belongs to current user, then he can add stops to it.
         const showAddIcon = userId === itineraryOwnerId;
-        this.setState({ itineraryId: itinerary.id, userId: userId, showAddIcon }),
-          console.log(this.state);
-        this.getStopsById();
-        this.checkIfFavorited();  
+        this.setState({ itineraryId: itinerary.id, userId: userId, showAddIcon });
+        this.getStopsById().then(
+          (stops) => this.setState(
+            { stops, sortableStops: toSortableStops(stops), stopsOrder: getStopsOrder(stops) }, () => console.log(this.state)));
+        this.checkIfFavorited(); 
       })
       .catch(err => console.log(err));
-  }
-
-  // componentDidMount() {
-  //   this.getStopsById();
-  // }
-
-  getStopsById = () => {
-    let itineraryId = this.state.itineraryId;
-
-    return fetch(`http://localhost:3000/stops?itineraryId=${itineraryId}`, {
-      method: "GET",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json"
-      }
-    })
-      .then(response => {
-        if (response.error) {
-          console.log(response.error);
-        } else {
-          return response.json();
-        }
-      })
-      .then(data => {
-        console.log("stops", data);
-        this.setState({
-          stops: data
-        });
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  };
-
-  handleFocus() {
-    this.getStopsById();
   }
 
   addItineraryToFavorites() {
@@ -203,18 +183,12 @@ class Stops extends React.Component {
   render() {
     const defaultImageUrl = 'https://www.telegraph.co.uk/content/dam/Travel/2018/April/road-trip-GettyImages-655931324.jpg?imwidth=1400'
     const { navigation } = this.props;
-    
+    const { showAddIcon, liked , itineraryId, stops, sortableStops } = this.state;
+
     const renderAddIcon = () => {
-      return this.state.showAddIcon ? (
-        <Button
-          onPress={() => {
-            /* 1. Navigate map and see the direction */
-            navigation.navigate("CreateStop", {
-              itineraryId: this.state.itineraryId
-            });
-          }}
-        >
-          <Ionicons name="ios-add" size={20}/>
+      return showAddIcon ? (
+        <Button onPress={() => navigation.navigate("CreateStop", { itineraryId })}>
+          <Icon name="add" />
         </Button>
       ) : null;
     };
@@ -247,63 +221,39 @@ class Stops extends React.Component {
     return (
       <Container>
         <NavigationEvents onDidFocus={payload => this.handleFocus()} />
-        <Content>
-          <CardItem cardBody>
-            <ImageBackground
-              source={{ uri: navigation.getParam("itinerary").photoUrl || defaultImageUrl }}
-              style={{ height: 200, width: null, flex: 1 }}
-            >
-              <Text style={styles.tourname}>
-                {navigation.getParam("itinerary").name}
-              </Text>
-            </ImageBackground>
-          </CardItem>
-          <CardItem>
-              <Body>
-               <Text>{navigation.getParam('itinerary').description} </Text>
-              </Body>
-            </CardItem>
-          <FlatList
-            data={this.state.stops}
-            renderItem={({ item }) => (
-              <TouchableHighlight
-                onPress={() => {
-                  /* 1. Navigate to the Details route with params */
-                  this.props.navigation.navigate("Details", {
-                    item: item
-                  });
-                }}
-              >
-                <Card>
-                  <CardItem>
-                    <Left>
-                      <Thumbnail
-                        square
-                        style={{ width: 75, height: 75 }}
-                        source={{
-                          uri: item.StopPhotos[0]
-                            ? item.StopPhotos[0].url
-                            : "https://images-na.ssl-images-amazon.com/images/I/11qnZ2RCZML._SX331_BO1,204,203,200_.jpg"
-                        }}
-                      />
-                      <Body>
-                        <Text>{item.name}</Text>
-                        <Text note>{item.description}</Text>
-                      </Body>
-                    </Left>
-                  </CardItem>
-                </Card>
-              </TouchableHighlight>
-            )}
-            keyExtractor={(item, index) => index.toString()}
-          />
-        </Content>
+        <CardItem cardBody>
+          <ImageBackground
+            source={{ uri: navigation.getParam("itinerary").photoUrl || defautImageUrl }}
+            style={{ height: 125, width: null, flex: 1 }}
+          >
+            <Text style={styles.tourname}>
+              {navigation.getParam("itinerary").name}
+            </Text>
+          </ImageBackground>
+        </CardItem>
+        <CardItem>
+          <Body>
+            <Text>Description: {navigation.getParam('itinerary').description} </Text>
+            <Text>Number of Stops: {stops.length}</Text>
+          </Body>
+        </CardItem>
+        <SortableListView
+          style={{ flex: 1 }}
+          data={sortableStops}
+          order={this.state.stopsOrder}
+          onRowMoved={e => {
+            const { stopsOrder } = this.state;
+            stopsOrder.splice(e.to, 0, stopsOrder.splice(e.from, 1)[0]);
+            this.setState({stopsOrder});
+          }}
+          renderRow={stop => <StopItem stop={stop} />}
+        />
         <Footer>
           <FooterTab>
             <Button
               onPress={() => {
                 /* 1. Navigate to the Details route with params */
-                this.props.navigation.navigate("CommentItinerary", {
+                navigation.navigate("CommentItinerary", {
                   itinerary: navigation.getParam("itinerary")
                 });
               }}
@@ -315,8 +265,8 @@ class Stops extends React.Component {
             <Button
               onPress={() => {
                 /* 1. Navigate map and see the direction */
-                this.props.navigation.navigate("MapComponent",{
-                    stop: this.state.stops
+                navigation.navigate("MapComponent",{
+                    stop: stops
                 });
               }}
             >
