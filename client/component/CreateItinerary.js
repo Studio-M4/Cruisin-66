@@ -20,7 +20,7 @@ import axios from 'axios';
 
 export default class CreateItinerary extends React.Component {
   static navigationOptions = {
-    title: 'CreateItinerary'
+    title: 'Create'
   };
 
   constructor(props) {

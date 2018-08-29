@@ -30,8 +30,7 @@ import CommentItinerary from "./client/component/CommentItinerary";
 const TabsIcons = (isFocused) => (
   {
     Profile: `ios-person${isFocused ? "" : ""}`,
-    CreateItinerary: `ios-add-circle${isFocused ? "" : ""}`,
-    CreateStop: `ios-add-circle${isFocused ? "" : ""}`,
+    Create: `ios-add-circle${isFocused ? "" : ""}`,
     Itinerary: `ios-menu${isFocused ? "" : ""}`,
   }
 );
@@ -39,7 +38,7 @@ const TabsIcons = (isFocused) => (
 // createTabNavigator depreciate but can swip :)
 const Tabs = createBottomTabNavigator({
     Itinerary: Itinerary,
-    CreateItinerary: CreateItinerary,
+    Create: CreateItinerary,
     Profile: Profile
     },
     {

@@ -32,7 +32,7 @@ import axios from "axios";
 
 export default class Itinerary extends React.Component {
   static navigationOptions = {
-    title: "Itinerary",
+    title: 'Itinerary',
     headerStyle: {
       backgroundColor: '#f4511e'
     }
@@ -52,7 +52,6 @@ export default class Itinerary extends React.Component {
     axios
       .get('http://localhost:3000/itineraries')
       .then((response) => {
-        // console.log(response.data);
         this.setState({
           itineraries: response.data,
           allItineraries: response.data
@@ -69,8 +68,6 @@ export default class Itinerary extends React.Component {
   }
 
   handleSearch = (text) => {
-    // console.log('text', text)
-
     const newData = this.state.allItineraries.filter((item)=> {
       if (item.name.includes(text) || item.description.includes(text) ) {
         return true;
@@ -80,9 +77,7 @@ export default class Itinerary extends React.Component {
           return true; 
         } 
       }
-
     })
-
     this.setState({itineraries:newData})
   }  
 
@@ -92,12 +87,10 @@ export default class Itinerary extends React.Component {
     return (
       <Container>
         <NavigationEvents onDidFocus={this.getItineraries}></NavigationEvents>
-        <Header searchBar rounded>
-          <Item>
-            <Icon name="ios-search" />
-            <Input placeholder="Search" onChangeText={this.handleSearch} />
+          <Item style={styles.input}>
+            <Text>  </Text><Icon name="ios-search" size={15} />
+            <Input  placeholder="Search" onChangeText={this.handleSearch} />
           </Item>
-        </Header>
 
         <Content>
           <FlatList
@@ -133,6 +126,12 @@ export default class Itinerary extends React.Component {
   }
 }
 const styles = StyleSheet.create({
+  input: {
+    height: 25,
+    fontSize: 18,
+    margin: 3,
+    color: 'gray',
+  },
   container: {
     display: "flex",
     flex: 1,
