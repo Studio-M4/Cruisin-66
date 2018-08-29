@@ -57,7 +57,25 @@ let addFavorite = (userId, itineraryId, callback) => {
       callback(err, null);
     });
   }
+
+  let checkIfLiked = (query, callback) => {
+    db.Favorite.findOne({
+      where: {
+        userId: query.userId,
+        itineraryId: query.itineraryId
+      }
+    })
+    .then((response) => {
+      console.log(response);
+      callback(null, itineraries);
+    })
+    .catch((err) => {
+      console.log(err);
+      callback(err, null);
+    });
+  }
   
   module.exports.addFavorite = addFavorite;
   module.exports.getFavorites = getFavorites;
   module.exports.removeFavorite = removeFavorite;
+  module.exports.checkIfLiked = checkIfLiked;

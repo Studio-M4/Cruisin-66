@@ -77,7 +77,8 @@ class Stops extends React.Component {
         const showAddIcon = userId === itineraryOwnerId;
         this.setState({ itineraryId: itinerary.id, userId: userId, showAddIcon }),
           console.log(this.state);
-        this.getStopsById();  
+        this.getStopsById();
+        this.checkIfFavorited();  
       })
       .catch(err => console.log(err));
   }
@@ -122,9 +123,6 @@ class Stops extends React.Component {
     let userId = this.state.userId
     let itineraryId = this.state.itineraryId
 
-    console.log('USER_ID', userId)
-    console.log('ITINERARYID', itineraryId)
-
     axios
     .post('http://localhost:3000/favorite', {
       userId: userId,
@@ -146,9 +144,6 @@ class Stops extends React.Component {
     let userId = this.state.userId
     let itineraryId = this.state.itineraryId
 
-    console.log('USER_ID line 150', userId)
-    console.log('ITINERARYID', itineraryId)
-
     axios
     .delete('http://localhost:3000/favorite', {params: 
       {
@@ -167,6 +162,41 @@ class Stops extends React.Component {
       alert(error);
     });
   }
+
+  checkIfFavorited() {
+    let userId = this.state.userId
+    let itineraryId = this.state.itineraryId
+
+    console.log('USER_ID line 169', userId)
+    console.log('ITINERARYID', itineraryId)
+
+    return fetch(`http://localhost:3000/heart?userId=${userId}&itineraryId=${itineraryId}`, {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      }
+    })
+      .then(response => {
+        if (response.error) {
+          console.log(response.error);
+        } else {
+          return response.json();
+        }
+      })
+      .then(data => {
+        console.log("line 188", data);
+        if (data === null) {
+          this.setState({liked: false})
+        } else {
+          this.setState({liked: true})
+        }
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
+
 
 
 
@@ -230,8 +260,7 @@ class Stops extends React.Component {
           </CardItem>
           <CardItem>
               <Body>
-               <Text>Description: {navigation.getParam('itinerary').description} </Text>
-               <Text>Number of Stops: {this.state.stops.length}</Text>
+               <Text>{navigation.getParam('itinerary').description} </Text>
               </Body>
             </CardItem>
           <FlatList

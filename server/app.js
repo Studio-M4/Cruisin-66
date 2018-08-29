@@ -62,6 +62,8 @@ app.post('/favorite', require('./routes/addFavorite.js'));
 app.delete('/favorite', require('./routes/removeFavorite.js'));
 app.get('/favorite', require('./routes/getFavoritesByUserId.js'));
 
+app.get('/heart', require('./routes/checkIfLiked.js'));
+
 if (!module.parent) {
   app.listen(app.get('port'));
   console.log('Listening on', app.get('port'));
