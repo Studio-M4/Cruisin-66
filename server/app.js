@@ -50,6 +50,7 @@ app.delete('/stop', require('./routes/deleteStopById.js'));
 app.get('/categories', require('./routes/getCategories.js'));
 
 app.post('/itinerarycomments', require('./routes/createItineraryComments.js'));
+app.put('/itinerarystops/order', require('./routes/updateItineraryStopsOrder.js'));
 app.get('/itinerarycomments', require('./routes/getItineraryComments.js'));
 
 app.post('/itinerarystops', require('./routes/createItineraryStops.js'));

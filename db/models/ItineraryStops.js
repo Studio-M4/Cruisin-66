@@ -11,7 +11,11 @@ module.exports = (Sequelize, type) => {
     },
     StopId: {
       type: type.INTEGER
-    }
+    },
+    order: {
+      type: type.INTEGER,
+      defaultValue: 0,
+    },
   });
 
   ItineraryStops.associate = function(models) {

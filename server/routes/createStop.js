@@ -3,9 +3,9 @@ const db = require('../controllers/stop.js');
 
 
 stop.post('/stop', (req, res) => {
-  const { itineraryId, stop } = req.body;
+  const { itineraryId, stop, order } = req.body;
 
-  db.createStop(stop, itineraryId, (err, data) => {
+  db.createStop(stop, itineraryId, order, (err, data) => {
     if (err) {
       res.status(500).send('Server side error happened');
     } else {

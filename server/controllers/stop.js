@@ -10,7 +10,8 @@ let getAllStops = (query, callback) => {
       where: {
         id: id
       }
-    }, db.StopPhoto]
+    }, db.StopPhoto],
+    // order: [['order', 'ASC']]
   })
   .then((stops) => {
     console.log(stops);
@@ -39,16 +40,19 @@ const getStopById = (query, callback) => {
   });
 };
 
-const createStop = (stop, itineraryId, callback) => {
-  console.log("ITINERARY_ID ", itineraryId);
-  console.log('STOP', stop.StopPhotos);
+const createStop = (stop, itineraryId, order, callback) => {
   // { include: [db.StopPhoto] } will insert associated StopPhotos into database.
   db.Stop.create(stop, { include: [db.StopPhoto] })
     // Insert into join table: ItineraryStops.
     .then(createdStop =>
-      createdStop
-        .setItineraries([itineraryId])
-        .then(() => callback(null, createdStop))
+      // createdStop
+      //   .setItineraries([itineraryId])
+      //   .then(() => callback(null, createdStop))
+      db.ItineraryStops.create({
+        ItineraryId: itineraryId,
+        StopId: createdStop.id,
+        order: order,
+      }).then(() => callback(null, createdStop))
     )
     .catch(err => {
       console.error(err);
@@ -87,8 +91,22 @@ const deleteStopById = (query, callback) => {
   });
 }
 
+const updateStopsOrder = (idsByOrder, callback) => {
+  console.log('IDS_BY_ORDER: ', idsByOrder);
+  try {
+    idsByOrder.forEach((id, index) => {
+      const order = index + 1;
+      db.Stop.update({ order }, { where: { id } });
+    });
+    callback(null, 'update successfully');
+  } catch(err) {
+    callback(err, null);
+  }
+};
+
 module.exports.createStop = createStop;
 module.exports.getAllStops = getAllStops;
 module.exports.getStopById = getStopById;
 module.exports.getStopByCoordinate = getStopByCoordinate;
 module.exports.deleteStopById = deleteStopById;
+module.exports.updateStopsOrder = updateStopsOrder;
