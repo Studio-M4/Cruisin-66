@@ -42,7 +42,7 @@ import {
 import { NavigationEvents } from "react-navigation";
 
 import axios from "axios";
-import { toSortableStops, getStopsOrder } from '../utilities/sortableUtil';
+import { toSortableStops, getStopsOrder, updateStopsOrder } from '../utilities/sortableUtil';
 
 class Stops extends React.Component {
   static navigationOptions = {
@@ -244,7 +244,7 @@ class Stops extends React.Component {
           onRowMoved={e => {
             const { stopsOrder } = this.state;
             stopsOrder.splice(e.to, 0, stopsOrder.splice(e.from, 1)[0]);
-            this.setState({stopsOrder});
+            this.setState({stopsOrder}, () => updateStopsOrder(stopsOrder)); 
           }}
           renderRow={stop => <StopItem stop={stop} />}
         />
