@@ -63,7 +63,6 @@ export default function validate(fieldName, value) {
   var formFields = {};
   formFields[fieldName] = constraints[fieldName];
 
-
   const result = validation(formValues, formFields);
 
   if (result) {
