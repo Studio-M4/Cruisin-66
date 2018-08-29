@@ -10,7 +10,8 @@ let getAllStops = (query, callback) => {
       where: {
         id: id
       }
-    }, db.StopPhoto]
+    }, db.StopPhoto],
+    order: [['order', 'ASC']]
   })
   .then((stops) => {
     console.log(stops);
@@ -87,8 +88,22 @@ const deleteStopById = (query, callback) => {
   });
 }
 
+const updateStopsOrder = (idsByOrder, callback) => {
+  console.log('IDS_BY_ORDER: ', idsByOrder);
+  try {
+    idsByOrder.forEach((id, index) => {
+      const order = index + 1;
+      db.Stop.update({ order }, { where: { id } });
+    });
+    callback(null, 'update successfully');
+  } catch(err) {
+    callback(err, null);
+  }
+};
+
 module.exports.createStop = createStop;
 module.exports.getAllStops = getAllStops;
 module.exports.getStopById = getStopById;
 module.exports.getStopByCoordinate = getStopByCoordinate;
 module.exports.deleteStopById = deleteStopById;
+module.exports.updateStopsOrder = updateStopsOrder;

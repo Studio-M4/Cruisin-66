@@ -9,6 +9,7 @@ module.exports = (Sequelize, type) => {
     address: type.STRING,
     zipCode: type.STRING,
     audioFile: type.STRING,
+    order: type.INTEGER,
     photo: type.STRING //deprecated, now using StopPhotos
   });
 
