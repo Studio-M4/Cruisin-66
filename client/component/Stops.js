@@ -187,7 +187,7 @@ class Stops extends React.Component {
 
     const renderAddIcon = () => {
       return showAddIcon ? (
-        <Button onPress={() => navigation.navigate("CreateStop", { itineraryId })}>
+        <Button onPress={() => navigation.navigate("CreateStop", { itineraryId, stopsAmount: stops.length })}>
           <Icon name="add" />
         </Button>
       ) : null;
