@@ -248,7 +248,7 @@ const styles = StyleSheet.create({
     marginTop: 2,
     color: "red",
     marginRight: "auto",
-    marginLeft: '10%'
+    marginLeft: '10%',
   },
   button: {
     alignItems: "center",
