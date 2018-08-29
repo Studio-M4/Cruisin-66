@@ -11,7 +11,7 @@ let getAllStops = (query, callback) => {
         id: id
       }
     }, db.StopPhoto],
-    order: [['order', 'ASC']]
+    // order: [['order', 'ASC']]
   })
   .then((stops) => {
     console.log(stops);
@@ -40,16 +40,19 @@ const getStopById = (query, callback) => {
   });
 };
 
-const createStop = (stop, itineraryId, callback) => {
-  console.log("ITINERARY_ID ", itineraryId);
-  console.log('STOP', stop.StopPhotos);
+const createStop = (stop, itineraryId, order, callback) => {
   // { include: [db.StopPhoto] } will insert associated StopPhotos into database.
   db.Stop.create(stop, { include: [db.StopPhoto] })
     // Insert into join table: ItineraryStops.
     .then(createdStop =>
-      createdStop
-        .setItineraries([itineraryId])
-        .then(() => callback(null, createdStop))
+      // createdStop
+      //   .setItineraries([itineraryId])
+      //   .then(() => callback(null, createdStop))
+      db.ItineraryStops.create({
+        ItineraryId: itineraryId,
+        StopId: createdStop.id,
+        order: order,
+      }).then(() => callback(null, createdStop))
     )
     .catch(err => {
       console.error(err);
