@@ -12,7 +12,8 @@ import {
   TouchableHighlight,
   ScrollView,
   ActivityIndicator,
-  AsyncStorage
+  AsyncStorage,
+  ImageBackground
 } from "react-native";
 
 import { InputGroup, Input, Container, Content, Icon } from "native-base";
@@ -23,7 +24,7 @@ const axios = require("axios");
 
 class Login extends React.Component {
   static navigationOptions = {
-    title: "Cruisin'66"
+    title: ''
   };
 
   constructor(props) {
@@ -116,6 +117,11 @@ class Login extends React.Component {
 
     return (
       <Container>
+      <ImageBackground
+      style={styles.background}
+      source={require('./imgs/monument-valley.jpg')}
+       >
+
         <Content>
           <ScrollView>
             <NavigationEvents
@@ -131,7 +137,7 @@ class Login extends React.Component {
               <View>
                 <Image
                   style={styles.imagesStyle}
-                  source={require("./imgs/icon.png")}
+                  source={require("./imgs/cruisin66logo.png")}
                 />
               </View>
               <View style={styles.formStyle}>
@@ -177,23 +183,24 @@ class Login extends React.Component {
             </View>
           </ScrollView>
         </Content>
-      </Container>
+      
+      </ImageBackground>
+    </Container>
     );
   }
 }
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#eee",
     alignItems: "center",
     width: "100%",
     borderColor: "#000",
     height: "100%"
   },
   imagesStyle: {
-    width: 80,
-    height: 80,
-    marginBottom: 40
+    width: 120,
+    height: 120,
+    marginBottom: 30
   },
   title: {
     fontSize: 32,
@@ -204,13 +211,16 @@ const styles = StyleSheet.create({
   inputStyle: {
     height: 40,
     width: 300,
+    color: '#000',
+    backgroundColor: '#fff',
     borderColor: "#ccc",
     borderWidth: 0.4,
     paddingLeft: 10,
-    marginTop: 10
+    marginTop: 10,
+    opacity: 0.8,
+    borderRadius: 5
   },
   formStyle: {
-    backgroundColor: "#fff",
     alignItems: "center",
     width: "100%",
     borderColor: "#000",
@@ -225,15 +235,19 @@ const styles = StyleSheet.create({
   },
   button: {
     alignItems: "center",
-    backgroundColor: "#336699",
     marginTop: 20,
     padding: 10,
     width: 300,
     justifyContent: "center",
-    borderRadius: 5
+    borderRadius: 5,
+    borderColor: '#ccc',
+    borderWidth: 0.4,
+    fontWeight: 'bold',
+    opacity: .6,
+    backgroundColor: '#fff',
   },
   buttonTextColor: {
-    color: "#fff"
+    color: "#000"
   },
   loader: {
     marginTop: 10
@@ -241,7 +255,13 @@ const styles = StyleSheet.create({
   error: {
     color: "red",
     marginBottom: 20
-  }
+  },
+  background: {
+    height: "100%",
+    width: "100%",
+    backgroundColor: "rgba(0,0,0,0.5)",
+    resizeMode: "stretch"
+  },
 });
 
 export default Login;

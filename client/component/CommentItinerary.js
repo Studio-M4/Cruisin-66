@@ -25,7 +25,7 @@ import { NavigationEvents } from "react-navigation";
 const axios = require("axios");
 export default class CommentItinerary extends React.Component {
     static navigationOptions = {
-        title: 'Comments itinerary',
+        title: 'Comments',
     };
   constructor(props) {
     super(props);
