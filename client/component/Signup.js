@@ -247,7 +247,8 @@ const styles = StyleSheet.create({
   inputError: {
     marginTop: 2,
     color: "red",
-    justifyContent: "space-between",
+    marginRight: "auto",
+    marginLeft: '10%',
   },
   button: {
     alignItems: "center",

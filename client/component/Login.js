@@ -216,7 +216,13 @@ const styles = StyleSheet.create({
     borderColor: "#000",
     height: "auto",
     paddingBottom: 20,
-    paddingTop: 21
+    paddingTop: 21,
+  },
+  inputError: {
+    marginTop: 2,
+    color: "red",
+    marginRight: "auto",
+    marginLeft: '10%'
   },
   inputError: {
     marginTop: 2,
