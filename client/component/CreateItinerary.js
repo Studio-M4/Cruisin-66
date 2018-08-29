@@ -11,6 +11,7 @@ import {
   ScrollView,
   Button,
   ImageBackground,
+  ActivityIndicator,
 } from 'react-native';
 import PickerSelect from 'react-native-picker-select';
 import { openImagePicker, uploadToCloudinary } from "../utilities/photoUtil";
@@ -30,7 +31,8 @@ export default class CreateItinerary extends React.Component {
       name: null,
       description: null,
       photoUrl: null,
-      user: {}
+      user: {},
+      showSpinner: false,
     };
 
     this.getCategories = this.getCategories.bind(this);
@@ -45,7 +47,7 @@ export default class CreateItinerary extends React.Component {
   handleSubmit = () => {
     const { navigation } = this.props;
     this.createItinerary()
-        .then((itinerary) => navigation.navigate("Stops", {itinerary}))
+        .then((itinerary) => navigation.navigate("Itinerary"))
         .catch((err) => console.log(err));
   };
 
@@ -93,12 +95,12 @@ export default class CreateItinerary extends React.Component {
 
   handlePhotoUpload() {
     openImagePicker(null, (response) => {
+      this.setState({showSpinner: true});
       console.log('imagePickerResponse: ', response);
       const source = { uri: "data:image/jpeg;base64," + response.data };
-
-    uploadToCloudinary(source.uri)
-      .then((url) => this.setState({photoUrl: url}))
-      .catch((err) => console.log(err));
+      uploadToCloudinary(source.uri)
+        .then((url) => this.setState({photoUrl: url, showSpinner: false}))
+        .catch((err) => console.log(err));
     });
   }
 
@@ -111,10 +113,17 @@ export default class CreateItinerary extends React.Component {
         <ImageBackground
           source={{ uri: this.state.photoUrl || defautImageUrl }}
           style={{ height: 200, width: null, flex: 1 }}
+          onLoadStart={() => this.setState({showSpinner: true})}
+          onLoadEnd={() => this.setState({showSpinner: false})}
         >
           <Text style={styles.tourname}>
             {this.state.name}
           </Text>
+          <ActivityIndicator 
+            animating={this.state.showSpinner}
+            size="large"
+            color="white"
+          />
         </ImageBackground>
         <View style={styles.container}>
           <TextInput
