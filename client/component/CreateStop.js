@@ -38,6 +38,7 @@ export default class CreateStop extends React.Component {
 
     this.stopId = null;
     this.itineraryId = null;
+    this.stopsAmount = this.props.navigation.getParam('stopsAmount');
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handlePhotoUpload = this.handlePhotoUpload.bind(this);
@@ -71,7 +72,8 @@ export default class CreateStop extends React.Component {
         address: address,
         StopPhotos: photos.map((url) => ({ url: url, description: "" })), // description is decrecated
         latitude: latitude,
-        longitude: longitude
+        longitude: longitude,
+        order: this.stopsAmount + 1, // order starts with 1
       },
       itineraryId: this.itineraryId,
     };
