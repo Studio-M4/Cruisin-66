@@ -1,5 +1,9 @@
 import React from "react";
-import { TouchableHighlight, Text } from "react-native";
+import {
+  TouchableHighlight, 
+  Text,
+  StyleSheet
+} from "react-native";
 import { Card, CardItem, Left, Thumbnail, Body } from "native-base";
 
 class StopItem extends React.Component {
@@ -30,8 +34,8 @@ class StopItem extends React.Component {
                 }}
               />
               <Body>
-                <Text>{stop.name}</Text>
-                <Text note>{stop.description}</Text>
+                <Text style={styles.stopname}>{stop.name}</Text>
+                <Text note numberOfLines={1}>{stop.description}</Text>
               </Body>
             </Left>
           </CardItem>
@@ -40,5 +44,12 @@ class StopItem extends React.Component {
     );
   }
 }
+
+const styles = StyleSheet.create({
+  stopname: {
+    fontSize:18,
+    fontWeight: '600',
+  }
+});
 
 export default StopItem;

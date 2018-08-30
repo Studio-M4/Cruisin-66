@@ -150,9 +150,6 @@ class Stops extends React.Component {
     let userId = this.state.userId
     let itineraryId = this.state.itineraryId
 
-    console.log('USER_ID line 169', userId)
-    console.log('ITINERARYID', itineraryId)
-
     return fetch(`http://localhost:3000/heart?userId=${userId}&itineraryId=${itineraryId}`, {
       method: "GET",
       headers: {
@@ -227,7 +224,7 @@ class Stops extends React.Component {
         <CardItem cardBody>
           <ImageBackground
             source={{ uri: navigation.getParam("itinerary").photoUrl || defaultImageUrl }}
-            style={{ height: 125, width: null, flex: 1 }}
+            style={{ height: 160, width: null, flex: 1 }}
           >
             <Text style={styles.tourname}>
               {navigation.getParam("itinerary").name}
@@ -235,9 +232,9 @@ class Stops extends React.Component {
           </ImageBackground>
         </CardItem>
         <CardItem>
-          <Body>
-            <Text>Description: {navigation.getParam('itinerary').description} </Text>
-            <Text>Number of Stops: {stops.length}</Text>
+          <Body >
+            <Text style={styles.description}>{navigation.getParam('itinerary').description} </Text>
+            {/* <Text >Number of Stops: {stops.length}</Text> */}
           </Body>
         </CardItem>
         <SortableListView
@@ -296,14 +293,17 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "flex-end"
   },
+  description: {
+    textAlign:'left'
+  },
   tourname: {
-    color: "#fff",
-    textAlign: "center",
-    marginTop: 90,
-    fontSize: 30,
-    fontWeight: "bold",
-    textShadowColor: "#000",
-    textShadowOffset: { width: -1, height: 1 },
+    color: '#fff',
+    textAlign: 'center',
+    marginTop:60,
+    fontSize:28,
+    fontWeight: 'bold',
+    textShadowColor: '#000',
+    textShadowOffset: {width: -1, height: 1},
     textShadowRadius: 10
   }
 });
