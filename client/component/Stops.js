@@ -259,7 +259,7 @@ class Stops extends React.Component {
                 });
               }}
             >
-              <Ionicons name="md-chatbubbles" size={20}/>
+              <Ionicons name="md-chatbubbles" size={20} color={'#939393'}/>
             </Button>
             {renderAddIcon()}
             {renderFavoriteIcon()}
@@ -271,7 +271,7 @@ class Stops extends React.Component {
                 });
               }}
             >
-              <Ionicons name="md-map" size={20} />
+              <Ionicons name="md-map" size={20} color={'#939393'} />
             </Button>
           </FooterTab>
         </Footer>

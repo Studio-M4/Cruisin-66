@@ -12,9 +12,6 @@ import {
 
 
 
-
-import TimeAgo from 'react-native-timeago';
-
 import {
   Container,
   Header,
@@ -80,7 +77,7 @@ export default class Details extends React.Component {
           }}> 
           {item.name}
         </Text>
-        <Text>{item.description}</Text>
+        <Text style={styles.description}>{item.description}</Text>
         <Directions props={item}></Directions>
         <SegmentedControlTab
             tabsContainerStyle={styles.tabsContainerStyle}
@@ -111,12 +108,6 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "30%",
     backgroundColor: "#fff"
-  },
-  title2: {
-    fontSize: 22,
-    fontWeight: "bold",
-    color: "#000",
-    marginTop: 2
   },
   imagesStyle: {
     width: "100%",
@@ -164,6 +155,15 @@ const styles = StyleSheet.create({
   closeIt: {
     padding: 10,
     marginLeft: "80%",
+    marginTop: 5
+  },
+  description: {
+    marginTop: 3,
+    marginLeft: 10,
+    marginRight: 5,
+    fontSize: 16
+  },
+  tabsContainerStyle: {
     marginTop: 5
   }
 });
