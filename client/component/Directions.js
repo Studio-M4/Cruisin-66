@@ -5,7 +5,9 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import React from "react";
 
 import {
-    Text
+    Text,
+    View,
+    StyleSheet
   } from "react-native";
   
 import {
@@ -68,10 +70,20 @@ export default class gmapsDirections extends React.Component {
  
   render() {
     return (
-        <Button transparent textStyle={{color: '#87838B'}} onPress={this.handleGetDirections}>
-          <Ionicons name="ios-navigate" size={20}/>
-          <Text>Directions</Text>
-        </Button>
+      <View style={styles.view}>
+          <Ionicons name="ios-navigate" size={20} color={'#2196f3'} onPress={this.handleGetDirections}/>
+          <Text style={{fontSize: 16, color: '#2196f3', textAlign:'right'}}  onPress={this.handleGetDirections}>  Directions</Text>
+      </View>
     );
   }
 }
+
+
+const styles = StyleSheet.create({
+  view: {
+    flexDirection: 'row',
+    marginTop: 3,
+    marginLeft: 10, 
+
+  }
+});
