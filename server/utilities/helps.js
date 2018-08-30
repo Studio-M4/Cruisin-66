@@ -10,7 +10,7 @@ const createSession = (req, res, newUser) => {
       lastName: newUser.lastName,
       userName: newUser.userName,
       email: newUser.email,
-      photoAvar: newUser.photoAvar,
+      photoAvatar: newUser.photoAvatar,
     };
     res.send({
       token: withoutPassword,
@@ -49,6 +49,7 @@ const hashPassword = (user, callback) => {
         userName: user.userName,
         email: user.email,
         password: hash,
+        photoAvatar: user.photoAvatar
       };
       callback(null, userObj);
     });

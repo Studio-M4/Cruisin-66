@@ -61,6 +61,7 @@ export default class Profile extends React.Component {
         this.setState({
           user: userObject.data.token
         });
+        console.log(this.state.user);
         this.getUserItineraries();
         this.getUserFavorites();
       }
@@ -117,18 +118,18 @@ export default class Profile extends React.Component {
     return (
       <View style={styles.container}>
         <NavigationEvents onDidFocus={payload => this._retrieveData()} />
-          <View>  
+          <View style={styles.header}>  
             <Image
               style={styles.imagesStyle}
-              round source={{ uri: this.state.user.photoAvatar }} 
+              round source={{ uri: this.state.user.photoAvatar }}
             />
-
+            <View style={styles.headerContent}>
+              <Text style={styles.title}>
+                {this.state.user.firstName} {this.state.user.lastName} 
+              </Text>      
+              <Text onPress={this._logOut} style={styles.logout}> Log Out </Text>
+            </View>
           </View>
-          <Text style={styles.title}>
-            {this.state.user.firstName} {this.state.user.lastName} 
-          </Text>
-       
-           <Text onPress={this._logOut} style={styles.logout}> Logout </Text>
     
           <SegmentedControlTab
             tabsContainerStyle={styles.tabsContainerStyle}
@@ -163,16 +164,19 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "100%"
   },
-
+  header: {
+    flexDirection: "row",
+    justifyContent: "center",
+    backgroundColor: "#FEFEFE"
+  },
+  headerContent: {
+    marginLeft: 15,
+    alignSelf: "center"
+  },
   title: {
-    fontSize: 17,
     fontWeight: "bold",
-    color: "#000",
-    marginTop: 2,
-    marginBottom: 2,
-    backgroundColor: "#fff",
-    width: "100%",
-    padding: 20
+    color: "#444",
+    fontSize: 20
   },
   imagesStyle: {
     width: 80,
@@ -181,7 +185,8 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     backgroundColor: "#336699",
     borderRadius: 40,
-    padding: 5
+    padding: 5,
+    zIndex: 2,
   },
   button: {
     alignItems: "center",
@@ -194,38 +199,12 @@ const styles = StyleSheet.create({
     //custom styles
     margin: 10,
     height: 40,
-    marginTop:20
-  },
-  tabStyle: {
-    //custom styles
-  },
-  tabTextStyle: {
-    //custom styles
-  },
-  activeTabStyle: {
-    //custom styles
-  },
-  activeTabTextStyle: {
-    //custom styles
-  },
-  tabBadgeContainerStyle: {
-    //custom styles
-  },
-  activeTabBadgeContainerStyle: {
-    //custom styles
-  },
-  tabBadgeStyle: {
-    //custom styles
-  },
-  activeTabBadgeStyle: {
-    //custom styles
+    marginTop:10
   },
   logout:{
     color:'red',
-    marginTop:'38%',
-    right:0,
-    marginLeft:'80%',
-    position:'absolute'
+    fontSize: 16,
+    paddingTop: 5
   },
   tourname: {
     color: '#fff',

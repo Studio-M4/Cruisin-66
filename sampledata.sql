@@ -10,7 +10,6 @@ UPDATE users
 SET photoAvatar = 'https://avatars0.githubusercontent.com/u/25995901?s=460&v=4'
 WHERE id =1;
 
-
 INSERT INTO categories (name, createdat, updatedat)
 VALUES 
 ('nature', NOW(), NOW()), 
@@ -51,12 +50,12 @@ INSERT INTO stopphotos (url, description, stopid, createdat, updatedat)
 VALUES ('https://media-cdn.tripadvisor.com/media/photo-s/13/e6/10/e7/photo0jpg.jpg', 'mcway falls', 3, NOW(), NOW());
 
 SELECT id into @stopid from stops where id =1;
-SELECT id into @itineraryid from itineraries where id =1;
+SELECT id into @itineraryid from itineraries where id =2;
 INSERT INTO itinerarystops (itineraryid, stopid, createdat, updatedat)
-VALUES (@itineraryid, @stopid, NOW(), NOW());
+VALUES (@itineraryid, @stopid,NOW(), NOW());
 
 SELECT id into @stopid from stops where id =2;
-SELECT id into @itineraryid from itineraries where id =1;
+SELECT id into @itineraryid from itineraries where id =2;
 INSERT INTO itinerarystops (itineraryid, stopid, createdat, updatedat)
 VALUES (@itineraryid, @stopid, NOW(), NOW());
 
@@ -80,13 +79,13 @@ VAlues ('Reynisfjara', -19.071619, 63.4057404, 'Black sand beach and cool basalt
 
 SELECT id into @stopid from stops where id =3;
 SELECT id into @itineraryid from itineraries where id =4;
-INSERT INTO itinerarystops (itineraryid, stopid, createdat, updatedat)
-VALUES (@itineraryid, @stopid, NOW(), NOW());
+INSERT INTO itinerarystops (itineraryid, stopid, order, createdat, updatedat)
+VALUES (@itineraryid, @stopid, 1,  NOW(), NOW());
 
 SELECT id into @stopid from stops where id =4;
 SELECT id into @itineraryid from itineraries where id =4;
-INSERT INTO itinerarystops (itineraryid, stopid, createdat, updatedat)
-VALUES (@itineraryid, @stopid, NOW(), NOW());
+INSERT INTO itinerarystops (itineraryid, stopid, order, createdat, updatedat)
+VALUES (@itineraryid, @stopid, 2, NOW(), NOW());
 
 INSERT INTO stopphotos (url, description, stopid, createdat, updatedat)
 VALUES ('https://images.adventures.is/assets/uploads/2015/11/19164800/jokulsarlon-glacier-lagoon1.jpg', 'mcway falls', 3, NOW(), NOW());
