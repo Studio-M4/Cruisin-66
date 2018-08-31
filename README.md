@@ -14,7 +14,6 @@ Cruisin' 66 is a mobile app that lets you find and create road trip itineraries.
 1.  [Requirements](#requirements)
 1.  [Development](#development)
     1.  [Installing Dependencies](#installing-dependencies)
-    1.  [Tasks](#tasks)
 1.  [Team](#team)
 1.  [Contributing](#contributing)
 
@@ -32,7 +31,17 @@ Cruisin' 66 is a mobile app that lets you find and create road trip itineraries.
 - MySQL
 - Node/Express
 
+- /db/config.js file containing:
+  - username, password, database, host, dialect
+-/server/api.js file containg:
+  -cloudinary cloud_name, api_key, api_secret 
+
 ## Development
+
+1. Install dependencies (see below)
+2. Create database indicated in your db/config.js file
+3. Run run start-dev 
+4. Run react-native run-ios or open XCode and build
 
 ### Installing Dependencies
 
