@@ -3,33 +3,22 @@ import {
   StyleSheet,
   View,
   FlatList,
-  Image,
   TextInput,
-  ImageBackground,
   TouchableHighlight,
   AsyncStorage,
-  ScrollView,
-  Modal
 } from "react-native";
 import TimeAgo from "react-native-timeago";
 import {
   Container,
-  Header,
   Content,
-  Card,
-  CardItem,
   Thumbnail,
   Text,
   Button,
-  Icon,
   Left,
   List,
   ListItem,
   Body,
   Right,
-  Title,
-  Item,
-  Input
 } from "native-base";
 import { NavigationEvents } from "react-navigation";
 
@@ -51,7 +40,6 @@ export default class CommentStop extends React.Component {
   }
 
   postComment() {
-
     axios
       .post("http://localhost:3000/stopcomments", {
         text: this.state.text,
@@ -60,13 +48,11 @@ export default class CommentStop extends React.Component {
         rating: 1
       })
       .then(response => {
-        console.log(response);
         this.setState({ text: "" });
         this.getComment();
 
       })
       .catch(function(error) {
-        console.log(error);
         alert(error)
       });
   }
@@ -79,42 +65,37 @@ export default class CommentStop extends React.Component {
         }`
       )
       .then(response => {
-        // handle success
         this.setState({
           data: response.data
         });
       })
       .catch(error => {
-        // handle error
-        console.log(error);
+        alert(error);
       });
   }
+
   componentWillMount() {
     this.getComment();
     this._retrieveData();
   }
 
   _retrieveData = async () => {
-
     this.setState({
       stopId: this.props.nav.state.params.item.id
     });
-
     try {
       const value = await AsyncStorage.getItem("userInfo");
       if (value !== null) {
-        // We have data!!
         userObject = JSON.parse(value);
         this.setState({
           UserId: userObject.data.token.userId
         });
-        console.log("data sss",userObject.data.token.userId)
       }
     } catch (error) {
-      // Error retrieving data
       alert(error);
     }
   };
+  
   render() {
     return (
       <Container>

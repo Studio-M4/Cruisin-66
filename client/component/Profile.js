@@ -4,32 +4,12 @@ import {
   StyleSheet,
   View,
   Image,
-  ImageBackground,
-  TextInput,
-  TouchableHighlight,
-  ScrollView,
-  Modal,
-  FlatList,
   AsyncStorage
 } from "react-native";
-
 import SegmentedControlTab from "react-native-segmented-control-tab";
-import {
-  Card,
-  CardItem,
-  Thumbnail,
-  Text,
-  Left,
-  Body,
-  Item,
-  Input,
-  Content
-} from "native-base";
-
-
+import {Text} from "native-base";
 import UserItineraries from './UserItineraries.js';
 import UserFavorites from "./UserFavorites.js";
-
 const axios = require("axios");
 
 export default class Profile extends React.Component {
@@ -56,20 +36,18 @@ export default class Profile extends React.Component {
     try {
       const value = await AsyncStorage.getItem("userInfo");
       if (value !== null) {
-        // We have data!!
         userObject = JSON.parse(value);
         this.setState({
           user: userObject.data.token
         });
-        console.log(this.state.user);
         this.getUserItineraries();
         this.getUserFavorites();
       }
     } catch (error) {
-      // Error retrieving data
       alert(error);
     }
   };
+
   _logOut  = async () => {
       try {
         await AsyncStorage.clear();
@@ -85,13 +63,11 @@ export default class Profile extends React.Component {
     axios
     .get(`http://localhost:3000/profile/itineraries?UserId=${userId}`)
     .then((response) => {
-      // console.log(response.data);
       this.setState({
         userItineraries: response.data
       })
     })
     .catch((error) => {
-      console.log(error);
       alert(error);
     });
 }
@@ -101,19 +77,15 @@ export default class Profile extends React.Component {
     axios
     .get(`http://localhost:3000/favorite?userId=${userId}`)
     .then((response) => {
-      // console.log(response.data);
       this.setState({
         userFavorites: response.data
       })
     })
     .catch((error) => {
-      console.log(error);
       alert(error);
     });
   }
 
-
-  //NavigationEvents  instead of wcdl
   render() {
     return (
       <View style={styles.container}>
@@ -121,7 +93,7 @@ export default class Profile extends React.Component {
           <View style={styles.header}>  
             <Image
               style={styles.imagesStyle}
-              round source={{ uri: this.state.user.photoAvatar }}
+              round source={{ uri: 'https://avatars0.githubusercontent.com/u/25995901?s=460&v=4'}}
             />
             <View style={styles.headerContent}>
               <Text style={styles.title}>
@@ -133,10 +105,6 @@ export default class Profile extends React.Component {
     
           <SegmentedControlTab
             tabsContainerStyle={styles.tabsContainerStyle}
-            tabStyle={styles.tabStyle}
-            tabTextStyle={styles.tabTextStyle}
-            activeTabStyle={styles.activeTabStyle}
-            activeTabTextStyle={styles.activeTabTextStyle}
             selectedIndex={1}
             selectedIndex={this.state.selectedIndex}
             onTabPress={this.handleIndexChange}
@@ -160,7 +128,6 @@ export default class Profile extends React.Component {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: "#eee",
-    // alignItems: "center",
     width: "100%",
     height: "100%"
   },
