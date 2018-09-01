@@ -85,6 +85,7 @@ VAlues ('Artist Point', -16.23055, 64.07844, 'An overlook point on the edge of t
 INSERT INTO stops (name, longitude, latitude, description, avgRating, address, zipcode, audiofile, createdat, updatedat)
 VAlues ('Mammoth Hot Springs', -19.071619, 63.4057404, 'Huge area of geothermal vents and travertine flourishes.', 5, 'Yellowstone National Park Wyoming 82190', '81290', 'exaudiofile', NOW(), NOW());
 
+
 SELECT id into @stopid from stops where id =4;
 SELECT id into @itineraryid from itineraries where name ='Ultimate Yellowstone';
 INSERT INTO itinerarystops (itineraryid, stopid, createdat, updatedat)

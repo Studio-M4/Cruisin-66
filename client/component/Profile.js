@@ -40,6 +40,7 @@ export default class Profile extends React.Component {
         this.setState({
           user: userObject.data.token
         });
+        console.log(this.state.user);
         this.getUserItineraries();
         this.getUserFavorites();
       }
@@ -93,7 +94,7 @@ export default class Profile extends React.Component {
           <View style={styles.header}>  
             <Image
               style={styles.imagesStyle}
-              round source={{ uri: 'https://avatars0.githubusercontent.com/u/25995901?s=460&v=4'}}
+              round source={{ uri: this.state.user.photoAvatar }}
             />
             <View style={styles.headerContent}>
               <Text style={styles.title}>
