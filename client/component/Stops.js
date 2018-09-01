@@ -8,34 +8,18 @@ import SortableListView from 'react-native-sortable-listview';
 
 import {
   StyleSheet,
-  View,
-  FlatList,
-  Image,
-  TextInput,
   ImageBackground,
-  TouchableHighlight,
-  ScrollView,
-  Modal,
   AsyncStorage
 } from "react-native";
 
 import {
   Container,
-  Header,
   Icon,
-  Content,
-  Card,
   CardItem,
-  Thumbnail,
   Text,
   Button,
-  Left,
   Body,
-  Right,
-  Title,
   Footer,
-  Item,
-  Input,
   FooterTab
 } from "native-base";
 
@@ -62,8 +46,8 @@ class Stops extends React.Component {
       itineraryId: null,
       modalVisible: false,
       stops: [],
-      sortableStops: {}, // this is for srotable list
-      stopsOrder: [], // this is for srotable list
+      sortableStops: {}, // this is for the drag and drop sortable list
+      stopsOrder: [], // this is for the drag and drop list
       liked: false,
       isOwner: true,
       userId: null
@@ -99,7 +83,7 @@ class Stops extends React.Component {
         );
         this.checkIfFavorited(); 
       })
-      .catch(err => console.log(err));
+      .catch(err => alert(err));
   }
 
   addItineraryToFavorites() {
@@ -112,13 +96,11 @@ class Stops extends React.Component {
       itineraryId: itineraryId
     })
     .then((response) => {
-      // console.log(response.data);
       this.setState({
         liked: true
       })
     })
     .catch((error) => {
-      console.log(error);
       alert(error);
     });
   }
@@ -135,13 +117,11 @@ class Stops extends React.Component {
       }
     })
     .then((response) => {
-      // console.log(response.data);
       this.setState({
         liked: false
       })
     })
     .catch((error) => {
-      console.log(error);
       alert(error);
     });
   }
@@ -165,7 +145,6 @@ class Stops extends React.Component {
         }
       })
       .then(data => {
-        console.log("line 188", data);
         if (data === null) {
           this.setState({liked: false})
         } else {
@@ -173,7 +152,7 @@ class Stops extends React.Component {
         }
       })
       .catch(error => {
-        console.log(error);
+        alert(error);
       });
   };
 
@@ -201,7 +180,7 @@ class Stops extends React.Component {
               this.addItineraryToFavorites()
             }}
           >
-            <Ionicons name='ios-heart-empty' size={20}/>
+            <Ionicons name='ios-heart-empty' size={20} color={'#939393'}/>
           </Button>
         )
       } else if (this.state.liked === true && this.state.isOwner === false) {
@@ -211,7 +190,7 @@ class Stops extends React.Component {
               this.deleteItineraryFromFavorites()
             }}
           >
-            <Ionicons name='ios-heart' size={20}/>
+            <Ionicons name='ios-heart' size={20} color={'#939393'}/>
           </Button>
         )
       }
@@ -234,7 +213,6 @@ class Stops extends React.Component {
         <CardItem>
           <Body >
             <Text style={styles.description}>{navigation.getParam('itinerary').description} </Text>
-            {/* <Text >Number of Stops: {stops.length}</Text> */}
           </Body>
         </CardItem>
         <SortableListView

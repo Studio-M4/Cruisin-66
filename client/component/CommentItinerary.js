@@ -1,24 +1,19 @@
 import React from 'react';
-import { StyleSheet, View,FlatList,Image, TextInput,
-  ImageBackground, TouchableHighlight,AsyncStorage,ScrollView,Modal } from 'react-native';
-  import TimeAgo from 'react-native-timeago';
+import { StyleSheet, View, FlatList,TextInput,
+  ImageBackground, TouchableHighlight,AsyncStorage} from 'react-native';
+import TimeAgo from 'react-native-timeago';
 import {
   Container,
-  Header,
   Content,
-  Card,
   CardItem,
   Thumbnail,
   Text,
   Button,
-  Icon,
   Left,
   List,
   ListItem,
   Body,
   Right,
-  Title,
-  Item,Input
 } from "native-base";
 import { NavigationEvents } from "react-navigation";
 
@@ -76,19 +71,14 @@ export default class CommentItinerary extends React.Component {
     try {
       const value = await AsyncStorage.getItem("userInfo");
       if (value !== null) {
-        // We have data!!
         userObject = JSON.parse(value);
         this.setState({
           UserId: userObject.data.token.userId
         });
-        //console.log("dass",userObject.data.token.userId)
       }
     } catch (error) {
-      // Error retrieving data
       alert(error);
     }
-    console.log("user info ", user)
-  
   };
 
   goDetails(){
@@ -97,17 +87,16 @@ export default class CommentItinerary extends React.Component {
 
   render() {
     const { navigation } = this.props;
-    console.log(navigation)
     return (  
       <Container>
-      <NavigationEvents onDidFocus={payload => this._retrieveData()} />
+        <NavigationEvents onDidFocus={payload => this._retrieveData()} />
 
-      <CardItem cardBody>
+        <CardItem cardBody>
           <ImageBackground
             source={{ uri: navigation.getParam('itinerary').photoUrl }}
             style={{ height: 160, width: null, flex: 1 }}
           >
-          <Text style={styles.tourname}>{navigation.getParam('itinerary').name}</Text>
+            <Text style={styles.tourname}>{navigation.getParam('itinerary').name}</Text>
           </ImageBackground>
         </CardItem>
       <Content>
@@ -116,40 +105,38 @@ export default class CommentItinerary extends React.Component {
           data={this.state.data}
           renderItem={({ item }) =>
           <TouchableHighlight>
-    
-          <ListItem thumbnail>
-            <Left>
-              <Thumbnail round  source={{ uri: item.User.photoAvatar }} /> 
-            </Left>
-            <Body>
-              <Text>{item.User.firstName}</Text>
-              <Text note>{item.text}</Text>
-            </Body>
-            <Right>
-              <Button transparent>
-                <Text like>  <TimeAgo time={item.updatedAt} hideAgo={true} /></Text>
-              </Button>
-            </Right>
-          </ListItem>
-     
-        </TouchableHighlight>
+            <ListItem thumbnail>
+              <Left>
+                <Thumbnail round  source={{ uri: item.User.photoAvatar }} /> 
+              </Left>
+              <Body>
+                <Text>{item.User.firstName}</Text>
+                <Text note>{item.text}</Text>
+              </Body>
+              <Right>
+                <Button transparent>
+                  <Text like>  <TimeAgo time={item.updatedAt} hideAgo={true} /></Text>
+                </Button>
+              </Right>
+            </ListItem>
+          </TouchableHighlight>
           }
           keyExtractor={(item, index) => index.toString()}
         />
         </List>
         <View style={styles.container}>
-        <TextInput
-         onChangeText={(text) => this.setState({"text":text})}
-         value={this.state.text}
-         style={styles.inputStyle}
-         placeholder="Be nice !!!"
-       />
-         <Button rounded light onPress={() => {
+          <TextInput
+          onChangeText={(text) => this.setState({"text":text})}
+          value={this.state.text}
+          style={styles.inputStyle}
+          placeholder="Be nice !!!"
+          />
+          <Button rounded light onPress={() => {
             this.postComment()
-        }}>
+          }}>
             <Text>Post</Text>
           </Button>
-          </View>
+        </View>
       </Content>
     </Container>
     );
