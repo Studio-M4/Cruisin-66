@@ -1,30 +1,19 @@
 import React from "react";
 import {
   StyleSheet,
-  View,
-  Image,
   ImageBackground,
-  TextInput,
   TouchableHighlight,
-  ScrollView,
-  Modal,
   FlatList
 } from "react-native";
 import {
   Container,
-  Header,
   Content,
   Card,
   CardItem,
-  Thumbnail,
   Text,
-  Button,
   Icon,
-  Left,
-  Body,
-  Right,
-  Title,
-  Item,Input
+  Item,
+  Input
 } from "native-base";
 
 import { NavigationEvents } from "react-navigation";
@@ -94,9 +83,7 @@ export default class Itinerary extends React.Component {
 
         <Content>
           <FlatList
-
             data = {this.state.itineraries}
-
             renderItem={({ item }) => (
               <TouchableHighlight
                 onPress={() => {

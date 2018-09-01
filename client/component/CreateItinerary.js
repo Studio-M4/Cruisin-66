@@ -4,11 +4,8 @@ import {
   StyleSheet,
   Text,
   View,
-  Image,
   TextInput,
-  TouchableHighlight,
   AsyncStorage,
-  ScrollView,
   Button,
   ImageBackground,
   ActivityIndicator,
@@ -48,27 +45,24 @@ export default class CreateItinerary extends React.Component {
     const { navigation } = this.props;
     this.createItinerary()
         .then((itinerary) => navigation.navigate("Itinerary"))
-        .catch((err) => console.log(err));
+        .catch((err) => alert(err));
   };
 
   _retrieveData = async () => {
     try {
       const value = await AsyncStorage.getItem("userInfo");
       if (value !== null) {
-        // We have data!!
         userObject = JSON.parse(value);
         this.setState({
           user: userObject.data.token
         });
       }
     } catch (error) {
-      // Error retrieving data
       alert(error);
     }
   };
 
   createItinerary() {
-    console.log(this.state);
     const url = 'http://localhost:3000/itinerary';
     const { name, description, user, categoryId, photoUrl } = this.state;
     const postData = {
@@ -78,7 +72,6 @@ export default class CreateItinerary extends React.Component {
       CategoryId: categoryId,
       photoUrl: photoUrl,
     };
-    console.log('postData ', postData);
     return axios.post(url, postData)
                 .then((res) => res.data); // res.data is the created Itinerary object.
   };
@@ -96,11 +89,10 @@ export default class CreateItinerary extends React.Component {
   handlePhotoUpload() {
     openImagePicker(null, (response) => {
       this.setState({showSpinner: true});
-      console.log('imagePickerResponse: ', response);
       const source = { uri: "data:image/jpeg;base64," + response.data };
       uploadToCloudinary(source.uri)
         .then((url) => this.setState({photoUrl: url, showSpinner: false}))
-        .catch((err) => console.log(err));
+        .catch((err) => alert.log(err));
     });
   }
 

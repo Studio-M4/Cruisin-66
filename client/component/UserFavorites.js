@@ -1,28 +1,16 @@
 import React from "react";
-import { NavigationEvents } from "react-navigation";
 import {
   StyleSheet,
-  View,
-  Image,
   ImageBackground,
   TouchableHighlight,
-  ScrollView,
   FlatList,
 } from "react-native";
 
-import SegmentedControlTab from "react-native-segmented-control-tab";
 import {
   Card,
   CardItem,
-  Thumbnail,
-  Text,
-  Left,
-  Body,
-  Item,
-  Input,
-  Content
+  Text
 } from "native-base";
-
 
 export default class UserFavorites extends React.Component {
 
@@ -30,39 +18,33 @@ export default class UserFavorites extends React.Component {
       const { navigate } = this.props.navigation;
         return (
 
-
         <FlatList
-            data = {this.props.data}
-
-            renderItem={({ item }) => (
-              <TouchableHighlight
-                onPress={() => {
-                  /* 1. Navigate to the Details route with params */
-                  this.props.navigation.navigate("Stops", {
-                    itinerary: item
-                  });
-                }}
-              >
-                <Card>
-                    <CardItem cardBody>
-                      <ImageBackground
-                        source={{ uri: item.photoUrl || 'https://www.telegraph.co.uk/content/dam/Travel/2018/April/road-trip-GettyImages-655931324.jpg?imwidth=1400' }}
-                        style={{ height: 120, width: null, flex: 1, opacity: .8 }}
-                      >
-                      <Text style={styles.tourname}>{item.name}</Text>
-                      </ImageBackground>
-                    </CardItem>
-                  </Card>
-                
-              </TouchableHighlight>
+          data = {this.props.data}
+          renderItem={({ item }) => (
+            <TouchableHighlight
+              onPress={() => {
+                /* 1. Navigate to the Details route with params */
+                this.props.navigation.navigate("Stops", {
+                  itinerary: item
+                });
+              }}
+        >
+              <Card>
+                  <CardItem cardBody>
+                    <ImageBackground
+                      source={{ uri: item.photoUrl || 'https://www.telegraph.co.uk/content/dam/Travel/2018/April/road-trip-GettyImages-655931324.jpg?imwidth=1400' }}
+                      style={{ height: 120, width: null, flex: 1, opacity: .8 }}
+                    >
+                    <Text style={styles.tourname}>{item.name}</Text>
+                    </ImageBackground>
+                  </CardItem>
+                </Card>   
+            </TouchableHighlight>
               )}
               keyExtractor={(item, index) => index.toString()}
             />
-
-
         )
     }
-
 }
 
 

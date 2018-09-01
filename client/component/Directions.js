@@ -9,11 +9,6 @@ import {
     View,
     StyleSheet
   } from "react-native";
-  
-import {
-    Icon,
-    Button
-  } from "native-base";
  
 export default class gmapsDirections extends React.Component {
 
@@ -40,15 +35,14 @@ export default class gmapsDirections extends React.Component {
       params: [
         {
           key: "travelmode",
-          value: "driving"        // may be "walking", "bicycling" or "transit" as well
+          value: "driving"    // may be "walking", "bicycling" or "transit" as well
         },
         {
           key: "dir_action",
-          value: "navigate"       // this instantly initializes navigation using the given travel mode 
+          value: "navigate"   // this instantly initializes navigation using the given travel mode 
         }
       ]
     }
- 
     getDirections(data)
   }
 
@@ -65,8 +59,6 @@ export default class gmapsDirections extends React.Component {
       { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 },
     );
   }
-  
-  
  
   render() {
     return (
@@ -83,7 +75,6 @@ const styles = StyleSheet.create({
   view: {
     flexDirection: 'row',
     marginTop: 3,
-    marginLeft: 10, 
-
+    marginLeft: 10
   }
 });
