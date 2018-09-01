@@ -3,20 +3,15 @@ import {
   StyleSheet,
   Text,
   View,
-  Image,
   TextInput,
   ScrollView,
   Button,
   ImageBackground,
-  FlatList,
   ActivityIndicator,
 } from "react-native";
 
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
 import { openImagePicker, uploadToCloudinary } from "../utilities/photoUtil";
-// import photoUtil from "../utilities/photoUtil";
-import { InputGroup, Input, Container, Content, Icon } from "native-base";
-
 import axios from "axios";
 
 export default class CreateStop extends React.Component {
@@ -62,8 +57,6 @@ export default class CreateStop extends React.Component {
           .catch((err) => console.log(err));
       return;
     }
-
-    console.log(this.state);
     const { name, description, address, photos, latitude, longitude } = this.state;
     const postData = {
       stop: {
@@ -88,13 +81,11 @@ export default class CreateStop extends React.Component {
   }
 
   handleAutoCompletePress(data, details) {
-    console.log(data, details);
     const fullInfo = data.description;
     const { lat, lng } = details.geometry.location;
 
     this.searchStopByCoordinate(lng, lat)
         .then((res) => {
-          console.log('RES ', res);
           const stop = res.data;
           // If this stop already exists in the database, we just pull it out.
           if (stop) {
@@ -119,7 +110,6 @@ export default class CreateStop extends React.Component {
 
   handlePhotoUpload() {
     openImagePicker(null, (response) => {
-      console.log('imagePickerResponse: ', response);
       const { photos } = this.state;
       const source = { uri: "data:image/jpeg;base64," + response.data };
 
@@ -153,7 +143,6 @@ export default class CreateStop extends React.Component {
    */
   fetchAndSaveOneGooglePhoto(photoreference) {
     const url = "http://localhost:4000/google/photo";
-    console.log(photoreference);
     return axios.post(url, { photoreference });
   }
 
@@ -169,7 +158,7 @@ export default class CreateStop extends React.Component {
     const url = "http://localhost:3000/stop";
     return axios.post(url, postData)
                 .then((res) => console.log(res.data))
-                .catch((err) => console.log(err));
+                .catch((err) => alert(err));
   }
 
   /**
@@ -250,7 +239,7 @@ export default class CreateStop extends React.Component {
             <TextInput
               editable={this.state.editable}
               multiline={true}
-              numberOfLines={6}
+              numberOfLines={8}
               maxLength={100}
               placeholder={"What so special here?"}
               style={styles.inputStyle}
@@ -293,7 +282,6 @@ const getName = info => {
   return info.split(",")[0];
 };
 
-// Styles 😎
 const styles = StyleSheet.create({
   container: {
     alignItems: "center",
@@ -301,7 +289,6 @@ const styles = StyleSheet.create({
     borderColor: "#000",
     height: "100%"
   },
-
   title: {
     fontSize: 22,
     fontWeight: "bold",
@@ -316,7 +303,8 @@ const styles = StyleSheet.create({
     width: 300
   },
   inputStyle: {
-    height: 40,
+    height: 100,
+    fontSize: 16,
     width: 300,
     borderColor: "#ccc",
     borderWidth: 0.4,

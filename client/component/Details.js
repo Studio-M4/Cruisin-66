@@ -2,41 +2,16 @@ import React from "react";
 import {
   StyleSheet,
   Text,
-  View,
-  Image,
-  TextInput,
-  TouchableHighlight,
-  ScrollView,
-  FlatList,AsyncStorage
 } from "react-native";
-
-
 
 import {
   Container,
-  Header,
-  Content,
-  Card,
-  CardItem,
-  Thumbnail,  Icon,
-  Left,
-  List,
-  ListItem,
-  Body,
-  Right,
-  Title,
-  Item,Input
 } from "native-base";
 
 import SegmentedControlTab from "react-native-segmented-control-tab";
 
-// import MapView from "react-native-maps";
-// import { Rating } from "react-native-elements";
-import { Button } from "native-base";
-
 import ImageGallery from './ImageGallery.js';
 import CommentStop from "./CommentStop.js";
-
 import Directions from './Directions.js'
 
 export default class Details extends React.Component {

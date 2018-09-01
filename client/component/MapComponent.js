@@ -2,42 +2,14 @@ import React from "react";
 
 import {
   StyleSheet,
-  View,
-  FlatList,
-  Image,
-  TextInput,
-  TouchableHighlight,
-  ScrollView,
-  Modal
+  View
 } from "react-native";
 
-import {
-  Container,
-  Header,
-  Content,
-  Card,
-  CardItem,
-  Thumbnail,
-  Text,
-  Button,
-  Icon,
-  Left,
-  List,
-  ListItem,
-  Body,
-  Right,
-  Title,
-  Item,
-  Input
-} from "native-base";
-
-import MapView   from "react-native-maps";
+import MapView, { Polyline }   from "react-native-maps";
 import { Marker } from "react-native-maps";
 
 export default class CommentStop extends React.Component {
   static navigationOptions = (navigation) => {
-    
-    console.log("The talk about nav ", navigation.state)
     return {
       title : "Map"
     }
@@ -50,6 +22,7 @@ export default class CommentStop extends React.Component {
     stops = [];
 
   }
+
   componentWillMount(){
     this.getStop()
   }
@@ -66,12 +39,10 @@ export default class CommentStop extends React.Component {
     })
   }
 
-  
-
   render() {
     const { navigation} = this.props;
     var allStop = navigation.state.params.stop; 
-    console.log("Mm the long", typeof(allStop[0]))
+
     return (
       <View style={styles.container}>
 
@@ -93,12 +64,12 @@ export default class CommentStop extends React.Component {
             latitude: marker.latitude,
             longitude: marker.longitude
           }
-          console.log("The coodinate 's ",coordinate)
           return(
             <Marker
               //image = {marker.StopPhotos[0].url}
               coordinate={coordinate}
-              description={marker.description}
+              // description={marker.name}
+              title={marker.name}
            />
           )}
         )}
@@ -107,6 +78,7 @@ export default class CommentStop extends React.Component {
     );
   }
 }
+
 const styles = StyleSheet.create({
   container: {
     ...StyleSheet.absoluteFillObject,

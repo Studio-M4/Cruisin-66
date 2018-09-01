@@ -1,6 +1,5 @@
 
 import React from "react";
-import ReactNative from 'react-native'
 import { NavigationEvents } from "react-navigation";
 
 import {
@@ -16,7 +15,10 @@ import {
   ImageBackground
 } from "react-native";
 
-import { InputGroup, Input, Container, Content, Icon } from "native-base";
+import { 
+  Container, 
+  Content 
+} from "native-base";
 
 import validate from './Utilities';
 
@@ -58,7 +60,7 @@ class Login extends React.Component {
     }
   }
 
-  //submitLogin using axios
+
   submintLoginAxios() {
     if (this.validateInputs()) {
       const { navigate } = this.props.navigation; // define here for the context
@@ -83,11 +85,11 @@ class Login extends React.Component {
           }
         })
         .catch(function(error) {
-          console.log(error);
           alert(error);
         });
     }
   }
+
   _testIftheUserAlreadyLogin = async () => {
     const { navigate } = this.props.navigation; // define here for the context
 
@@ -118,17 +120,15 @@ class Login extends React.Component {
     return (
       <Container>
       <ImageBackground
-      style={styles.background}
-      source={require('./imgs/monument-valley.jpg')}
-       >
-
+        style={styles.background}
+        source={require('./imgs/monument-valley.jpg')}
+      >
         <Content>
           <ScrollView>
             <NavigationEvents
               onDidFocus={payload => this._testIftheUserAlreadyLogin()}
             />
             <View style={styles.container}>
-              <Text style={styles.title}>{/* Cruisin'66 */}</Text>
               <ActivityIndicator
                 animating={this.state.showProgress}
                 size="large"
@@ -182,8 +182,7 @@ class Login extends React.Component {
               </View>
             </View>
           </ScrollView>
-        </Content>
-      
+        </Content>  
       </ImageBackground>
     </Container>
     );
@@ -201,12 +200,6 @@ const styles = StyleSheet.create({
     width: 120,
     height: 120,
     marginBottom: 30
-  },
-  title: {
-    fontSize: 32,
-    fontWeight: "bold",
-    color: "#000",
-    marginTop: 0
   },
   inputStyle: {
     height: 40,
