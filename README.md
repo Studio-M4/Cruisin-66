@@ -32,7 +32,7 @@ Cruisin' 66 is a mobile app that lets you find and create road trip itineraries.
 - Node/Express
 
 - /db/config.js file containing: username, password, database, host, dialect
--/server/api.js file containing: cloudinary cloud_name, api_key, api_secret 
+- /server/api.js file containing: cloudinary cloud_name, api_key, api_secret 
 
 
 ## Development
